@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/styles/home.css}" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
+    <title>Ogarnizer</title>
+</head>
+
+<body>
+<h1 class="header">Ogarnizer</h1>
+
+<nav class="nav">
+    <a th:href="@{/away_work}" class="nav__link">Away works</a>
+    <a th:href="@{/service}" class="nav__link">Services</a>
+    <a th:href="@{/order}" class="nav__link">Orders</a>
+    <a th:href="@{/client}" class="nav__link">Clients</a>
+    <a th:href="@{/admin_panel}" class="nav__link">Admin Panel</a>
+</nav>
+
+<h2 class="header2">Services</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Created By</th>
+        <th>Created Date</th>
+        <th>Priority</th>
+        <th>Client</th>
+        <th>Description</th>
+        <th>Device</th>
+        <th>Additional Info</th>
+        <th>Update Info</th>
+        <th>Stage</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="service : ${serviceDTOs}">
+        <td th:text="${service.creatingUserName}"></td>
+        <td th:text="${service.createdDate}"></td>
+        <td th:text="${service.priorityName}"></td>
+        <td th:text="${service.clientName}"></td>
+        <td th:text="${service.description}"></td>
+        <td th:text="${service.device}"></td>
+        <td th:text="${service.additionalInfo}"></td>
+        <td th:text="${service.updateInfo}"></td>
+        <td th:text="${service.stageName}"></td>
+        <td  class="icon__container">
+            <form action="#" th:action="@{service/close/{serviceId}/{success}(serviceId=${service.serviceId}, success=true)}" th:method="DELETE">
+                <button type="submit"><i class="fas fa-check"></i></button>
+            </form>
+
+            <form action="#" th:action="@{service/show/{serviceId}(serviceId=${service.serviceId})}" th:method="GET">
+                <button type="submit"><i class="fas fa-edit"></i></button>
+            </form>
+
+            <form action="#" th:action="@{service/close/{serviceId}/{success}(serviceId=${service.serviceId}, success=false)}" th:method="DELETE">
+                <button type="submit"><i class="fas fa-trash-alt"></i></button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 class="header2">Add Service</h2>
+<form class="add" action="#" th:action="@{/service/add}" method="POST" th:object="${taskDTO}" >
+    <div class="add__container">
+        <div class="add__container-field">
+            <label for="priority">Priority</label>
+            <select id="priority" th:field="*{priorityName}">
+                <option th:each="priority : ${priorities}" th:value="${priority.name}" th:text="${priority.name}"></option>
+            </select>
+        </div>
+        <div class="add__container-field">
+            <label for="client">Client</label>
+            <select id="client" th:field="*{clientName}">
+                <option th:each="client : ${clients}" th:value="${client.name}" th:text="${client.name}"></option>
+            </select>
+            <a th:href="@{/client}" class="add__client">Add new Client</a>
+        </div>
+        <div class="add__container-field">
+            <label for="description">Description</label>
+            <textarea id="description" class="add__container-field-textarea" th:field="*{description}"></textarea>
+        </div>
+    </div>
+
+    <div class="add__container">
+        <div class="add__container-field">
+            <label for="device">Device</label>
+            <input id="device" th:field="*{device}"></input>
+        </div>
+        <div class="add__container-field">
+            <label for="additionalInfo">AdditionalInfo</label>
+            <textarea id="additionalInfo" class="add__container-field-textarea" th:field="*{additionalInfo}"></textarea>
+        </div>
+    </div>
+
+    <div class="add__submit">
+        <input type="submit" value="SUBMIT">
+    </div>
+</form>
+</body>
+
+</html>

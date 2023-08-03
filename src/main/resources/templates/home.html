@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/styles/home.css}" rel="stylesheet" />
+    <title>Ogarnizer</title>
+</head>
+
+<body>
+    <h1 class="header">Ogarnizer</h1>
+
+    <nav class="nav">
+        <a th:href="@{/away_work}" class="nav__link">Away works</a>
+        <a th:href="@{/service}" class="nav__link">Services</a>
+        <a th:href="@{/order}" class="nav__link">Orders</a>
+        <a th:href="@{/client}" class="nav__link">Clients</a>
+        <a th:href="@{/admin_panel}" class="nav__link">Admin Panel</a>
+    </nav>
+</body>
+
+</html>

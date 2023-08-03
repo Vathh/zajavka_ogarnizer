@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/styles/home.css}" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
+    <title>Ogarnizer</title>
+</head>
+
+<body>
+<h1 class="header">Ogarnizer</h1>
+
+<nav class="nav">
+    <a th:href="@{/away_work}" class="nav__link">Away works</a>
+    <a th:href="@{/service}" class="nav__link">Services</a>
+    <a th:href="@{/order}" class="nav__link">Orders</a>
+    <a th:href="@{/client}" class="nav__link">Clients</a>
+    <a th:href="@{/admin_panel}" class="nav__link">Admin Panel</a>
+</nav>
+
+<h2 class="header2">Admin Panel</h2>
+
+<div class="nav">
+    <a th:href="@{/closed_away_work}"  class="nav__link" >Closed Away works</a>
+    <a th:href="@{/closed_service}"  class="nav__link" >Closed Services</a>
+    <a th:href="@{/closed_order}"  class="nav__link" >Closed Orders</a>
+    <a th:href="@{/user}"  class="nav__link" >Users</a>
+</div>
+
+<h2 class="header2">Users</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${userDTOs}">
+        <td th:text="${user.userName}"></td>
+        <td th:text="${user.roles}"></td>
+        <td>
+            <form action="#" th:action="@{user/delete/{userId}(userId=${user.userId})}" th:method="DELETE">
+                <button type="submit"><i class="fas fa-trash-alt"></i></button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 class="header2">Add User</h2>
+<form class="add" action="#" th:action="@{/user/add}" method="POST" th:object="${userDTO}" >
+    <div class="add__container">
+        <div class="add__container-field">
+            <label for="userName">User Name</label>
+            <input id="userName" th:field="*{userName}"></input>
+        </div>
+        <div class="add__container-field">
+            <label for="login">Login</label>
+            <input id="login" th:field="*{login}"></input>
+        </div>
+        <div class="add__container-field">
+            <label for="password">Password</label>
+            <input id="password" th:field="*{password}"></input>
+        </div>
+        <div class="add__container-field">
+            <label for="role">Role</label>
+            <select id="role" th:field="*{roles}">
+                <option th:each="role : ${roleDTOs}" th:value="${role.role}" th:text="${role.role}"></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="add__submit">
+        <input type="submit" value="SUBMIT">
+    </div>
+</form>
+</body>
+
+</html>

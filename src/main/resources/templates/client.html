@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/styles/home.css}" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
+    <title>Ogarnizer</title>
+</head>
+
+<body>
+<h1 class="header">Ogarnizer</h1>
+
+<nav class="nav">
+    <a th:href="@{/away_work}" class="nav__link">Away works</a>
+    <a th:href="@{/service}" class="nav__link">Services</a>
+    <a th:href="@{/order}" class="nav__link">Orders</a>
+    <a th:href="@{/client}" class="nav__link">Clients</a>
+    <a th:href="@{/admin_panel}" class="nav__link">Admin Panel</a>
+</nav>
+
+<h2 class="header2">Clients</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>NIP</th>
+        <th>Phone Number</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client : ${clientDTOs}">
+        <td th:text="${client.name}"></td>
+        <td th:text="${client.address}"></td>
+        <td th:text="${client.nip}"></td>
+        <td th:text="${client.phoneNumber}"></td>
+        <td  class="icon__container">
+            <form action="#" th:if="${userRole == 'admin'}" th:action="@{client/delete/{clientId}(clientId=${client.clientId})}" th:method="DELETE">
+                <button type="submit"><i class="fas fa-trash-alt"></i></button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 class="header2">Add Client</h2>
+<form class="add" action="#" th:action="@{/client/add}" method="POST" th:object="${clientDTO}" >
+    <div class="add__container">
+        <div class="add__container-field">
+            <label for="name">Name</label>
+            <input id="name" th:field="*{name}"></input>
+        </div>
+        <div class="add__container-field">
+            <label for="address">Address</label>
+            <input id="address" th:field="*{address}"></input>
+        </div>
+        <div class="add__container-field">
+            <label for="nip">NIP</label>
+            <textarea id="nip" th:field="*{nip}"></textarea>
+        </div>
+        <div class="add__container-field">
+            <label for="phoneNumber">Phone Number</label>
+            <textarea id="phoneNumber" th:field="*{phoneNumber}"></textarea>
+        </div>
+    </div>
+
+    <div class="add__submit">
+        <input type="submit" value="SUBMIT">
+    </div>
+</form>
+</body>
+
+</html>
