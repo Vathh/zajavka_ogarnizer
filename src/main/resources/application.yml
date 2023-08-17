@@ -3,6 +3,10 @@ server:
   servlet:
     context-path: /ogarnizer
 
+api:
+  ogarnizerAPI:
+    url: http://localhost:8180/zajavka-ogarnizerAPI
+
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource

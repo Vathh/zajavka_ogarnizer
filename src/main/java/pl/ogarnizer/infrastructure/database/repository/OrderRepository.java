@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.OrderDAO;
 import pl.ogarnizer.domain.*;
 import pl.ogarnizer.infrastructure.database.entity.OrderEntity;
-import pl.ogarnizer.infrastructure.database.entity.ServiceEntity;
 import pl.ogarnizer.infrastructure.database.repository.jpa.OrderJpaRepository;
 import pl.ogarnizer.infrastructure.database.repository.mapper.OrderEntityMapper;
 
@@ -71,6 +70,12 @@ public class OrderRepository implements OrderDAO {
     public void saveOrder(Order order) {
         OrderEntity toSave = orderEntityMapper.mapToEntity(order);
         orderJpaRepository.save(toSave);
+    }
+
+    @Override
+    public void saveOrders(List<Order> orders) {
+        List<OrderEntity> orderEntities = orders.stream().map(orderEntityMapper::mapToEntity).toList();
+        orderJpaRepository.saveAllAndFlush(orderEntities);
     }
 
     @Override

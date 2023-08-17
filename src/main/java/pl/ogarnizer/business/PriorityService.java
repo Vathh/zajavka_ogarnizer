@@ -3,10 +3,9 @@ package pl.ogarnizer.business;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.ogarnizer.business.dao.PriorityDAO;
-import pl.ogarnizer.domain.Client;
 import pl.ogarnizer.domain.Priority;
-import pl.ogarnizer.domain.User;
 import pl.ogarnizer.domain.exception.NotFoundException;
 
 import java.util.List;
@@ -19,12 +18,14 @@ public class PriorityService {
 
     private final PriorityDAO priorityDAO;
 
+    @Transactional
     public List<Priority> findPriorities(){
         List<Priority> priorities = priorityDAO.findAll();
         log.info("Priorities: [{}]", priorities.size());
         return priorities;
     }
 
+    @Transactional
     public Priority findPriority(String priorityName){
         Optional<Priority> priority = priorityDAO.findByName(priorityName);
 

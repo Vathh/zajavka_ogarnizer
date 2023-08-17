@@ -26,5 +26,5 @@ public class Task {
     String stageName;
     String closingUserName;
     LocalDateTime closedDate;
-    String success;
+    Boolean success;
 }

@@ -13,10 +13,12 @@ import pl.ogarnizer.api.dto.TaskDTO;
 import pl.ogarnizer.api.dto.UpdateTaskDTO;
 import pl.ogarnizer.api.dto.mapper.ServiceMapper;
 import pl.ogarnizer.api.dto.mapper.TaskMapper;
+import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.business.*;
 import pl.ogarnizer.domain.Service;
 import pl.ogarnizer.domain.Task;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -28,12 +30,14 @@ public class ServiceController {
     static final String CLOSE_SERVICE = "/service/close/{serviceId}/{success}";
     static final String SERVICE_DETAILS = "/service/show/{serviceId}";
     static final String UPDATE_SERVICE = "/service/update/{serviceId}";
+    static final String LOAD_RANDOM_SERVICES = "/service/load";
 
     private final ServiceService serviceService;
     private final PriorityService priorityService;
     private final ClientService clientService;
     private final StageService stageService;
     private final ClosingTaskService closingTaskService;
+    private final OgarnizerAPIDAO ogarnizerAPIDAO;
     private final ServiceMapper serviceMapper;
     private final TaskMapper taskMapper;
 
@@ -75,6 +79,18 @@ public class ServiceController {
         Task task = taskMapper.map(taskDTO);
 
         serviceService.addService(task);
+
+        return "redirect:/service";
+    }
+
+    @GetMapping(value = LOAD_RANDOM_SERVICES)
+    public String loadRandomServices() {
+
+        List<Service> services = ogarnizerAPIDAO.getServices();
+        services.forEach(service -> clientService.addClient(service.getClient()));
+        List<Service> servicesToAdd = services.stream().map(service -> service.withClient(clientService.findByName(service.getClient().getName()))).toList();
+
+        serviceService.addServices(servicesToAdd);
 
         return "redirect:/service";
     }

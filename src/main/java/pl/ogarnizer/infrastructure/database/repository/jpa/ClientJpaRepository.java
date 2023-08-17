@@ -2,7 +2,6 @@ package pl.ogarnizer.infrastructure.database.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.ogarnizer.infrastructure.database.entity.AwayWorkEntity;
 import pl.ogarnizer.infrastructure.database.entity.ClientEntity;
 
 import java.util.Optional;

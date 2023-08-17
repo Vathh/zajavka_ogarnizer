@@ -12,7 +12,6 @@ import java.util.List;
 public class UserDTO {
     Integer userId;
     String userName;
-    String login;
     String password;
     List<String> roles;
 }

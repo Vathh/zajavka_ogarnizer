@@ -1,0 +1,307 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Ogarnizer application",
+    "contact": {
+      "name": "Maciej Przestrzelski",
+      "email": "przestrzelski.maciej1@gmail.com"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8180/zajavka-ogarnizerAPI",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/service": {
+      "get": {
+        "tags": [
+          "service-controller"
+        ],
+        "operationId": "awayWorksList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order": {
+      "get": {
+        "tags": [
+          "order-controller"
+        ],
+        "operationId": "awayWorksList_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client": {
+      "get": {
+        "tags": [
+          "client-controller"
+        ],
+        "operationId": "awayWorksList_2",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/away_work": {
+      "get": {
+        "tags": [
+          "away-work-controller"
+        ],
+        "operationId": "awayWorksList_3",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AwayWorkDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ClientDTO": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "nip": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "PriorityDTO": {
+        "type": "object",
+        "properties": {
+          "priorityId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "RoleDTO": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceDTO": {
+        "type": "object",
+        "properties": {
+          "serviceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "creatingUser": {
+            "$ref": "#/components/schemas/UserDTO"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/PriorityDTO"
+          },
+          "client": {
+            "$ref": "#/components/schemas/ClientDTO"
+          },
+          "description": {
+            "type": "string"
+          },
+          "device": {
+            "type": "string"
+          },
+          "additionalInfo": {
+            "type": "string"
+          },
+          "updateInfo": {
+            "type": "string"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/StageDTO"
+          }
+        }
+      },
+      "StageDTO": {
+        "type": "object",
+        "properties": {
+          "stageId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "UserDTO": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoleDTO"
+            }
+          }
+        }
+      },
+      "OrderDTO": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "creatingUser": {
+            "$ref": "#/components/schemas/UserDTO"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/PriorityDTO"
+          },
+          "client": {
+            "$ref": "#/components/schemas/ClientDTO"
+          },
+          "description": {
+            "type": "string"
+          },
+          "device": {
+            "type": "string"
+          },
+          "additionalInfo": {
+            "type": "string"
+          },
+          "updateInfo": {
+            "type": "string"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/StageDTO"
+          }
+        }
+      },
+      "AwayWorkDTO": {
+        "type": "object",
+        "properties": {
+          "awayWorkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "creatingUser": {
+            "$ref": "#/components/schemas/UserDTO"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/PriorityDTO"
+          },
+          "client": {
+            "$ref": "#/components/schemas/ClientDTO"
+          },
+          "description": {
+            "type": "string"
+          },
+          "place": {
+            "type": "string"
+          },
+          "device": {
+            "type": "string"
+          },
+          "additionalInfo": {
+            "type": "string"
+          },
+          "updateInfo": {
+            "type": "string"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/StageDTO"
+          }
+        }
+      }
+    }
+  }
+}

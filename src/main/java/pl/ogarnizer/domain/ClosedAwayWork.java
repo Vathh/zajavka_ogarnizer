@@ -1,8 +1,6 @@
 package pl.ogarnizer.domain;
 
 import lombok.*;
-import pl.ogarnizer.infrastructure.database.entity.ClientEntity;
-import pl.ogarnizer.infrastructure.security.UserEntity;
 
 import java.time.LocalDateTime;
 

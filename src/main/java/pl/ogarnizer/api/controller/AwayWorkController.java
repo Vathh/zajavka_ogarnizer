@@ -13,10 +13,13 @@ import pl.ogarnizer.api.dto.TaskDTO;
 import pl.ogarnizer.api.dto.UpdateTaskDTO;
 import pl.ogarnizer.api.dto.mapper.AwayWorkMapper;
 import pl.ogarnizer.api.dto.mapper.TaskMapper;
+import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.business.*;
 import pl.ogarnizer.domain.AwayWork;
+import pl.ogarnizer.domain.Client;
 import pl.ogarnizer.domain.Task;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -28,12 +31,14 @@ public class AwayWorkController {
     static final String CLOSE_AWAY_WORK = "/away_work/close/{awayWorkId}/{success}";
     static final String AWAY_WORK_DETAILS = "/away_work/show/{awayWorkId}";
     static final String UPDATE_AWAY_WORK = "/away_work/update/{awayWorkId}";
+    static final String LOAD_RANDOM_AWAY_WORKS = "/away_work/load";
 
     private final AwayWorkService awayWorkService;
     private final PriorityService priorityService;
     private final ClientService clientService;
     private final StageService stageService;
     private final ClosingTaskService closingTaskService;
+    private final OgarnizerAPIDAO ogarnizerAPIDAO;
     private final AwayWorkMapper awayWorkMapper;
     private final TaskMapper taskMapper;
 
@@ -76,6 +81,16 @@ public class AwayWorkController {
 
         awayWorkService.addAwayWork(task);
 
+        return "redirect:/away_work";
+    }
+
+    @GetMapping(value = LOAD_RANDOM_AWAY_WORKS)
+    public String loadRandomAwayWorks() {
+
+        List<AwayWork> awayWorks = ogarnizerAPIDAO.getAwayWorks();
+        awayWorks.forEach(awayWork -> clientService.addClient(awayWork.getClient()));
+        List<AwayWork> awayWorksToAdd = awayWorks.stream().map(awayWork -> awayWork.withClient(clientService.findByName(awayWork.getClient().getName()))).toList();
+        awayWorkService.addAwayWorks(awayWorksToAdd);
         return "redirect:/away_work";
     }
 

@@ -8,6 +8,5 @@ import java.util.Optional;
 public interface StageDAO {
 
     List<Stage> findAll();
-
     Optional<Stage> findByName(String name);
 }

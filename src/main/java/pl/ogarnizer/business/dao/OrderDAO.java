@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderDAO {
-
     List<Order> findAll();
     Optional<Order> findByOrderId(Integer orderId);
     List<Order> findByCreatingUser(User user);
@@ -16,6 +15,7 @@ public interface OrderDAO {
     List<Order> findByClient(Client client);
     List<Order> findByStage(Stage stage);
     void saveOrder(Order order);
+    void saveOrders(List<Order> orders);
     void addOrder(Order order);
     void deleteOrder(Integer orderId);
 }

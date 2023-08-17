@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.PriorityDAO;
 import pl.ogarnizer.domain.Priority;
-import pl.ogarnizer.infrastructure.database.repository.jpa.ClientJpaRepository;
 import pl.ogarnizer.infrastructure.database.repository.jpa.PriorityJpaRepository;
-import pl.ogarnizer.infrastructure.database.repository.mapper.ClientEntityMapper;
 import pl.ogarnizer.infrastructure.database.repository.mapper.PriorityEntityMapper;
 
 import java.util.List;

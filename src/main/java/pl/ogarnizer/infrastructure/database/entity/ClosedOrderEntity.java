@@ -11,7 +11,6 @@ import lombok.ToString;
 import pl.ogarnizer.infrastructure.security.UserEntity;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter
 @Setter

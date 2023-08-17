@@ -11,6 +11,7 @@ import pl.ogarnizer.infrastructure.database.repository.mapper.AwayWorkEntityMapp
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Repository
 @AllArgsConstructor
@@ -71,6 +72,12 @@ public class AwayWorkRepository implements AwayWorkDAO {
     public void saveAwayWork(AwayWork awayWork) {
         AwayWorkEntity toSave = awayWorkEntityMapper.mapToEntity(awayWork);
         awayWorkJpaRepository.save(toSave);
+    }
+
+    @Override
+    public void saveAwayWorks(List<AwayWork> awayWorks) {
+        List<AwayWorkEntity> awayWorkEntities = awayWorks.stream().map(awayWorkEntityMapper::mapToEntity).toList();
+        awayWorkJpaRepository.saveAllAndFlush(awayWorkEntities);
     }
 
     @Override

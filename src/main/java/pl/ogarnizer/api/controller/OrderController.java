@@ -13,10 +13,12 @@ import pl.ogarnizer.api.dto.TaskDTO;
 import pl.ogarnizer.api.dto.UpdateTaskDTO;
 import pl.ogarnizer.api.dto.mapper.OrderMapper;
 import pl.ogarnizer.api.dto.mapper.TaskMapper;
+import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.business.*;
 import pl.ogarnizer.domain.Order;
 import pl.ogarnizer.domain.Task;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -27,12 +29,14 @@ public class OrderController {
     static final String CLOSE_ORDER = "/order/close/{orderId}/{success}";
     static final String ORDER_DETAILS = "/order/show/{orderId}";
     static final String UPDATE_ORDER = "/order/update/{orderId}";
+    static final String LOAD_RANDOM_ORDERS = "/order/load";
 
     private final OrderService orderService;
     private final PriorityService priorityService;
     private final ClientService clientService;
     private final StageService stageService;
     private final ClosingTaskService closingTaskService;
+    private final OgarnizerAPIDAO ogarnizerAPIDAO;
     private final OrderMapper orderMapper;
     private final TaskMapper taskMapper;
 
@@ -74,6 +78,18 @@ public class OrderController {
         Task task = taskMapper.map(taskDTO);
 
         orderService.addOrder(task);
+
+        return "redirect:/order";
+    }
+
+    @GetMapping(value = LOAD_RANDOM_ORDERS)
+    public String loadRandomOrders() {
+
+        List<Order> orders = ogarnizerAPIDAO.getOrders();
+        orders.forEach(order -> clientService.addClient(order.getClient()));
+        List<Order> ordersToAdd = orders.stream().map(order -> order.withClient(clientService.findByName(order.getClient().getName()))).toList();
+
+        orderService.addOrders(ordersToAdd);
 
         return "redirect:/order";
     }

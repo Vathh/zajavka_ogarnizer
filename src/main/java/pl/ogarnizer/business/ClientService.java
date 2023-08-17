@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.ogarnizer.api.dto.ClientDTO;
 import pl.ogarnizer.business.dao.ClientDAO;
-import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Client;
-import pl.ogarnizer.domain.Task;
 import pl.ogarnizer.domain.exception.NotFoundException;
 
 import java.util.List;
@@ -27,6 +26,7 @@ public class ClientService {
         return clients;
     }
 
+    @Transactional
     public Client findByName(String name){
         Optional<Client> client = clientDAO.findByName(name);
         if(client.isEmpty()){
@@ -40,7 +40,21 @@ public class ClientService {
         clientDAO.addClient(client);
     }
 
+    @Transactional
+    public void addClients(List<Client> clients){
+        clientDAO.addClients(clients);
+    }
+
+    @Transactional
     public void deleteClient(Integer clientId) {
         clientDAO.deleteClient(clientId);
+    }
+
+    public Client findByClientId(Integer clientId) {
+        Optional<Client> client = clientDAO.findById(clientId);
+        if(client.isEmpty()){
+            throw new NotFoundException("Could not find client by client id: [%s]".formatted(clientId));
+        }
+        return client.get();
     }
 }

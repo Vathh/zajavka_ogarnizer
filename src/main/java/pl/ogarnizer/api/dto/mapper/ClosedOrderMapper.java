@@ -2,8 +2,6 @@ package pl.ogarnizer.api.dto.mapper;
 
 import org.mapstruct.Mapper;
 import pl.ogarnizer.api.dto.ClosedOrderDTO;
-import pl.ogarnizer.domain.AwayWork;
-import pl.ogarnizer.domain.ClosedAwayWork;
 import pl.ogarnizer.domain.ClosedOrder;
 import pl.ogarnizer.domain.Order;
 

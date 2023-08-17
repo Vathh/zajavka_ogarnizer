@@ -2,7 +2,6 @@ package pl.ogarnizer.infrastructure.security;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.ogarnizer.infrastructure.security.UserEntity;
 
 @Data
 @Builder

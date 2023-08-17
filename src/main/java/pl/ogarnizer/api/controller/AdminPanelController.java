@@ -15,17 +15,3 @@ public class AdminPanelController {
         return "admin_panel";
     }
 }
-//.requestMatchers("/login", "/error", "/images/oh_no.png").permitAll()
-//        .requestMatchers(
-//        "/",
-//        "/away_work/**",
-//        "/service/**",
-//        "/order/**",
-//        "/client",
-//        "/client/add").hasAnyAuthority("admin", "serviceman")
-//        .requestMatchers(
-//        "/client/delete/**",
-//        "/closed_away_work/**",
-//        "/closed_service/**",
-//        "/closed_order/**",
-//        "/admin_panel").hasAnyAuthority("admin")

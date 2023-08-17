@@ -11,7 +11,6 @@ public interface UserMapper {
         return UserDTO.builder()
                 .userId(user.getUserId())
                 .userName(user.getUserName())
-                .login(user.getLogin())
                 .roles(user.getRoles().stream().map(Role::getRole).toList())
                 .build();
     }

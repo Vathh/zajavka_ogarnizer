@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.ServiceDAO;
 import pl.ogarnizer.domain.*;
-import pl.ogarnizer.infrastructure.database.entity.AwayWorkEntity;
 import pl.ogarnizer.infrastructure.database.entity.ServiceEntity;
 import pl.ogarnizer.infrastructure.database.repository.jpa.ServiceJpaRepository;
 import pl.ogarnizer.infrastructure.database.repository.mapper.ServiceEntityMapper;
@@ -71,6 +70,12 @@ public class ServiceRepository implements ServiceDAO {
     public void saveService(Service service) {
         ServiceEntity toSave = serviceEntityMapper.mapToEntity(service);
         serviceJpaRepository.save(toSave);
+    }
+
+    @Override
+    public void saveServices(List<Service> services) {
+        List<ServiceEntity> serviceEntities = services.stream().map(serviceEntityMapper::mapToEntity).toList();
+        serviceJpaRepository.saveAllAndFlush(serviceEntities);
     }
 
     @Override

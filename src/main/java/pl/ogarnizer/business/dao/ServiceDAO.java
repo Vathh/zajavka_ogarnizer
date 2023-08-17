@@ -16,6 +16,7 @@ public interface ServiceDAO {
     List<Service> findByClient(Client client);
     List<Service> findByStage(Stage stage);
     void saveService(Service service);
+    void saveServices(List<Service> services);
     void addService(Service service);
     void deleteService(Integer serviceId);
 }

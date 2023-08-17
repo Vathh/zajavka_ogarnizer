@@ -15,7 +15,6 @@ public class User {
 
     Integer userId;
     String userName;
-    String login;
     String password;
     List<Role> roles;
     Boolean active;

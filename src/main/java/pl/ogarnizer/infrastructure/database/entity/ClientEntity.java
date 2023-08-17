@@ -1,29 +1,13 @@
 package pl.ogarnizer.infrastructure.database.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Set;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"name"})
+@EqualsAndHashCode(of = {"clientId"})
 @ToString(of = {"clientId", "name", "address", "nip", "phoneNumber"})
 @Builder
 @NoArgsConstructor
@@ -48,4 +32,22 @@ public class ClientEntity {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    private Set<AwayWorkEntity> awayWorks;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    private Set<ClosedAwayWorkEntity> closedAwayWorks;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    private Set<ClosedOrderEntity> closedOrders;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    private Set<ClosedServiceEntity> closedServices;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    private Set<OrderEntity> orders;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    private Set<ServiceEntity> services;
 }

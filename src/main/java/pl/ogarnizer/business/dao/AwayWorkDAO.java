@@ -15,6 +15,7 @@ public interface AwayWorkDAO {
     List<AwayWork> findByClient(Client client);
     List<AwayWork> findByStage(Stage stage);
     void saveAwayWork(AwayWork awayWork);
+    void saveAwayWorks(List<AwayWork> awayWorks);
     void addAwayWork(AwayWork awayWork);
     void deleteAwayWork(Integer awayWorkId);
 }

@@ -45,6 +45,11 @@ public class ServiceService {
     }
 
     @Transactional
+    public void addServices(List<pl.ogarnizer.domain.Service> services){
+        serviceDAO.saveServices(services);
+    }
+
+    @Transactional
     public void saveService(pl.ogarnizer.domain.Service service){
         serviceDAO.saveService(service);
     }

@@ -2,11 +2,10 @@ package pl.ogarnizer.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+import pl.ogarnizer.api.dto.ClientDTO;
 import pl.ogarnizer.business.dao.ClientDAO;
 import pl.ogarnizer.domain.Client;
-import pl.ogarnizer.domain.Service;
 import pl.ogarnizer.infrastructure.database.entity.ClientEntity;
-import pl.ogarnizer.infrastructure.database.entity.ServiceEntity;
 import pl.ogarnizer.infrastructure.database.repository.jpa.ClientJpaRepository;
 import pl.ogarnizer.infrastructure.database.repository.mapper.ClientEntityMapper;
 
@@ -45,7 +44,18 @@ public class ClientRepository implements ClientDAO {
     }
 
     @Override
+    public void addClients(List<Client> clients) {
+        List<ClientEntity> clientEntities = clients.stream().map(clientEntityMapper::mapToEntity).toList();
+        clientJpaRepository.saveAllAndFlush(clientEntities);
+    }
+
+    @Override
     public void deleteClient(Integer clientId) {
         clientJpaRepository.deleteById(clientId);
+    }
+
+    @Override
+    public Optional<Client> findById(Integer clientId) {
+        return clientJpaRepository.findById(clientId).map(clientEntityMapper::mapFromEntity);
     }
 }

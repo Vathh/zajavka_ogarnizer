@@ -8,10 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
 import pl.ogarnizer.infrastructure.security.UserEntity;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter
 @Setter

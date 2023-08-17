@@ -12,8 +12,4 @@ import lombok.NoArgsConstructor;
 public class PriorityDTO {
 
     String name;
-
-    public static PriorityDTO buildDefault(){
-        return PriorityDTO.builder().name("low").build();
-    }
 }

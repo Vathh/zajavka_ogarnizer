@@ -12,8 +12,4 @@ import lombok.NoArgsConstructor;
 public class StageDTO {
 
     String name;
-
-    public static StageDTO buildDefault(){
-        return StageDTO.builder().name("just_added").build();
-    }
 }

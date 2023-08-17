@@ -30,12 +30,12 @@ public class StageEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stage")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "stage")
     private Set<OrderEntity> orders;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stage")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "stage")
     private Set<ServiceEntity> services;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stage")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "stage")
     private Set<AwayWorkEntity> awayWorks;
 }

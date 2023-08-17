@@ -46,6 +46,11 @@ public class OrderService {
     }
 
     @Transactional
+    public void addOrders(List<Order> orders){
+        orderDAO.saveOrders(orders);
+    }
+
+    @Transactional
     public void saveOrder(Order order){
         orderDAO.saveOrder(order);
     }

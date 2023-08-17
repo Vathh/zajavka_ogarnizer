@@ -44,6 +44,11 @@ public class AwayWorkService {
     }
 
     @Transactional
+    public void addAwayWorks(List<AwayWork> awayWorks){
+        awayWorkDAO.saveAwayWorks(awayWorks);
+    }
+
+    @Transactional
     public void saveAwayWork(AwayWork awayWork){
         awayWorkDAO.saveAwayWork(awayWork);
     }
@@ -53,7 +58,7 @@ public class AwayWorkService {
         awayWorkDAO.deleteAwayWork(awayWorkId);
     }
 
-    private AwayWork prepareAwayWork(Task task){
+    public AwayWork prepareAwayWork(Task task){
         return AwayWork.builder()
                 .creatingUser(userService.findUserByName(task.getCreatedByUserName()))
                 .createdDate(LocalDateTime.now())

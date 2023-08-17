@@ -7,8 +7,6 @@ import pl.ogarnizer.domain.Client;
 import pl.ogarnizer.domain.Priority;
 import pl.ogarnizer.domain.Stage;
 import pl.ogarnizer.domain.User;
-import pl.ogarnizer.infrastructure.database.entity.AwayWorkEntity;
-import pl.ogarnizer.infrastructure.database.entity.OrderEntity;
 import pl.ogarnizer.infrastructure.database.entity.ServiceEntity;
 
 import java.util.Set;
