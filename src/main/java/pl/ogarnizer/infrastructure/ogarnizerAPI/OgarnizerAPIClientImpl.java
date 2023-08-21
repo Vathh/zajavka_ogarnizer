@@ -32,7 +32,7 @@ public class OgarnizerAPIClientImpl implements OgarnizerAPIDAO {
     @Override
     public List<AwayWork> getAwayWorks() {
         try{
-            final var body = Objects.requireNonNull(awayWorkApi.awayWorksList3WithHttpInfo().block())
+            final var body = Objects.requireNonNull(awayWorkApi.awayWorksListWithHttpInfo().block())
                     .getBody();
             return Objects.requireNonNull(body).stream().map(awayWorkMapper::map).toList();
         }catch (Exception e) {
@@ -43,7 +43,7 @@ public class OgarnizerAPIClientImpl implements OgarnizerAPIDAO {
     @Override
     public List<Client> getClients() {
         try{
-            final var body = Objects.requireNonNull(clientApi.awayWorksList2WithHttpInfo().block()).getBody();
+            final var body = Objects.requireNonNull(clientApi.clientListWithHttpInfo().block()).getBody();
             return Objects.requireNonNull(body).stream().map(clientMapper::map).toList();
         }catch (Exception e) {
             return List.of();
@@ -53,7 +53,7 @@ public class OgarnizerAPIClientImpl implements OgarnizerAPIDAO {
     @Override
     public List<Order> getOrders() {
         try{
-            final var body = Objects.requireNonNull(orderApi.awayWorksList1WithHttpInfo().block()).getBody();
+            final var body = Objects.requireNonNull(orderApi.orderListWithHttpInfo().block()).getBody();
             return Objects.requireNonNull(body).stream().map(orderMapper::map).toList();
         }catch (Exception e) {
             return List.of();
@@ -63,7 +63,7 @@ public class OgarnizerAPIClientImpl implements OgarnizerAPIDAO {
     @Override
     public List<Service> getServices() {
         try{
-            final var body = Objects.requireNonNull(serviceApi.awayWorksListWithHttpInfo().block()).getBody();
+            final var body = Objects.requireNonNull(serviceApi.serviceListWithHttpInfo().block()).getBody();
             return Objects.requireNonNull(body).stream().map(serviceMapper::map).toList();
         }catch (Exception e) {
             return List.of();

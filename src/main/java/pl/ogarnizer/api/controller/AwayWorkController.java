@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +17,6 @@ import pl.ogarnizer.api.dto.mapper.TaskMapper;
 import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.business.*;
 import pl.ogarnizer.domain.AwayWork;
-import pl.ogarnizer.domain.Client;
 import pl.ogarnizer.domain.Task;
 
 import java.util.List;
@@ -69,9 +69,9 @@ public class AwayWorkController {
     public String addAwayWork(
             @Valid @ModelAttribute("taskDTO") TaskDTO taskDTO,
             BindingResult bindingResult
-    ) {
+    ) throws BindException {
         if(bindingResult.hasErrors()){
-            return "away_work";
+            throw new BindException(bindingResult);
         }
 
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -89,7 +89,11 @@ public class AwayWorkController {
 
         List<AwayWork> awayWorks = ogarnizerAPIDAO.getAwayWorks();
         awayWorks.forEach(awayWork -> clientService.addClient(awayWork.getClient()));
-        List<AwayWork> awayWorksToAdd = awayWorks.stream().map(awayWork -> awayWork.withClient(clientService.findByName(awayWork.getClient().getName()))).toList();
+        List<AwayWork> awayWorksToAdd = awayWorks.stream().map(
+                awayWork -> awayWork.withClient(
+                        clientService.findByName(
+                                awayWork.getClient().getName())))
+                .toList();
         awayWorkService.addAwayWorks(awayWorksToAdd);
         return "redirect:/away_work";
     }

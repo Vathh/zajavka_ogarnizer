@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Ogarnizer application",
+    "title": "Ogarnizer Random Data application",
     "contact": {
       "name": "Maciej Przestrzelski",
       "email": "przestrzelski.maciej1@gmail.com"
@@ -20,7 +20,7 @@
         "tags": [
           "service-controller"
         ],
-        "operationId": "awayWorksList",
+        "operationId": "serviceList",
         "responses": {
           "200": {
             "description": "OK",
@@ -43,7 +43,7 @@
         "tags": [
           "order-controller"
         ],
-        "operationId": "awayWorksList_1",
+        "operationId": "orderList",
         "responses": {
           "200": {
             "description": "OK",
@@ -66,7 +66,7 @@
         "tags": [
           "client-controller"
         ],
-        "operationId": "awayWorksList_2",
+        "operationId": "clientList",
         "responses": {
           "200": {
             "description": "OK",
@@ -89,7 +89,7 @@
         "tags": [
           "away-work-controller"
         ],
-        "operationId": "awayWorksList_3",
+        "operationId": "awayWorksList",
         "responses": {
           "200": {
             "description": "OK",
@@ -158,10 +158,6 @@
       "ServiceDTO": {
         "type": "object",
         "properties": {
-          "serviceId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "creatingUser": {
             "$ref": "#/components/schemas/UserDTO"
           },
@@ -228,10 +224,6 @@
       "OrderDTO": {
         "type": "object",
         "properties": {
-          "orderId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "creatingUser": {
             "$ref": "#/components/schemas/UserDTO"
           },
@@ -265,10 +257,6 @@
       "AwayWorkDTO": {
         "type": "object",
         "properties": {
-          "awayWorkId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "creatingUser": {
             "$ref": "#/components/schemas/UserDTO"
           },

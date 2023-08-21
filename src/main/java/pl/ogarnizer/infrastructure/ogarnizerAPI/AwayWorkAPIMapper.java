@@ -1,7 +1,6 @@
 package pl.ogarnizer.infrastructure.ogarnizerAPI;
 
 import lombok.AllArgsConstructor;
-import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.infrastructure.ogarnizerAPI.model.AwayWorkDTO;

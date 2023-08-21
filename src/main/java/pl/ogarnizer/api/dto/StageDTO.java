@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StageDTO {
 
-    String name;
+    private String name;
 }

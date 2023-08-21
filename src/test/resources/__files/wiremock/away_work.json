@@ -1,0 +1,172 @@
+[
+  {
+    "creatingUser": {
+      "userId": 5,
+      "userName": "Wojtek",
+      "password": "$2a$12$8NFmSojsYg1QE69Ff.C3luEUnwJQacpsIQWFj6s5wJVzuNW6J.CSK",
+      "roles": [
+        {
+          "roleId": 2,
+          "role": "admin"
+        }
+      ]
+    },
+    "createdDate": "2022-01-03T03:47:20",
+    "priority": {
+      "priorityId": 1,
+      "name": "low"
+    },
+    "client": {
+      "clientId": 521,
+      "name": "ayyfugrxdg",
+      "address": "Szafirowa 12 Goldap",
+      "nip": "818 564 82 76",
+      "phoneNumber": "156 654 798"
+    },
+    "description": "zaciecie papieru",
+    "place": "padma 3.0",
+    "device": "hp 2035",
+    "additionalInfo": "mozliwe ze uszkodzony czujnik polozenia papieru",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 3,
+      "name": "waiting_for_parts"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 2,
+      "userName": "Marian",
+      "password": "$2a$12$tgknuYcWJuLxuzc6jXhnCeY1Xzv2ElCyECyv5aXapgVrKO84dKWN6",
+      "roles": [
+        {
+          "roleId": 1,
+          "role": "serviceman"
+        }
+      ]
+    },
+    "createdDate": "2020-09-18T04:53:37",
+    "priority": {
+      "priorityId": 3,
+      "name": "high"
+    },
+    "client": {
+      "clientId": 522,
+      "name": "oadynneisp",
+      "address": "Diamentowa 15 Elk",
+      "nip": "292 404 23 10",
+      "phoneNumber": "158 487 981"
+    },
+    "description": "rolka poboru papieru",
+    "place": "sekretariat",
+    "device": "ricoh mp501",
+    "additionalInfo": "wymienilem toner",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 4,
+      "name": "to_invoice"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 3,
+      "userName": "Norbert",
+      "password": "$2a$12$0QiavKu05usb2kCKVrtbFudUkBX4XF1fFO5GX598NE6X0ZtZ8yzZG",
+      "roles": [
+        {
+          "roleId": 1,
+          "role": "serviceman"
+        }
+      ]
+    },
+    "createdDate": "2003-09-02T08:03:56",
+    "priority": {
+      "priorityId": 1,
+      "name": "low"
+    },
+    "client": {
+      "clientId": 523,
+      "name": "gwfndbhrou",
+      "address": "Pilsudskiego 5 Suwalki",
+      "nip": "127 106 92 52",
+      "phoneNumber": "951 951 951"
+    },
+    "description": "brak zasilania",
+    "place": "produkcja",
+    "device": "bizhub 3350",
+    "additionalInfo": "haslo do kompa: ciasto123",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 2,
+      "name": "in_progress"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 2,
+      "userName": "Marian",
+      "password": "$2a$12$tgknuYcWJuLxuzc6jXhnCeY1Xzv2ElCyECyv5aXapgVrKO84dKWN6",
+      "roles": [
+        {
+          "roleId": 1,
+          "role": "serviceman"
+        }
+      ]
+    },
+    "createdDate": "2022-02-18T02:15:26",
+    "priority": {
+      "priorityId": 2,
+      "name": "medium"
+    },
+    "client": {
+      "clientId": 524,
+      "name": "iledscdisz",
+      "address": "Rubinowa 8 Olecko",
+      "nip": "180 947 83 86",
+      "phoneNumber": "512 233 135"
+    },
+    "description": "touchpad nie dziala",
+    "place": "produkcja",
+    "device": "bizhub 3350",
+    "additionalInfo": "czarny drukuje ok",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 1,
+      "name": "just_added"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 5,
+      "userName": "Wojtek",
+      "password": "$2a$12$8NFmSojsYg1QE69Ff.C3luEUnwJQacpsIQWFj6s5wJVzuNW6J.CSK",
+      "roles": [
+        {
+          "roleId": 2,
+          "role": "admin"
+        }
+      ]
+    },
+    "createdDate": "2020-06-05T22:24:56",
+    "priority": {
+      "priorityId": 2,
+      "name": "medium"
+    },
+    "client": {
+      "clientId": 525,
+      "name": "hakvipnbnc",
+      "address": "Polna 12 Bakalarzewo",
+      "nip": "641 679 82 89",
+      "phoneNumber": "111 333 222"
+    },
+    "description": "uszkodzony wyswietlacz",
+    "place": "biuro na bydgoskiej",
+    "device": "dell precision tower 8160",
+    "additionalInfo": "wszystkie rolki wymienione na nowe",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 2,
+      "name": "in_progress"
+    }
+  }
+]

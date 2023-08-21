@@ -1,14 +1,14 @@
 package pl.ogarnizer.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDateTime;
 
 @Data
+@With
+@EqualsAndHashCode(of = {"creatingUserName", "priorityName", "clientName",
+        "description", "place", "device", "additionalInfo", "updateInfo", "stageName"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

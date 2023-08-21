@@ -1,6 +1,5 @@
 package pl.ogarnizer.business.dao;
 
-import pl.ogarnizer.api.dto.ClientDTO;
 import pl.ogarnizer.domain.Client;
 
 import java.util.List;

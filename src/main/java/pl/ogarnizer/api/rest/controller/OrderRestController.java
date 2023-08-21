@@ -14,7 +14,6 @@ import pl.ogarnizer.business.ClosingTaskService;
 import pl.ogarnizer.business.OrderService;
 import pl.ogarnizer.business.PriorityService;
 import pl.ogarnizer.business.StageService;
-import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Order;
 import pl.ogarnizer.domain.Task;
 

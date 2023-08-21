@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -68,9 +69,9 @@ public class ServiceController {
     public String addService(
             @Valid @ModelAttribute("taskDTO") TaskDTO taskDTO,
             BindingResult bindingResult
-    ) {
+    ) throws BindException {
         if(bindingResult.hasErrors()){
-            return "service";
+            throw new BindException(bindingResult);
         }
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -19,7 +19,7 @@ public class DtoFixtures {
                 .device("urzadzenie")
                 .additionalInfo("dodatkowe informacje")
                 .updateInfo("informacje o aktualizacji")
-                .stageName(someStage1().getName())
+                .stageName(someStageDTO1().getName())
                 .build();
     }
 
@@ -27,14 +27,14 @@ public class DtoFixtures {
         return AwayWorkDTO.builder()
                 .creatingUserName(someUserDTO2().getUserName())
                 .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
-                .priorityName(lowPriority().getName())
+                .priorityName(mediumPriority().getName())
                 .clientName(someClientDTO2().getName())
                 .description("opis")
                 .place("miejsce")
                 .device("urzadzenie")
                 .additionalInfo("dodatkowe informacje")
                 .updateInfo("informacje o aktualizacji")
-                .stageName(someStage2().getName())
+                .stageName(someStageDTO2().getName())
                 .build();
     }
 
@@ -42,14 +42,14 @@ public class DtoFixtures {
         return AwayWorkDTO.builder()
                 .creatingUserName(someUserDTO3().getUserName())
                 .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
-                .priorityName(lowPriority().getName())
+                .priorityName(highPriority().getName())
                 .clientName(someClientDTO3().getName())
                 .description("opis")
                 .place("miejsce")
                 .device("urzadzenie")
                 .additionalInfo("dodatkowe informacje")
                 .updateInfo("informacje o aktualizacji")
-                .stageName(someStage3().getName())
+                .stageName(someStageDTO3().getName())
                 .build();
     }
 
@@ -69,7 +69,7 @@ public class DtoFixtures {
                 .device("urzadzenie")
                 .additionalInfo("dodatkowe informacje")
                 .updateInfo("informacje o aktualizacji")
-                .stageName(someStage3().getName())
+                .stageName(someStageDTO3().getName())
                 .build();
     }
 
@@ -89,7 +89,7 @@ public class DtoFixtures {
                 .device("urzadzenie")
                 .additionalInfo("dodatkowe informacje")
                 .updateInfo("informacje o aktualizacji")
-                .stageName(someStage3().getName())
+                .stageName(someStageDTO3().getName())
                 .build();
     }
 
@@ -109,16 +109,16 @@ public class DtoFixtures {
 
     public static UserDTO someUserDTO2(){
         return UserDTO.builder()
-                .userName("Darek")
-                .password("darek123")
+                .userName("Karol")
+                .password("karol123")
                 .roles(List.of(servicemanRole().getRole()))
                 .build();
     }
 
     public static UserDTO someUserDTO3(){
         return UserDTO.builder()
-                .userName("Marek")
-                .password("marek123")
+                .userName("Norbert")
+                .password("norbert123")
                 .roles(List.of(servicemanRole().getRole()))
                 .build();
     }
@@ -159,25 +159,25 @@ public class DtoFixtures {
                 .build();
     }
 
-    public static StageDTO someStage1(){
+    public static StageDTO someStageDTO1(){
         return StageDTO.builder()
                 .name("just_added")
                 .build();
     }
 
-    public static StageDTO someStage2(){
+    public static StageDTO someStageDTO2(){
         return StageDTO.builder()
                 .name("in_progress")
                 .build();
     }
 
-    public static StageDTO someStage3(){
+    public static StageDTO someStageDTO3(){
         return StageDTO.builder()
                 .name("waiting_for_parts")
                 .build();
     }
 
-    public static StageDTO someStage4(){
+    public static StageDTO someStageDTO4(){
         return StageDTO.builder()
                 .name("to_invoice")
                 .build();
@@ -186,7 +186,7 @@ public class DtoFixtures {
     public static ClientDTO someClientDTO1(){
         return ClientDTO.builder()
                 .name("Magda")
-                .address("Poznanska 15 Warszawa")
+                .address("Poznanska 15 Poznan")
                 .nip("543 345 34 32")
                 .phoneNumber("123 456 789")
                 .build();
@@ -274,6 +274,59 @@ public class DtoFixtures {
     public static ClosedServicesDTO someClosedServicesDTO(){
         return ClosedServicesDTO.builder()
                 .closedServices(List.of(someClosedServiceDTO1(), someClosedServiceDTO1(), someClosedServiceDTO1()))
+                .build();
+    }
+
+    public static TaskDTO someTaskDTO1(){
+        return TaskDTO.builder()
+                .createdByUserName(someUserDTO1().getUserName())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priorityName(lowPriority().getName())
+                .clientName(someClientDTO1().getName())
+                .description("opis")
+                .place("miejsce")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stageName(someStageDTO1().getName())
+                .build();
+    }
+
+    public static TaskDTO someTaskDTO2(){
+        return TaskDTO.builder()
+                .createdByUserName(someUserDTO2().getUserName())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priorityName(mediumPriority().getName())
+                .clientName(someClientDTO2().getName())
+                .description("opis")
+                .place("miejsce")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stageName(someStageDTO2().getName())
+                .build();
+    }
+
+    public static TaskDTO someTaskDTO3(){
+        return TaskDTO.builder()
+                .createdByUserName(someUserDTO3().getUserName())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priorityName(highPriority().getName())
+                .clientName(someClientDTO3().getName())
+                .description("opis")
+                .place("miejsce")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stageName(someStageDTO3().getName())
+                .build();
+    }
+
+    public static UpdateTaskDTO someUpdateTaskDTO1(){
+        return UpdateTaskDTO.builder()
+                .priorityName(highPriority().getName())
+                .updateInfo("inne informacje o aktualizacji")
+                .stageName(someStageDTO4().getName())
                 .build();
     }
 }

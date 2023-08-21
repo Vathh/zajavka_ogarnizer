@@ -13,6 +13,7 @@ import pl.ogarnizer.business.dao.ClosedServiceDAO;
 import pl.ogarnizer.domain.*;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @Service
@@ -32,7 +33,7 @@ public class ClosingTaskService {
         User closingUser = userService.findUserByName(closingUserName);
         ClosedAwayWork closedAwayWork = closedAwayWorkMapper.map(awayWork);
         ClosedAwayWork closedAwayWorkToAdd = closedAwayWork.withClosingUser(closingUser)
-                .withClosedDate(LocalDateTime.now())
+                .withClosedDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))
                 .withSuccess(success);
 
         closedAwayWorkDAO.addClosedAwayWork(closedAwayWorkToAdd);
@@ -43,7 +44,7 @@ public class ClosingTaskService {
         User closingUser = userService.findUserByName(closingUserName);
         ClosedOrder closedOrder = closedOrderMapper.map(order);
         ClosedOrder closedOrderToAdd = closedOrder.withClosingUser(closingUser)
-                .withClosedDate(LocalDateTime.now())
+                .withClosedDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))
                 .withSuccess(success);
 
         closedOrderDAO.addClosedOrder(closedOrderToAdd);
@@ -54,7 +55,7 @@ public class ClosingTaskService {
         User closingUser = userService.findUserByName(closingUserName);
         ClosedService closedService = closedServiceMapper.map(service);
         ClosedService closedServiceToAdd = closedService.withClosingUser(closingUser)
-                .withClosedDate(LocalDateTime.now())
+                .withClosedDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))
                 .withSuccess(success);
 
         closedServiceDAO.addClosedService(closedServiceToAdd);

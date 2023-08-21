@@ -9,6 +9,7 @@ import pl.ogarnizer.domain.Task;
 import pl.ogarnizer.domain.exception.NotFoundException;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +25,7 @@ public class ServiceService {
 
     @Transactional
     public List<pl.ogarnizer.domain.Service> findServices(){
-        List<pl.ogarnizer.domain.Service> services = serviceDAO.findAll();
-        log.info("Services: [{}]", services.size());
-        return services;
+        return serviceDAO.findAll();
     }
 
     @Transactional
@@ -62,7 +61,7 @@ public class ServiceService {
     private pl.ogarnizer.domain.Service prepareService(Task task){
         return pl.ogarnizer.domain.Service.builder()
                 .creatingUser(userService.findUserByName(task.getCreatedByUserName()))
-                .createdDate(LocalDateTime.now())
+                .createdDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))
                 .priority(priorityService.findPriority(task.getPriorityName()))
                 .client(clientService.findByName(task.getClientName()))
                 .description(task.getDescription())

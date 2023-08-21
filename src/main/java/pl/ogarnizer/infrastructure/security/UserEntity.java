@@ -1,7 +1,10 @@
 package pl.ogarnizer.infrastructure.security;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.ogarnizer.infrastructure.database.entity.*;
 
 import java.util.Set;

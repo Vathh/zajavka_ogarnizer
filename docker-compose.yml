@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.4'
 services:
   backend:
     build: .
@@ -17,7 +17,7 @@ services:
   PostgreSQL:
     image: postgres:15.0
     ports:
-      - 5432:5432
+      - 5431:5432
     environment:
       - POSTGRES_DB=ogarnizer
       - POSTGRES_USER=postgres

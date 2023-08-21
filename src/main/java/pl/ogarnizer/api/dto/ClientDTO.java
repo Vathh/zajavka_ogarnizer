@@ -1,13 +1,16 @@
 package pl.ogarnizer.api.dto;
 
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-@Data
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+@Getter
+@Setter
+@EqualsAndHashCode(of = "nip")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,8 +21,17 @@ public class ClientDTO {
     String name;
     @Length(max = 100)
     String address;
-    @Pattern(regexp = "^\\d{3}\\s\\d{3}\\s\\d{2}\\s\\d{2}$")
+    @Pattern(regexp = "^\\d{3}\\s\\d{3}\\s\\d{2}\\s\\d{2}$", message = "Invalid nip")
     String nip;
-    @Pattern(regexp = "^\\d{3}\\s\\d{3}\\s\\d{3}$")
+    @Pattern(regexp = "^\\d{3}\\s\\d{3}\\s\\d{3}$", message = "Invalid phone number")
     String phoneNumber;
+
+    public Map<String, String> asMap(){
+        Map<String, String> result = new HashMap<>();
+        Optional.ofNullable(name).ifPresent(value -> result.put("name", value));
+        Optional.ofNullable(address).ifPresent(value -> result.put("address", value));
+        Optional.ofNullable(nip).ifPresent(value -> result.put("nip", value));
+        Optional.ofNullable(phoneNumber).ifPresent(value -> result.put("phoneNumber", value));
+        return result;
+    }
 }

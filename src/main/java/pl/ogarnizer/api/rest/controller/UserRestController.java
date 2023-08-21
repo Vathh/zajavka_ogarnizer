@@ -3,8 +3,6 @@ package pl.ogarnizer.api.rest.controller;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.ogarnizer.api.dto.UserDTO;
 import pl.ogarnizer.api.dto.mapper.UserMapper;

@@ -10,6 +10,7 @@ import pl.ogarnizer.domain.Task;
 import pl.ogarnizer.domain.exception.NotFoundException;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +26,7 @@ public class OrderService {
 
     @Transactional
     public List<Order> findOrders(){
-        List<Order> orders = orderDAO.findAll();
-        log.info("Orders: [{}]", orders.size());
-        return orders;
+        return orderDAO.findAll();
     }
 
     @Transactional
@@ -63,7 +62,7 @@ public class OrderService {
     private Order prepareOrder(Task task){
         return Order.builder()
                 .creatingUser(userService.findUserByName(task.getCreatedByUserName()))
-                .createdDate(LocalDateTime.now())
+                .createdDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))
                 .priority(priorityService.findPriority(task.getPriorityName()))
                 .client(clientService.findByName(task.getClientName()))
                 .description(task.getDescription())

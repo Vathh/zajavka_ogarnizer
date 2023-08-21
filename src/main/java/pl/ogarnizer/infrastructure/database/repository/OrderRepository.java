@@ -81,7 +81,7 @@ public class OrderRepository implements OrderDAO {
     @Override
     public void addOrder(Order order) {
         OrderEntity orderToSave = orderEntityMapper.mapToEntity(order);
-        OrderEntity orderSaved = orderJpaRepository.saveAndFlush(orderToSave);
+        orderJpaRepository.saveAndFlush(orderToSave);
     }
 
     @Override

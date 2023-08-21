@@ -20,9 +20,7 @@ public class StageService {
 
     @Transactional
     public List<Stage> findStages(){
-        List<Stage> priorities = stageDAO.findAll();
-        log.info("Priorities: [{}]", priorities.size());
-        return priorities;
+        return stageDAO.findAll();
     }
 
     @Transactional

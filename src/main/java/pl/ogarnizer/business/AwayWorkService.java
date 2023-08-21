@@ -5,10 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ogarnizer.business.dao.AwayWorkDAO;
-import pl.ogarnizer.domain.*;
+import pl.ogarnizer.domain.AwayWork;
+import pl.ogarnizer.domain.Task;
 import pl.ogarnizer.domain.exception.NotFoundException;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +26,7 @@ public class AwayWorkService {
 
     @Transactional
     public List<AwayWork> findAwayWorks(){
-        List<AwayWork> awayWorks = awayWorkDAO.findAll();
-        log.info("Away works: [{}]", awayWorks.size());
-        return awayWorks;
+        return awayWorkDAO.findAll();
     }
 
     public AwayWork findAwayWorkById(Integer awayWorkId){
@@ -61,7 +61,7 @@ public class AwayWorkService {
     public AwayWork prepareAwayWork(Task task){
         return AwayWork.builder()
                 .creatingUser(userService.findUserByName(task.getCreatedByUserName()))
-                .createdDate(LocalDateTime.now())
+                .createdDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))
                 .priority(priorityService.findPriority(task.getPriorityName()))
                 .client(clientService.findByName(task.getClientName()))
                 .description(task.getDescription())

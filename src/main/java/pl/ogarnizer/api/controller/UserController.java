@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.ogarnizer.api.dto.UserDTO;
@@ -41,9 +42,9 @@ public class UserController {
     public String addUser(
             @Valid @ModelAttribute("userDTO") UserDTO userDTO,
             BindingResult bindingResult
-    ) {
+    ) throws BindException {
         if(bindingResult.hasErrors()){
-            return "user";
+            throw new BindException(bindingResult);
         }
 
         userService.addUser(userDTO);

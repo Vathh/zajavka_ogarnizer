@@ -2,7 +2,6 @@ package pl.ogarnizer.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
-import pl.ogarnizer.api.dto.ClientDTO;
 import pl.ogarnizer.business.dao.ClientDAO;
 import pl.ogarnizer.domain.Client;
 import pl.ogarnizer.infrastructure.database.entity.ClientEntity;

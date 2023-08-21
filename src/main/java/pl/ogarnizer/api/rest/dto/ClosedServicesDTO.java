@@ -14,5 +14,5 @@ import java.util.List;
 @AllArgsConstructor
 public class ClosedServicesDTO {
 
-    List<ClosedServiceDTO> closedServices;
+    private List<ClosedServiceDTO> closedServices;
 }

@@ -52,6 +52,10 @@ public class DomainFixtures {
                 .build();
     }
 
+    public static List<AwayWork> someAwayWorksList(){
+        return List.of(someAwayWork1(), someAwayWork2(), someAwayWork3());
+    }
+
     public static Order someOrder1(){
         return Order.builder()
                 .creatingUser(someUser1())
@@ -137,6 +141,10 @@ public class DomainFixtures {
                 .build();
     }
 
+    public static List<Priority> allPriorities(){
+        return List.of(lowPriority(), mediumPriority(), highPriority());
+    }
+
     public static Stage someStage1(){
         return Stage.builder()
                 .name("just_added")
@@ -193,6 +201,10 @@ public class DomainFixtures {
                 .nip("654 321 23 45")
                 .phoneNumber("789 123 456")
                 .build();
+    }
+
+    public static List<Client> someClientsList(){
+        return List.of(someClient1(), someClient2(), someClient3());
     }
 
     public static Task someTask1(){
@@ -252,4 +264,5 @@ public class DomainFixtures {
                 .closedDate(LocalDateTime.of(2020,10,20,10,20,20))
                 .build();
     }
+
 }

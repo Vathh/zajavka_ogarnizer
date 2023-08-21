@@ -15,25 +15,25 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TaskDTO {
 
-    Integer taskId;
-    String createdByUserName;
-    LocalDateTime createdDate;
+    private Integer taskId;
+    private String createdByUserName;
+    private LocalDateTime createdDate;
     @Pattern(regexp = "low|medium|high", flags = Pattern.Flag.CASE_INSENSITIVE)
-    String priorityName;
-    String clientName;
+    private String priorityName;
+    private String clientName;
     @Length(max = 100)
-    String description;
+    private String description;
     @Length(max = 100)
-    String place;
+    private String place;
     @Length(max = 100)
-    String device;
+    private String device;
     @Length(max = 100)
-    String additionalInfo;
+    private String additionalInfo;
     @Length(max = 100)
-    String updateInfo;
+    private String updateInfo;
     @Pattern(regexp = "just_added|in_progress|waiting_for_parts|to_invoice", flags = Pattern.Flag.CASE_INSENSITIVE)
-    String stageName;
-    String closingUserName;
-    LocalDateTime closedDate;
-    Boolean success;
+    private String stageName;
+    private String closingUserName;
+    private LocalDateTime closedDate;
+    private Boolean success;
 }

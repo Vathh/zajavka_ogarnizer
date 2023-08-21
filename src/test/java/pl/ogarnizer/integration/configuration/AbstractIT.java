@@ -1,7 +1,5 @@
 package pl.ogarnizer.integration.configuration;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -23,13 +21,4 @@ public abstract class AbstractIT {
     @Value("${server.servlet.context-path}")
     protected String basePath;
 
-    @AfterEach
-    void afterEach() {
-
-    }
-
-    @BeforeEach
-    void beforeEach(){
-
-    }
 }

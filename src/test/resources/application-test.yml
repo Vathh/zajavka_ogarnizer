@@ -1,3 +1,6 @@
+api:
+  ogarnizerAPI:
+    url: http://localhost:9999/zajavka-ogarnizerAPI
 spring:
   security:
     enabled: false

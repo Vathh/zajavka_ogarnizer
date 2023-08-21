@@ -17,9 +17,7 @@ public class ClosedAwayWorkService {
 
     @Transactional
     public List<ClosedAwayWork> findClosedAwayWorks(){
-        List<ClosedAwayWork> closedAwayWorks = closedAwayWorkDAO.findAll();
-        log.info("Closed away works: [{}]", closedAwayWorks.size());
-        return closedAwayWorks;
+        return closedAwayWorkDAO.findAll();
     }
 
     @Transactional

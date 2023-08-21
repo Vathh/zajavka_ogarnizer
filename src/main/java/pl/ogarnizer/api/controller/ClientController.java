@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,7 +13,6 @@ import pl.ogarnizer.api.dto.ClientDTO;
 import pl.ogarnizer.api.dto.mapper.ClientMapper;
 import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.business.ClientService;
-import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Client;
 
 import java.util.List;
@@ -61,9 +61,9 @@ public class ClientController {
     public String addClient(
             @Valid @ModelAttribute("clientDTO") ClientDTO clientDTO,
             BindingResult bindingResult
-    ) {
+    ) throws BindException {
         if(bindingResult.hasErrors()){
-            return "service";
+            throw new BindException(bindingResult);
         }
 
         Client client = clientMapper.map(clientDTO);
@@ -84,7 +84,7 @@ public class ClientController {
     }
 
     @DeleteMapping(value = DELETE_CLIENT)
-    public String deleteAwayWork(
+    public String deleteClient(
             @PathVariable("clientId") Integer clientId
     ){
         clientService.deleteClient(clientId);

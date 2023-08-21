@@ -18,8 +18,6 @@ public class RoleService {
 
     @Transactional
     public List<Role> findRoles(){
-        List<Role> roles = roleDAO.findRoles();
-        log.info("Roles: [{}]", roles.size());
-        return roles;
+        return roleDAO.findRoles();
     }
 }

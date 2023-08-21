@@ -17,9 +17,7 @@ public class ClosedOrderService {
 
     @Transactional
     public List<ClosedOrder> findClosedOrders(){
-        List<ClosedOrder> closedOrders = closedOrderDAO.findAll();
-        log.info("Closed orders: [{}]", closedOrders.size());
-        return closedOrders;
+        return closedOrderDAO.findAll();
     }
 
     @Transactional

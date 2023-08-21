@@ -18,9 +18,7 @@ public class ClosedServiceService {
 
     @Transactional
     public List<ClosedService> findClosedServices(){
-        List<ClosedService> closedServices = closedServiceDAO.findAll();
-        log.info("Closed services: [{}]", closedServices.size());
-        return closedServices;
+        return closedServiceDAO.findAll();
     }
 
     @Transactional

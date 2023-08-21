@@ -10,8 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
-    Integer userId;
-    String userName;
-    String password;
-    List<String> roles;
+    private Integer userId;
+    private String userName;
+    private String password;
+    private List<String> roles;
 }

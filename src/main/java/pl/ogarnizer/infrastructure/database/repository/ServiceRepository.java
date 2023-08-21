@@ -81,7 +81,7 @@ public class ServiceRepository implements ServiceDAO {
     @Override
     public void addService(Service service) {
         ServiceEntity serviceToSave = serviceEntityMapper.mapToEntity(service);
-        ServiceEntity serviceSaved = serviceJpaRepository.saveAndFlush(serviceToSave);
+        serviceJpaRepository.saveAndFlush(serviceToSave);
     }
 
     @Override

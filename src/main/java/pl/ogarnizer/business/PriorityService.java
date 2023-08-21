@@ -20,9 +20,7 @@ public class PriorityService {
 
     @Transactional
     public List<Priority> findPriorities(){
-        List<Priority> priorities = priorityDAO.findAll();
-        log.info("Priorities: [{}]", priorities.size());
-        return priorities;
+        return priorityDAO.findAll();
     }
 
     @Transactional

@@ -1,13 +1,7 @@
 package pl.ogarnizer.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import pl.ogarnizer.infrastructure.security.UserEntity;
 
 import java.time.LocalDateTime;
@@ -28,14 +22,14 @@ public class ClosedAwayWorkEntity {
     @Column(name = "closed_away_work_id")
     private Integer closedAwayWorkId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "created_by_user_id")
     private UserEntity creatingUser;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private ClientEntity client;
 
@@ -54,7 +48,7 @@ public class ClosedAwayWorkEntity {
     @Column(name = "update_info")
     private String updateInfo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "closed_by_user_id")
     private UserEntity closingUser;
 

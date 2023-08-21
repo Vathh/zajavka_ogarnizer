@@ -58,7 +58,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         request ->
                             request.requestMatchers(AUTH_WHITELIST).permitAll()
-                                .requestMatchers("/login", "/error", "/images/oh_no.png","/api/**").permitAll()
+                                .requestMatchers("/login", "/error", "/images/error.jpg","/api/**").permitAll()
                                 .requestMatchers(
                                         "/",
                                         "/images/**",
