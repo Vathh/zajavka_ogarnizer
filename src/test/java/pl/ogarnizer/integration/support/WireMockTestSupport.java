@@ -13,4 +13,18 @@ public interface WireMockTestSupport {
                         .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                         .withBodyFile("wiremock/away_work.json")));
     }
+
+    default void stubForLoadServices(final WireMockServer wireMockServer){
+        wireMockServer.stubFor(get(urlPathMatching("/zajavka-ogarnizerAPI/service"))
+                .willReturn(aResponse()
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("wiremock/service.json")));
+    }
+
+    default void stubForLoadOrders(final WireMockServer wireMockServer){
+        wireMockServer.stubFor(get(urlPathMatching("/zajavka-ogarnizerAPI/order"))
+                .willReturn(aResponse()
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("wiremock/order.json")));
+    }
 }

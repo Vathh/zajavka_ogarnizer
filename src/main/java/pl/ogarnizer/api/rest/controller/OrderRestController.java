@@ -9,13 +9,14 @@ import pl.ogarnizer.api.dto.TaskDTO;
 import pl.ogarnizer.api.dto.UpdateTaskDTO;
 import pl.ogarnizer.api.dto.mapper.OrderMapper;
 import pl.ogarnizer.api.dto.mapper.TaskMapper;
+import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.api.rest.dto.OrdersDTO;
-import pl.ogarnizer.business.ClosingTaskService;
-import pl.ogarnizer.business.OrderService;
-import pl.ogarnizer.business.PriorityService;
-import pl.ogarnizer.business.StageService;
+import pl.ogarnizer.business.*;
+import pl.ogarnizer.domain.Order;
 import pl.ogarnizer.domain.Order;
 import pl.ogarnizer.domain.Task;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -25,11 +26,14 @@ public class OrderRestController {
     public static final String API_ORDER = "/api/order";
     public static final String API_ORDER_ID = "/{orderId}";
     public static final String API_DELETE_ORDER = "/{orderId}/{success}/{closingUserName}";
+    public static final String LOAD_RANDOM_ORDERS = "/load";
 
     private final OrderService orderService;
+    private final ClientService clientService;
     private final PriorityService priorityService;
     private final StageService stageService;
     private final ClosingTaskService closingTaskService;
+    private final OgarnizerAPIDAO ogarnizerAPIDAO;
     private final OrderMapper orderMapper;
     private final TaskMapper taskMapper;
 
@@ -90,5 +94,18 @@ public class OrderRestController {
         } catch(Exception e){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping(value = LOAD_RANDOM_ORDERS)
+    public void loadRandomOrders() {
+
+        List<Order> orders = ogarnizerAPIDAO.getOrders();
+        orders.forEach(order -> clientService.addClient(order.getClient()));
+        List<Order> ordersToAdd = orders.stream().map(
+                        order -> order.withClient(
+                                clientService.findByName(
+                                        order.getClient().getName())))
+                .toList();
+        orderService.addOrders(ordersToAdd);
     }
 }

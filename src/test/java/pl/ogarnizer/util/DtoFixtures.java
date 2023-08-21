@@ -61,9 +61,37 @@ public class DtoFixtures {
 
     public static OrderDTO someOrderDTO1(){
         return OrderDTO.builder()
-                .creatingUserName(someUserDTO3().getUserName())
+                .creatingUserName(someUserDTO1().getUserName())
                 .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
                 .priorityName(lowPriority().getName())
+                .clientName(someClientDTO1().getName())
+                .description("opis")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stageName(someStageDTO1().getName())
+                .build();
+    }
+
+    public static OrderDTO someOrderDTO2(){
+        return OrderDTO.builder()
+                .creatingUserName(someUserDTO2().getUserName())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priorityName(mediumPriority().getName())
+                .clientName(someClientDTO2().getName())
+                .description("opis")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stageName(someStageDTO2().getName())
+                .build();
+    }
+
+    public static OrderDTO someOrderDTO3(){
+        return OrderDTO.builder()
+                .creatingUserName(someUserDTO3().getUserName())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priorityName(highPriority().getName())
                 .clientName(someClientDTO3().getName())
                 .description("opis")
                 .device("urzadzenie")
@@ -81,9 +109,37 @@ public class DtoFixtures {
 
     public static ServiceDTO someServiceDTO1(){
         return ServiceDTO.builder()
-                .creatingUserName(someUserDTO3().getUserName())
+                .creatingUserName(someUserDTO1().getUserName())
                 .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
                 .priorityName(lowPriority().getName())
+                .clientName(someClientDTO1().getName())
+                .description("opis")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stageName(someStageDTO1().getName())
+                .build();
+    }
+
+    public static ServiceDTO someServiceDTO2(){
+        return ServiceDTO.builder()
+                .creatingUserName(someUserDTO2().getUserName())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priorityName(mediumPriority().getName())
+                .clientName(someClientDTO2().getName())
+                .description("opis")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stageName(someStageDTO2().getName())
+                .build();
+    }
+
+    public static ServiceDTO someServiceDTO3(){
+        return ServiceDTO.builder()
+                .creatingUserName(someUserDTO3().getUserName())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priorityName(highPriority().getName())
                 .clientName(someClientDTO3().getName())
                 .description("opis")
                 .device("urzadzenie")

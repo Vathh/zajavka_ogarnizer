@@ -1,0 +1,167 @@
+[
+  {
+    "creatingUser": {
+      "userId": 3,
+      "userName": "Norbert",
+      "password": "$2a$12$0QiavKu05usb2kCKVrtbFudUkBX4XF1fFO5GX598NE6X0ZtZ8yzZG",
+      "roles": [
+        {
+          "roleId": 1,
+          "role": "serviceman"
+        }
+      ]
+    },
+    "createdDate": "2006-04-02T16:44:17",
+    "priority": {
+      "priorityId": 2,
+      "name": "medium"
+    },
+    "client": {
+      "clientId": 41,
+      "name": "vzokdzqlaa",
+      "address": "Szmaragdowa 5 Bialystok",
+      "nip": "512 750 05 64",
+      "phoneNumber": "953 375 359"
+    },
+    "description": "toner + beben",
+    "device": "hp 4200",
+    "additionalInfo": "reczny podajnik dziala",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 4,
+      "name": "to_invoice"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 2,
+      "userName": "Marian",
+      "password": "$2a$12$tgknuYcWJuLxuzc6jXhnCeY1Xzv2ElCyECyv5aXapgVrKO84dKWN6",
+      "roles": [
+        {
+          "roleId": 1,
+          "role": "serviceman"
+        }
+      ]
+    },
+    "createdDate": "2008-01-21T17:37:42",
+    "priority": {
+      "priorityId": 1,
+      "name": "low"
+    },
+    "client": {
+      "clientId": 42,
+      "name": "qwiljkqxhm",
+      "address": "Diamentowa 15 Elk",
+      "nip": "456 649 27 15",
+      "phoneNumber": "158 487 981"
+    },
+    "description": "powolne dzialanie",
+    "device": "bizhub c234",
+    "additionalInfo": "sprawdzalem wydruk kolorowy",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 2,
+      "name": "in_progress"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 3,
+      "userName": "Norbert",
+      "password": "$2a$12$0QiavKu05usb2kCKVrtbFudUkBX4XF1fFO5GX598NE6X0ZtZ8yzZG",
+      "roles": [
+        {
+          "roleId": 1,
+          "role": "serviceman"
+        }
+      ]
+    },
+    "createdDate": "2007-05-14T05:55:20",
+    "priority": {
+      "priorityId": 3,
+      "name": "high"
+    },
+    "client": {
+      "clientId": 43,
+      "name": "gzmelayqcn",
+      "address": "Ametystowa 19 Augustow",
+      "nip": "511 768 32 34",
+      "phoneNumber": "951 951 951"
+    },
+    "description": "folia do pieca",
+    "device": "bizhub 3350",
+    "additionalInfo": "sprawdzalem karte graficzna",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 1,
+      "name": "just_added"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 5,
+      "userName": "Wojtek",
+      "password": "$2a$12$8NFmSojsYg1QE69Ff.C3luEUnwJQacpsIQWFj6s5wJVzuNW6J.CSK",
+      "roles": [
+        {
+          "roleId": 2,
+          "role": "admin"
+        }
+      ]
+    },
+    "createdDate": "2021-02-09T17:41:55",
+    "priority": {
+      "priorityId": 2,
+      "name": "medium"
+    },
+    "client": {
+      "clientId": 44,
+      "name": "zhrzyuvoxu",
+      "address": "Polna 3 Wizajny",
+      "nip": "208 090 75 90",
+      "phoneNumber": "512 233 135"
+    },
+    "description": "zaciecie papieru",
+    "device": "dell latitude 5490",
+    "additionalInfo": "mozliwe ze uszkodzony czujnik polozenia papieru",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 2,
+      "name": "in_progress"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 4,
+      "userName": "Wladek",
+      "password": "$2a$12$VasTXpHMYig05oacsr8CMezX/0t4pKWHYamQ4O6CJQRuRDinl7dwG",
+      "roles": [
+        {
+          "roleId": 2,
+          "role": "admin"
+        }
+      ]
+    },
+    "createdDate": "2013-02-20T14:18:19",
+    "priority": {
+      "priorityId": 2,
+      "name": "medium"
+    },
+    "client": {
+      "clientId": 45,
+      "name": "fktlruqrrl",
+      "address": "Szafirowa 12 Goldap",
+      "nip": "268 661 30 77",
+      "phoneNumber": "587 456 982"
+    },
+    "description": "uszkodzona matryca",
+    "device": "ricoh mp501",
+    "additionalInfo": "haslo do kompa: ciasto123",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 1,
+      "name": "just_added"
+    }
+  }
+]

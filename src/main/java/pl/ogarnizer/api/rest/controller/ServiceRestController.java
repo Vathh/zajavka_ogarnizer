@@ -9,13 +9,14 @@ import pl.ogarnizer.api.dto.TaskDTO;
 import pl.ogarnizer.api.dto.UpdateTaskDTO;
 import pl.ogarnizer.api.dto.mapper.ServiceMapper;
 import pl.ogarnizer.api.dto.mapper.TaskMapper;
+import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.api.rest.dto.ServicesDTO;
-import pl.ogarnizer.business.ClosingTaskService;
-import pl.ogarnizer.business.PriorityService;
-import pl.ogarnizer.business.ServiceService;
-import pl.ogarnizer.business.StageService;
+import pl.ogarnizer.business.*;
+import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Service;
 import pl.ogarnizer.domain.Task;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -25,11 +26,14 @@ public class ServiceRestController {
     public static final String API_SERVICE = "/api/service";
     public static final String API_SERVICE_ID = "/{serviceId}";
     public static final String API_DELETE_SERVICE = "/{serviceId}/{success}/{closingUserName}";
+    public static final String LOAD_RANDOM_SERVICES = "/load";
 
     private final ServiceService serviceService;
+    private final ClientService clientService;
     private final PriorityService priorityService;
     private final StageService stageService;
     private final ClosingTaskService closingTaskService;
+    private final OgarnizerAPIDAO ogarnizerAPIDAO;
     private final ServiceMapper serviceMapper;
     private final TaskMapper taskMapper;
 
@@ -91,5 +95,18 @@ public class ServiceRestController {
         } catch(Exception e){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping(value = LOAD_RANDOM_SERVICES)
+    public void loadRandomServices() {
+
+        List<Service> services = ogarnizerAPIDAO.getServices();
+        services.forEach(service -> clientService.addClient(service.getClient()));
+        List<Service> servicesToAdd = services.stream().map(
+                        service -> service.withClient(
+                                clientService.findByName(
+                                        service.getClient().getName())))
+                .toList();
+        serviceService.addServices(servicesToAdd);
     }
 }

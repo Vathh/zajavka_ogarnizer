@@ -1,0 +1,167 @@
+[
+  {
+    "creatingUser": {
+      "userId": 2,
+      "userName": "Marian",
+      "password": "$2a$12$tgknuYcWJuLxuzc6jXhnCeY1Xzv2ElCyECyv5aXapgVrKO84dKWN6",
+      "roles": [
+        {
+          "roleId": 1,
+          "role": "serviceman"
+        }
+      ]
+    },
+    "createdDate": "2006-10-03T17:34:20",
+    "priority": {
+      "priorityId": 3,
+      "name": "high"
+    },
+    "client": {
+      "clientId": 36,
+      "name": "aieklwcxwi",
+      "address": "Polna 12 Bakalarzewo",
+      "nip": "551 804 18 07",
+      "phoneNumber": "587 456 982"
+    },
+    "description": "brak dzwieku",
+    "device": "dell latitude 5120",
+    "additionalInfo": "wszystkie rolki wymienione na nowe",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 3,
+      "name": "waiting_for_parts"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 4,
+      "userName": "Wladek",
+      "password": "$2a$12$VasTXpHMYig05oacsr8CMezX/0t4pKWHYamQ4O6CJQRuRDinl7dwG",
+      "roles": [
+        {
+          "roleId": 2,
+          "role": "admin"
+        }
+      ]
+    },
+    "createdDate": "2012-02-16T21:51:26",
+    "priority": {
+      "priorityId": 2,
+      "name": "medium"
+    },
+    "client": {
+      "clientId": 37,
+      "name": "vvxpwyvnhs",
+      "address": "Rubinowa 3 Krasnopol",
+      "nip": "371 025 76 09",
+      "phoneNumber": "953 375 359"
+    },
+    "description": "brak zasilania",
+    "device": "bizhub c356",
+    "additionalInfo": "wymienilem toner",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 2,
+      "name": "in_progress"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 3,
+      "userName": "Norbert",
+      "password": "$2a$12$0QiavKu05usb2kCKVrtbFudUkBX4XF1fFO5GX598NE6X0ZtZ8yzZG",
+      "roles": [
+        {
+          "roleId": 1,
+          "role": "serviceman"
+        }
+      ]
+    },
+    "createdDate": "2006-10-15T18:27:27",
+    "priority": {
+      "priorityId": 3,
+      "name": "high"
+    },
+    "client": {
+      "clientId": 38,
+      "name": "mlqaodtgkf",
+      "address": "Pilsudskiego 5 Suwalki",
+      "nip": "626 897 19 09",
+      "phoneNumber": "587 456 982"
+    },
+    "description": "zuzyta rolka poboru papieru",
+    "device": "hp 123",
+    "additionalInfo": "mozliwe ze uszkodzony czujnik polozenia papieru",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 3,
+      "name": "waiting_for_parts"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 4,
+      "userName": "Wladek",
+      "password": "$2a$12$VasTXpHMYig05oacsr8CMezX/0t4pKWHYamQ4O6CJQRuRDinl7dwG",
+      "roles": [
+        {
+          "roleId": 2,
+          "role": "admin"
+        }
+      ]
+    },
+    "createdDate": "2018-03-18T14:57:09",
+    "priority": {
+      "priorityId": 3,
+      "name": "high"
+    },
+    "client": {
+      "clientId": 39,
+      "name": "kaajxwjymh",
+      "address": "Szmaragdowa 5 Bialystok",
+      "nip": "737 734 61 46",
+      "phoneNumber": "753 753 753"
+    },
+    "description": "uszkodzona matryca",
+    "device": "laptop hp",
+    "additionalInfo": "haslo do kompa: ciasto123",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 2,
+      "name": "in_progress"
+    }
+  },
+  {
+    "creatingUser": {
+      "userId": 2,
+      "userName": "Marian",
+      "password": "$2a$12$tgknuYcWJuLxuzc6jXhnCeY1Xzv2ElCyECyv5aXapgVrKO84dKWN6",
+      "roles": [
+        {
+          "roleId": 1,
+          "role": "serviceman"
+        }
+      ]
+    },
+    "createdDate": "2006-02-02T14:39:15",
+    "priority": {
+      "priorityId": 1,
+      "name": "low"
+    },
+    "client": {
+      "clientId": 40,
+      "name": "odavenfaht",
+      "address": "Szafirowa 12 Goldap",
+      "nip": "188 274 57 41",
+      "phoneNumber": "158 487 981"
+    },
+    "description": "piec uzywany",
+    "device": "dell precision tower 8160",
+    "additionalInfo": "sprawdzalem karte graficzna",
+    "updateInfo": null,
+    "stage": {
+      "stageId": 2,
+      "name": "in_progress"
+    }
+  }
+]
