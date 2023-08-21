@@ -10,11 +10,7 @@ public interface ServiceDAO {
 
     List<Service> findAll();
     Optional<Service> findByServiceId(Integer serviceId);
-    List<Service> findByCreatingUser(User user);
     List<Service> findByCreatingDate(LocalDate date);
-    List<Service> findByPriority(Priority priority);
-    List<Service> findByClient(Client client);
-    List<Service> findByStage(Stage stage);
     void saveService(Service service);
     void saveServices(List<Service> services);
     void addService(Service service);

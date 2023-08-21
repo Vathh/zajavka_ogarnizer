@@ -29,36 +29,8 @@ public class ClosedServiceRepository implements ClosedServiceDAO {
     }
 
     @Override
-    public List<ClosedService> findByCreatingUser(User user) {
-        return closedServiceJpaRepository.findByCreatingUser(user).stream()
-                .map(closedServiceEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
     public List<ClosedService> findByCreatingDate(LocalDate date) {
         return closedServiceJpaRepository.findByCreatedDate(date.toString()).stream()
-                .map(closedServiceEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<ClosedService> findByClient(Client client) {
-        return closedServiceJpaRepository.findByClient(client).stream()
-                .map(closedServiceEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<ClosedService> findByClosingUser(User user) {
-        return closedServiceJpaRepository.findByClosingUser(user).stream()
-                .map(closedServiceEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<ClosedService> findByClosingDate(LocalDate date) {
-        return closedServiceJpaRepository.findByClosedDate(date.toString()).stream()
                 .map(closedServiceEntityMapper::mapFromEntity)
                 .toList();
     }

@@ -10,6 +10,4 @@ import java.util.Optional;
 public interface ClientJpaRepository extends JpaRepository<ClientEntity, Integer> {
 
     Optional<ClientEntity> findByName(String name);
-
-    Optional<ClientEntity> findByNip(String nip);
 }

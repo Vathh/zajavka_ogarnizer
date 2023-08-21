@@ -14,18 +14,10 @@ import java.util.Set;
 @Repository
 public interface OrderJpaRepository extends JpaRepository<OrderEntity, Integer> {
 
-    Set<OrderEntity> findByCreatingUser(User user);
-
     @Query("""
             SELECT od FROM OrderEntity od
             WHERE date_trunc('day', od.createdDate) = :date            
             """)
     Set<OrderEntity> findByCreatedDate(String date);
-
-    Set<OrderEntity> findByPriority(Priority priority);
-
-    Set<OrderEntity> findByClient(Client client);
-
-    Set<OrderEntity> findByStage(Stage stage);
 
 }

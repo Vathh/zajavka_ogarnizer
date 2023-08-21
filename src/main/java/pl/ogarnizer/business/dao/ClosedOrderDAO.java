@@ -9,11 +9,7 @@ import java.util.List;
 
 public interface ClosedOrderDAO {
     List<ClosedOrder> findAll();
-    List<ClosedOrder> findByCreatingUser(User user);
     List<ClosedOrder> findByCreatingDate(LocalDate date);
-    List<ClosedOrder> findByClient(Client client);
-    List<ClosedOrder> findByClosingUser(User user);
-    List<ClosedOrder> findByClosingDate(LocalDate date);
     void addClosedOrder(ClosedOrder closedOrder);
     void deleteClosedOrder(Integer closedOrderId);
 }

@@ -33,36 +33,8 @@ public class AwayWorkRepository implements AwayWorkDAO {
     }
 
     @Override
-    public List<AwayWork> findByCreatingUser(User user) {
-        return awayWorkJpaRepository.findByCreatingUser(user).stream()
-                .map(awayWorkEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
     public List<AwayWork> findByCreatingDate(LocalDate date) {
         return awayWorkJpaRepository.findByCreatedDate(date.toString()).stream()
-                .map(awayWorkEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<AwayWork> findByPriority(Priority priority) {
-        return awayWorkJpaRepository.findByPriority(priority).stream()
-                .map(awayWorkEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<AwayWork> findByClient(Client client) {
-        return awayWorkJpaRepository.findByClient(client).stream()
-                .map(awayWorkEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<AwayWork> findByStage(Stage stage) {
-        return awayWorkJpaRepository.findByStage(stage).stream()
                 .map(awayWorkEntityMapper::mapFromEntity)
                 .toList();
     }

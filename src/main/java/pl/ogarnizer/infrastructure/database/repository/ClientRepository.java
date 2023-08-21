@@ -25,11 +25,6 @@ public class ClientRepository implements ClientDAO {
     }
 
     @Override
-    public Optional<Client> findByNip(String nip) {
-        return clientJpaRepository.findByNip(nip).map(clientEntityMapper::mapFromEntity);
-    }
-
-    @Override
     public List<Client> findAll() {
         return clientJpaRepository.findAll().stream()
                 .map(clientEntityMapper::mapFromEntity)

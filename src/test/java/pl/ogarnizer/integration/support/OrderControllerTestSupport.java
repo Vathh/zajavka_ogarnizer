@@ -2,12 +2,12 @@ package pl.ogarnizer.integration.support;
 
 import io.restassured.specification.RequestSpecification;
 import org.springframework.http.HttpStatus;
-import pl.ogarnizer.api.dto.OrderDTO;
 import pl.ogarnizer.api.dto.ClientDTO;
+import pl.ogarnizer.api.dto.OrderDTO;
 import pl.ogarnizer.api.dto.TaskDTO;
 import pl.ogarnizer.api.dto.UpdateTaskDTO;
-import pl.ogarnizer.api.rest.controller.OrderRestController;
 import pl.ogarnizer.api.rest.controller.ClientRestController;
+import pl.ogarnizer.api.rest.controller.OrderRestController;
 import pl.ogarnizer.api.rest.dto.OrdersDTO;
 
 public interface OrderControllerTestSupport {

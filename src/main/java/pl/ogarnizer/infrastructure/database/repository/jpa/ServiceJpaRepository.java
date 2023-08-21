@@ -14,17 +14,9 @@ import java.util.Set;
 @Repository
 public interface ServiceJpaRepository extends JpaRepository<ServiceEntity, Integer> {
 
-    Set<ServiceEntity> findByCreatingUser(User user);
-
     @Query("""
             SELECT sv FROM ServiceEntity sv
             WHERE date_trunc('day', sv.createdDate) = :date            
             """)
     Set<ServiceEntity> findByCreatedDate(String date);
-
-    Set<ServiceEntity> findByPriority(Priority priority);
-
-    Set<ServiceEntity> findByClient(Client client);
-
-    Set<ServiceEntity> findByStage(Stage stage);
 }

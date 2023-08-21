@@ -32,36 +32,8 @@ public class ServiceRepository implements ServiceDAO {
     }
 
     @Override
-    public List<Service> findByCreatingUser(User user) {
-        return serviceJpaRepository.findByCreatingUser(user).stream()
-                .map(serviceEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
     public List<Service> findByCreatingDate(LocalDate date) {
         return serviceJpaRepository.findByCreatedDate(date.toString()).stream()
-                .map(serviceEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<Service> findByPriority(Priority priority) {
-        return serviceJpaRepository.findByPriority(priority).stream()
-                .map(serviceEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<Service> findByClient(Client client) {
-        return serviceJpaRepository.findByClient(client).stream()
-                .map(serviceEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<Service> findByStage(Stage stage) {
-        return serviceJpaRepository.findByStage(stage).stream()
                 .map(serviceEntityMapper::mapFromEntity)
                 .toList();
     }

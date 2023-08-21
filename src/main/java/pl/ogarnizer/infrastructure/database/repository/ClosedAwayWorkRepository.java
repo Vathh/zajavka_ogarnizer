@@ -30,36 +30,8 @@ public class ClosedAwayWorkRepository implements ClosedAwayWorkDAO {
     }
 
     @Override
-    public List<ClosedAwayWork> findByCreatingUser(User user) {
-        return closedAwayWorkJpaRepository.findByCreatingUser(user).stream()
-                .map(closedAwayWorkEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
     public List<ClosedAwayWork> findByCreatingDate(LocalDate date) {
         return closedAwayWorkJpaRepository.findByCreatedDate(date.toString()).stream()
-                .map(closedAwayWorkEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<ClosedAwayWork> findByClient(Client client) {
-        return closedAwayWorkJpaRepository.findByClient(client).stream()
-                .map(closedAwayWorkEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<ClosedAwayWork> findByClosingUser(User user) {
-        return closedAwayWorkJpaRepository.findByClosingUser(user).stream()
-                .map(closedAwayWorkEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<ClosedAwayWork> findByClosingDate(LocalDate date) {
-        return closedAwayWorkJpaRepository.findByClosedDate(date.toString()).stream()
                 .map(closedAwayWorkEntityMapper::mapFromEntity)
                 .toList();
     }

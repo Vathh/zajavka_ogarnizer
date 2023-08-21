@@ -2,13 +2,12 @@ package pl.ogarnizer.integration.support;
 
 import io.restassured.specification.RequestSpecification;
 import org.springframework.http.HttpStatus;
-import pl.ogarnizer.api.dto.ServiceDTO;
 import pl.ogarnizer.api.dto.ClientDTO;
+import pl.ogarnizer.api.dto.ServiceDTO;
 import pl.ogarnizer.api.dto.TaskDTO;
 import pl.ogarnizer.api.dto.UpdateTaskDTO;
-import pl.ogarnizer.api.rest.controller.ServiceRestController;
 import pl.ogarnizer.api.rest.controller.ClientRestController;
-import pl.ogarnizer.api.rest.dto.ServicesDTO;
+import pl.ogarnizer.api.rest.controller.ServiceRestController;
 import pl.ogarnizer.api.rest.dto.ServicesDTO;
 
 public interface ServiceControllerTestSupport {

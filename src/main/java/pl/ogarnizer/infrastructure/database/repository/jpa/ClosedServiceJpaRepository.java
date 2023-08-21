@@ -12,21 +12,9 @@ import java.util.Set;
 @Repository
 public interface ClosedServiceJpaRepository extends JpaRepository<ClosedServiceEntity, Integer> {
 
-    Set<ClosedServiceEntity> findByCreatingUser(User user);
-
     @Query("""
             SELECT cs FROM ClosedServiceEntity cs
             WHERE date_trunc('day', cs.createdDate) = :date            
             """)
     Set<ClosedServiceEntity> findByCreatedDate(String date);
-
-    Set<ClosedServiceEntity> findByClient(Client client);
-
-    Set<ClosedServiceEntity> findByClosingUser(User user);
-
-    @Query("""
-            SELECT cs FROM ClosedServiceEntity cs
-            WHERE date_trunc('day', cs.closedDate) = :date            
-            """)
-    Set<ClosedServiceEntity> findByClosedDate(String date);
 }

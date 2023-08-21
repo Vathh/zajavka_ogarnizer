@@ -29,36 +29,8 @@ public class ClosedOrderRepository implements ClosedOrderDAO {
     }
 
     @Override
-    public List<ClosedOrder> findByCreatingUser(User user) {
-        return closedOrderJpaRepository.findByCreatingUser(user).stream()
-                .map(closedOrderEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
     public List<ClosedOrder> findByCreatingDate(LocalDate date) {
         return closedOrderJpaRepository.findByCreatedDate(date.toString()).stream()
-                .map(closedOrderEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<ClosedOrder> findByClient(Client client) {
-        return closedOrderJpaRepository.findByClient(client).stream()
-                .map(closedOrderEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<ClosedOrder> findByClosingUser(User user) {
-        return closedOrderJpaRepository.findByClosingUser(user).stream()
-                .map(closedOrderEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<ClosedOrder> findByClosingDate(LocalDate date) {
-        return closedOrderJpaRepository.findByClosedDate(date.toString()).stream()
                 .map(closedOrderEntityMapper::mapFromEntity)
                 .toList();
     }

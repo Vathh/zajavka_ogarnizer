@@ -70,6 +70,38 @@ public class DomainFixtures {
                 .build();
     }
 
+    public static Order someOrder2(){
+        return Order.builder()
+                .creatingUser(someUser2())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priority(mediumPriority())
+                .client(someClient2())
+                .description("opis")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stage(someStage2())
+                .build();
+    }
+
+    public static Order someOrder3(){
+        return Order.builder()
+                .creatingUser(someUser3())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priority(highPriority())
+                .client(someClient3())
+                .description("opis")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stage(someStage3())
+                .build();
+    }
+
+    public static List<Order> someOrdersList(){
+        return List.of(someOrder1(), someOrder2(), someOrder3());
+    }
+
     public static Service someService1(){
         return Service.builder()
                 .creatingUser(someUser1())
@@ -82,6 +114,38 @@ public class DomainFixtures {
                 .updateInfo("informacje o aktualizacji")
                 .stage(someStage1())
                 .build();
+    }
+
+    public static Service someService2(){
+        return Service.builder()
+                .creatingUser(someUser2())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priority(mediumPriority())
+                .client(someClient2())
+                .description("opis")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stage(someStage2())
+                .build();
+    }
+
+    public static Service someService3(){
+        return Service.builder()
+                .creatingUser(someUser3())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .priority(highPriority())
+                .client(someClient3())
+                .description("opis")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .stage(someStage3())
+                .build();
+    }
+
+    public static List<Service> someServicesList(){
+        return List.of(someService1(), someService2(), someService3());
     }
 
     public static User someUser1(){
@@ -237,6 +301,10 @@ public class DomainFixtures {
                 .build();
     }
 
+    public static List<ClosedAwayWork> someClosedAwayWorksList(){
+        return List.of(someClosedAwayWork1(), someClosedAwayWork1(), someClosedAwayWork1());
+    }
+
     public static ClosedOrder someClosedOrder1(){
         return  ClosedOrder.builder()
                 .creatingUser(someUser1())
@@ -251,6 +319,10 @@ public class DomainFixtures {
                 .build();
     }
 
+    public static List<ClosedOrder> someClosedOrdersList(){
+        return List.of(someClosedOrder1(), someClosedOrder1(), someClosedOrder1());
+    }
+
     public static ClosedService someClosedService1(){
         return  ClosedService.builder()
                 .creatingUser(someUser1())
@@ -263,6 +335,10 @@ public class DomainFixtures {
                 .closingUser(someUser1())
                 .closedDate(LocalDateTime.of(2020,10,20,10,20,20))
                 .build();
+    }
+
+    public static List<ClosedService> someClosedServicesList(){
+        return List.of(someClosedService1(), someClosedService1(), someClosedService1());
     }
 
 }

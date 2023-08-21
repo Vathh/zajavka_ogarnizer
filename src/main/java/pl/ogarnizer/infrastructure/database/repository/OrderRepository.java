@@ -32,36 +32,8 @@ public class OrderRepository implements OrderDAO {
     }
 
     @Override
-    public List<Order> findByCreatingUser(User user) {
-        return orderJpaRepository.findByCreatingUser(user).stream()
-                .map(orderEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
     public List<Order> findByCreatingDate(LocalDate date) {
         return orderJpaRepository.findByCreatedDate(date.toString()).stream()
-                .map(orderEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<Order> findByPriority(Priority priority) {
-        return orderJpaRepository.findByPriority(priority).stream()
-                .map(orderEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<Order> findByClient(Client client) {
-        return orderJpaRepository.findByClient(client).stream()
-                .map(orderEntityMapper::mapFromEntity)
-                .toList();
-    }
-
-    @Override
-    public List<Order> findByStage(Stage stage) {
-        return orderJpaRepository.findByStage(stage).stream()
                 .map(orderEntityMapper::mapFromEntity)
                 .toList();
     }

@@ -15,17 +15,9 @@ import java.util.Set;
 @Repository
 public interface AwayWorkJpaRepository extends JpaRepository<AwayWorkEntity, Integer> {
 
-    Set<AwayWorkEntity> findByCreatingUser(User user);
-
     @Query("""
             SELECT aw FROM AwayWorkEntity aw
             WHERE date_trunc('day', aw.createdDate) = :date         
             """)
     Set<AwayWorkEntity> findByCreatedDate(final @Param("date") String date);
-
-    Set<AwayWorkEntity> findByPriority(Priority priority);
-
-    Set<AwayWorkEntity> findByClient(Client client);
-
-    Set<AwayWorkEntity> findByStage(Stage stage);
 }

@@ -2,13 +2,12 @@ package pl.ogarnizer.integration.rest;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pl.ogarnizer.api.dto.OrderDTO;
 import pl.ogarnizer.api.dto.ClientDTO;
+import pl.ogarnizer.api.dto.OrderDTO;
 import pl.ogarnizer.api.dto.TaskDTO;
 import pl.ogarnizer.api.dto.UpdateTaskDTO;
 import pl.ogarnizer.api.rest.dto.OrdersDTO;
 import pl.ogarnizer.integration.configuration.RestAssuredIntegrationTestBase;
-import pl.ogarnizer.integration.support.OrderControllerTestSupport;
 import pl.ogarnizer.integration.support.OrderControllerTestSupport;
 import pl.ogarnizer.integration.support.WireMockTestSupport;
 import pl.ogarnizer.util.DtoFixtures;
