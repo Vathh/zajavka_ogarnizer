@@ -5,15 +5,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.ogarnizer.business.dao.AwayWorkDAO;
 import pl.ogarnizer.business.dao.ClosedAwayWorkDAO;
 import pl.ogarnizer.business.dao.ClosedOrderDAO;
 import pl.ogarnizer.business.dao.ClosedServiceDAO;
-import pl.ogarnizer.domain.*;
+import pl.ogarnizer.domain.ClosedAwayWork;
+import pl.ogarnizer.domain.ClosedOrder;
+import pl.ogarnizer.domain.ClosedService;
 import pl.ogarnizer.util.DomainFixtures;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
