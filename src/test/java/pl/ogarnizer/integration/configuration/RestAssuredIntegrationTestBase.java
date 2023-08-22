@@ -69,7 +69,7 @@ public abstract class RestAssuredIntegrationTestBase
 
     @AfterEach
     void afterEach() {
-//        wireMockServer.resetAll();
+        wireMockServer.resetAll();
     }
 
     @AfterAll

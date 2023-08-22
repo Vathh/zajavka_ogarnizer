@@ -179,6 +179,22 @@ public class DtoFixtures {
                 .build();
     }
 
+    public static UserDTO someUserDTO4(){
+        return UserDTO.builder()
+                .userName("Wacek")
+                .password("wacek123")
+                .roles(List.of(servicemanRole().getRole()))
+                .build();
+    }
+
+    public static UserDTO someUserDTO5(){
+        return UserDTO.builder()
+                .userName("Placek")
+                .password("placek123")
+                .roles(List.of(servicemanRole().getRole()))
+                .build();
+    }
+
     public static UsersDTO someUsersDTO(){
         return UsersDTO.builder()
                 .users(List.of(someUserDTO1(), someUserDTO1(), someUserDTO1()))
@@ -284,6 +300,23 @@ public class DtoFixtures {
                 .updateInfo("informacje o aktualizacji")
                 .closingUserName(someUserDTO1().getUserName())
                 .closedDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .success("DONE")
+                .build();
+    }
+
+    public static ClosedAwayWorkDTO someClosedAwayWorkDTO2(){
+        return ClosedAwayWorkDTO.builder()
+                .creatingUserName(someUserDTO2().getUserName())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .clientName(someClientDTO2().getName())
+                .description("opis")
+                .place("miejsce")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .closingUserName(someUserDTO2().getUserName())
+                .closedDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .success("DONE")
                 .build();
     }
 
@@ -304,8 +337,24 @@ public class DtoFixtures {
                 .updateInfo("informacje o aktualizacji")
                 .closingUserName(someUserDTO1().getUserName())
                 .closedDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .success("DONE")
                 .build();
     }
+    public static ClosedOrderDTO someClosedOrderDTO2(){
+        return ClosedOrderDTO.builder()
+                .creatingUserName(someUserDTO2().getUserName())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .clientName(someClientDTO2().getName())
+                .description("opis")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .closingUserName(someUserDTO2().getUserName())
+                .closedDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .success("DONE")
+                .build();
+    }
+
 
     public static ClosedOrdersDTO someClosedOrdersDTO(){
         return ClosedOrdersDTO.builder()
@@ -324,6 +373,22 @@ public class DtoFixtures {
                 .updateInfo("informacje o aktualizacji")
                 .closingUserName(someUserDTO1().getUserName())
                 .closedDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .success("DONE")
+                .build();
+    }
+
+    public static ClosedServiceDTO someClosedServiceDTO2(){
+        return ClosedServiceDTO.builder()
+                .creatingUserName(someUserDTO2().getUserName())
+                .createdDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .clientName(someClientDTO2().getName())
+                .description("opis")
+                .device("urzadzenie")
+                .additionalInfo("dodatkowe informacje")
+                .updateInfo("informacje o aktualizacji")
+                .closingUserName(someUserDTO2().getUserName())
+                .closedDate(LocalDateTime.of(2020,10,20,10,20,20))
+                .success("DONE")
                 .build();
     }
 
