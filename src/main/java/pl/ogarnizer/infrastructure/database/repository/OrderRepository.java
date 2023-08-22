@@ -3,7 +3,7 @@ package pl.ogarnizer.infrastructure.database.repository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.OrderDAO;
-import pl.ogarnizer.domain.*;
+import pl.ogarnizer.domain.Order;
 import pl.ogarnizer.infrastructure.database.entity.OrderEntity;
 import pl.ogarnizer.infrastructure.database.repository.jpa.OrderJpaRepository;
 import pl.ogarnizer.infrastructure.database.repository.mapper.OrderEntityMapper;

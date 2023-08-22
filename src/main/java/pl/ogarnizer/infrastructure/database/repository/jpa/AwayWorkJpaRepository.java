@@ -4,10 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pl.ogarnizer.domain.Client;
-import pl.ogarnizer.domain.Priority;
-import pl.ogarnizer.domain.Stage;
-import pl.ogarnizer.domain.User;
 import pl.ogarnizer.infrastructure.database.entity.AwayWorkEntity;
 
 import java.util.Set;

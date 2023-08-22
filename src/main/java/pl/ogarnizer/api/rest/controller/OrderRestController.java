@@ -13,7 +13,6 @@ import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.api.rest.dto.OrdersDTO;
 import pl.ogarnizer.business.*;
 import pl.ogarnizer.domain.Order;
-import pl.ogarnizer.domain.Order;
 import pl.ogarnizer.domain.Task;
 
 import java.util.List;

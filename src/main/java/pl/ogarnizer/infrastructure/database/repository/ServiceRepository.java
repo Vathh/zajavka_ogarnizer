@@ -3,7 +3,7 @@ package pl.ogarnizer.infrastructure.database.repository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.ServiceDAO;
-import pl.ogarnizer.domain.*;
+import pl.ogarnizer.domain.Service;
 import pl.ogarnizer.infrastructure.database.entity.ServiceEntity;
 import pl.ogarnizer.infrastructure.database.repository.jpa.ServiceJpaRepository;
 import pl.ogarnizer.infrastructure.database.repository.mapper.ServiceEntityMapper;

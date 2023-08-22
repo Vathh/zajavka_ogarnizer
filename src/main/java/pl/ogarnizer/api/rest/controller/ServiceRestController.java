@@ -12,7 +12,6 @@ import pl.ogarnizer.api.dto.mapper.TaskMapper;
 import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.api.rest.dto.ServicesDTO;
 import pl.ogarnizer.business.*;
-import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Service;
 import pl.ogarnizer.domain.Task;
 

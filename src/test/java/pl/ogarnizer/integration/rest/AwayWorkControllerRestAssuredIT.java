@@ -120,5 +120,4 @@ public class AwayWorkControllerRestAssuredIT
         //then
         Assertions.assertThat(awayWorks.getAwayWorks()).hasSize(1);
     }
-
 }

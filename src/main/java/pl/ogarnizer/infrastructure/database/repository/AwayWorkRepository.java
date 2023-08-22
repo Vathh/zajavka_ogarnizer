@@ -3,7 +3,7 @@ package pl.ogarnizer.infrastructure.database.repository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.AwayWorkDAO;
-import pl.ogarnizer.domain.*;
+import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.infrastructure.database.entity.AwayWorkEntity;
 import pl.ogarnizer.infrastructure.database.repository.jpa.AwayWorkJpaRepository;
 import pl.ogarnizer.infrastructure.database.repository.mapper.AwayWorkEntityMapper;

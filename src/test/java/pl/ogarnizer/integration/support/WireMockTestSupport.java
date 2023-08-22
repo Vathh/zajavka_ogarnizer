@@ -27,4 +27,11 @@ public interface WireMockTestSupport {
                         .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                         .withBodyFile("wiremock/order.json")));
     }
+
+    default void stubForLoadClients(final WireMockServer wireMockServer){
+        wireMockServer.stubFor(get(urlPathMatching("/zajavka-ogarnizerAPI/client"))
+                .willReturn(aResponse()
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("wiremock/client.json")));
+    }
 }

@@ -1,6 +1,6 @@
 package pl.ogarnizer.business.dao;
 
-import pl.ogarnizer.domain.*;
+import pl.ogarnizer.domain.Order;
 
 import java.time.LocalDate;
 import java.util.List;
