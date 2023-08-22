@@ -175,6 +175,10 @@ public class DomainFixtures {
                 .build();
     }
 
+    public static List<User> someUsersList(){
+        return List.of(someUser1(), someUser2(), someUser3());
+    }
+
     public static Role servicemanRole(){
         return Role.builder()
                 .role("serviceman")
