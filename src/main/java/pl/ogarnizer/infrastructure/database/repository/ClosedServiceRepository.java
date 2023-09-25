@@ -1,8 +1,11 @@
 package pl.ogarnizer.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.ClosedServiceDAO;
+import pl.ogarnizer.domain.ClosedAwayWork;
 import pl.ogarnizer.domain.ClosedService;
 import pl.ogarnizer.infrastructure.database.entity.ClosedServiceEntity;
 import pl.ogarnizer.infrastructure.database.repository.jpa.ClosedServiceJpaRepository;
@@ -27,10 +30,17 @@ public class ClosedServiceRepository implements ClosedServiceDAO {
     }
 
     @Override
-    public List<ClosedService> findByCreatingDate(LocalDate date) {
-        return closedServiceJpaRepository.findByCreatedDate(date.toString()).stream()
-                .map(closedServiceEntityMapper::mapFromEntity)
-                .toList();
+    public Page<ClosedService> findAll(Pageable pageRequest, String keyword) {
+
+        if(keyword == null || keyword.isEmpty()){
+            return closedServiceJpaRepository
+                    .findAll(pageRequest)
+                    .map(closedServiceEntityMapper::mapFromEntity);
+        }
+
+        return closedServiceJpaRepository.findAllByKeywordAndSort(keyword,
+                        pageRequest)
+                .map(closedServiceEntityMapper::mapFromEntity);
     }
 
     @Override

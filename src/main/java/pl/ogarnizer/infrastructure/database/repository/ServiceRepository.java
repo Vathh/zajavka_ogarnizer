@@ -1,8 +1,11 @@
 package pl.ogarnizer.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.ServiceDAO;
+import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Service;
 import pl.ogarnizer.infrastructure.database.entity.ServiceEntity;
 import pl.ogarnizer.infrastructure.database.repository.jpa.ServiceJpaRepository;
@@ -27,15 +30,22 @@ public class ServiceRepository implements ServiceDAO {
     }
 
     @Override
-    public Optional<Service> findByServiceId(Integer serviceId) {
-        return serviceJpaRepository.findById(serviceId).map(serviceEntityMapper::mapFromEntity);
+    public Page<Service> findAll(Pageable pageRequest, String keyword) {
+
+        if(keyword == null || keyword.isEmpty()){
+            return serviceJpaRepository
+                    .findAll(pageRequest)
+                    .map(serviceEntityMapper::mapFromEntity);
+        }
+
+        return serviceJpaRepository.findAllByKeywordAndSort(keyword,
+                        pageRequest)
+                .map(serviceEntityMapper::mapFromEntity);
     }
 
     @Override
-    public List<Service> findByCreatingDate(LocalDate date) {
-        return serviceJpaRepository.findByCreatedDate(date.toString()).stream()
-                .map(serviceEntityMapper::mapFromEntity)
-                .toList();
+    public Optional<Service> findByServiceId(Integer serviceId) {
+        return serviceJpaRepository.findById(serviceId).map(serviceEntityMapper::mapFromEntity);
     }
 
     @Override

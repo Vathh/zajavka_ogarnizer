@@ -2,9 +2,12 @@ package pl.ogarnizer.business;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ogarnizer.business.dao.ServiceDAO;
+import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Task;
 import pl.ogarnizer.domain.exception.NotFoundException;
 
@@ -26,6 +29,11 @@ public class ServiceService {
     @Transactional
     public List<pl.ogarnizer.domain.Service> findServices(){
         return serviceDAO.findAll();
+    }
+
+    @Transactional
+    public Page<pl.ogarnizer.domain.Service> findServices(Pageable pageRequest, String keyword){
+        return serviceDAO.findAll(pageRequest, keyword);
     }
 
     @Transactional

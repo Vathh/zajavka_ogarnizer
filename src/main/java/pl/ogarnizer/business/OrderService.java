@@ -2,9 +2,12 @@ package pl.ogarnizer.business;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ogarnizer.business.dao.OrderDAO;
+import pl.ogarnizer.domain.Order;
 import pl.ogarnizer.domain.Order;
 import pl.ogarnizer.domain.Task;
 import pl.ogarnizer.domain.exception.NotFoundException;
@@ -27,6 +30,11 @@ public class OrderService {
     @Transactional
     public List<Order> findOrders(){
         return orderDAO.findAll();
+    }
+
+    @Transactional
+    public Page<Order> findOrders(Pageable pageRequest, String keyword){
+        return orderDAO.findAll(pageRequest, keyword);
     }
 
     @Transactional

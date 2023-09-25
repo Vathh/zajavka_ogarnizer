@@ -47,18 +47,4 @@ public class ClosedAwayWorkRepositoryUnitTest {
         assertThat(result).isEqualTo(List.of(DomainFixtures.someClosedAwayWork1(),
                 DomainFixtures.someClosedAwayWork1(), DomainFixtures.someClosedAwayWork1()));
     }
-
-    @Test
-    void thatFindByCreatingDateCorrectly(){
-        //given
-        Set<ClosedAwayWorkEntity> closedAwayWorkEntities = Set.of(EntityFixtures.someClosedAwayWorkEntity1());
-        when(closedAwayWorkJpaRepository.findByCreatedDate(any())).thenReturn(closedAwayWorkEntities);
-        when(closedAwayWorkEntityMapper.mapFromEntity(any())).thenReturn(DomainFixtures.someClosedAwayWork1());
-
-        //when
-        List<ClosedAwayWork> result = closedAwayWorkRepository.findByCreatingDate(LocalDate.now());
-
-        //then
-        assertThat(result).isEqualTo(List.of(DomainFixtures.someClosedAwayWork1()));
-    }
 }

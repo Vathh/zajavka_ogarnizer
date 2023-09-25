@@ -2,6 +2,10 @@ package pl.ogarnizer.api.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -16,11 +20,12 @@ import pl.ogarnizer.api.dto.mapper.ServiceMapper;
 import pl.ogarnizer.api.dto.mapper.TaskMapper;
 import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.business.*;
+import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Service;
 import pl.ogarnizer.domain.Task;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.IntStream;
 
 @Controller
 @AllArgsConstructor
@@ -43,26 +48,68 @@ public class ServiceController {
     private final TaskMapper taskMapper;
 
     @GetMapping(value = SERVICE)
-    public ModelAndView servicePage(){
-        Map<String, ?> data = prepareNecessaryData();
+    public ModelAndView servicePage(
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size,
+            @RequestParam("keyword") Optional<String> keyword,
+            @RequestParam("sortDir") Optional<String> sortDir,
+            @RequestParam("sortBy") Optional<String> sortBy,
+            @ModelAttribute("sortOption") SortOption sortOption,
+            BindingResult bindingResult
+    ) throws BindException {
+        if(bindingResult.hasErrors()){
+            throw new BindException(bindingResult);
+        }
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        Sort.Direction sortDirection = (sortDir.isEmpty() || sortDir.get().length() == 0 || Objects.equals(sortDir.get(), "DESCENDING"))
+                ? Sort.Direction.DESC : Sort.Direction.ASC;
+
+        Sort sort = Sort.by(sortDirection, (sortBy.isEmpty() || sortBy.get().length() == 0) ? "priority" : sortBy.get());
+
+        Pageable pageRequest = PageRequest.of(currentPage - 1, pageSize, sort);
+
+        Map<String, ?> data = prepareNecessaryData(pageRequest, keyword.isEmpty() ? "" : keyword.get());
+
         return new ModelAndView("service", data);
     }
 
-    private Map<String, ?> prepareNecessaryData(){
-        var services =  serviceService.findServices().stream()
+    private Map<String, ?> prepareNecessaryData(Pageable pageRequest, String keyword){
+        Page<Service> servicesPage = serviceService.findServices(pageRequest, keyword);
+
+        var services =  servicesPage.stream()
                 .map(serviceMapper::map)
                 .toList();
 
         var taskDTO = new TaskDTO();
         var clients = clientService.findClients();
         var priorities = priorityService.findPriorities();
+        var sortByFields = List.of("priority", "createdDate", "stage");
+        var sortDirections = List.of("DESCENDING", "ASCENDING");
 
-        return Map.of(
+        Map<String, Object> data = new HashMap<>(Map.of(
                 "serviceDTOs", services,
                 "taskDTO", taskDTO,
                 "clients", clients,
-                "priorities", priorities
-        );
+                "priorities", priorities,
+                "sortByFields", sortByFields,
+                "sortDirections", sortDirections
+        ));
+        int totalPages = servicesPage.getTotalPages();
+        data.put("totalPages", totalPages);
+        int currentPageNumber = servicesPage.getNumber();
+        data.put("currentPageNumber", currentPageNumber);
+
+        if(totalPages > 0){
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .toList();
+            data.put("pageNumbers", pageNumbers);
+        }
+
+        return data;
     }
 
     @PostMapping(value = ADD_SERVICE)

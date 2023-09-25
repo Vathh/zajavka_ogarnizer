@@ -21,6 +21,45 @@
 
     <h2 class="header2">Away works</h2>
 
+    <div class="sort">
+        <form action="#" th:action="@{away_work(keyword=${sortOption.getKeyword},
+                                                sortDir=${sortOption.getSortDir},
+                                                sortBy=${sortOption.getSortBy})
+                                    }"
+              th:method="GET" th:object="${sortOption}">
+            <label for="keyword">Keyword</label>
+            <input id="keyword" th:field="*{keyword}" name="keyword"/>
+
+            <label for="sortBy">Sort By</label>
+            <select id="sortBy" th:field="*{sortBy}" name="sortBy">
+                <option th:each="sortBy : ${sortByFields}" th:value="${sortBy}" th:text="${#strings.capitalize(sortBy)}"></option>
+            </select>
+
+            <label for="sortDirection">Sort Direction</label>
+            <select id="sortDirection" th:field="*{sortDir}" name="sortDir">
+                <option th:each="sortDir : ${sortDirections}" th:value="${sortDir}" th:text="${sortDir}"></option>
+            </select>
+
+
+            <button type="submit">SEARCH</button>
+
+
+            <div th:if="${totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="pagination">
+                <a th:href="@{/away_work(size=5,
+                                        page=${pageNumber},
+                                        keyword=${sortOption.getKeyword},
+                                        sortDir=${sortOption.getSortDir},
+                                        sortBy=${sortOption.getSortBy})
+                            }"
+                   th:text=${pageNumber}
+                   class="test"
+                   th:class="${pageNumber==currentPageNumber + 1} ? active">
+                </a>
+            </div>
+        </form>
+
+    </div>
+
     <table class="table">
         <thead>
             <tr>
@@ -93,11 +132,11 @@
         <div class="add__container">
             <div class="add__container-field">
                 <label for="place">Place</label>
-                <input id="place" th:field="*{place}"></input>
+                <input id="place" th:field="*{place}"/>
             </div>
             <div class="add__container-field">
                 <label for="device">Device</label>
-                <input id="device" th:field="*{device}"></input>
+                <input id="device" th:field="*{device}"/>
             </div>
             <div class="add__container-field">
                 <label for="additionalInfo">AdditionalInfo</label>
@@ -106,7 +145,7 @@
         </div>
 
         <div class="add__submit">
-            <input type="submit" value="SUBMIT">
+            <input type="submit" value="SUBMIT"/>
         </div>
     </form>
 </body>

@@ -1,6 +1,8 @@
 package pl.ogarnizer.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.OrderDAO;
 import pl.ogarnizer.domain.Order;
@@ -27,15 +29,22 @@ public class OrderRepository implements OrderDAO {
     }
 
     @Override
-    public Optional<Order> findByOrderId(Integer orderId) {
-        return orderJpaRepository.findById(orderId).map(orderEntityMapper::mapFromEntity);
+    public Page<Order> findAll(Pageable pageRequest, String keyword) {
+
+        if(keyword == null || keyword.isEmpty()){
+            return orderJpaRepository
+                    .findAll(pageRequest)
+                    .map(orderEntityMapper::mapFromEntity);
+        }
+
+        return orderJpaRepository.findAllByKeywordAndSort(keyword,
+                        pageRequest)
+                .map(orderEntityMapper::mapFromEntity);
     }
 
     @Override
-    public List<Order> findByCreatingDate(LocalDate date) {
-        return orderJpaRepository.findByCreatedDate(date.toString()).stream()
-                .map(orderEntityMapper::mapFromEntity)
-                .toList();
+    public Optional<Order> findByOrderId(Integer orderId) {
+        return orderJpaRepository.findById(orderId).map(orderEntityMapper::mapFromEntity);
     }
 
     @Override

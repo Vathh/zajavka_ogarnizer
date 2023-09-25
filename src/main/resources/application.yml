@@ -8,6 +8,8 @@ api:
     url: http://localhost:8180/zajavka-ogarnizerAPI
 
 spring:
+  security:
+    enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.postgresql.Driver
@@ -24,8 +26,22 @@ spring:
       ddl-auto: none
     properties:
       hibernate:
+#        show_sql: true
+#        format_sql: true
+#        use_sql_comments: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
   mvc:
     hiddenmethod:
       filter:
         enabled: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL:
+          TRACE
+        type:
+          descriptor:
+            sql:
+              BasicBinder:
+                TRACE

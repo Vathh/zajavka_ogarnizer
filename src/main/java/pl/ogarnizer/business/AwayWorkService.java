@@ -2,6 +2,10 @@ package pl.ogarnizer.business;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ogarnizer.business.dao.AwayWorkDAO;
@@ -29,6 +33,13 @@ public class AwayWorkService {
         return awayWorkDAO.findAll();
     }
 
+
+    @Transactional
+    public Page<AwayWork> findAwayWorks(Pageable pageRequest, String keyword){
+        return awayWorkDAO.findAll(pageRequest, keyword);
+    }
+
+    @Transactional
     public AwayWork findAwayWorkById(Integer awayWorkId){
         Optional<AwayWork> awayWorkById = awayWorkDAO.findByAwayWorkId(awayWorkId);
         if(awayWorkById.isEmpty()){

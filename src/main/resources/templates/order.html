@@ -21,6 +21,45 @@
 
 <h2 class="header2">Orders</h2>
 
+<div class="sort">
+    <form action="#" th:action="@{order(keyword=${sortOption.getKeyword},
+                                                sortDir=${sortOption.getSortDir},
+                                                sortBy=${sortOption.getSortBy})
+                                    }"
+          th:method="GET" th:object="${sortOption}">
+        <label for="keyword">Keyword</label>
+        <input id="keyword" th:field="*{keyword}" name="keyword"/>
+
+        <label for="sortBy">Sort By</label>
+        <select id="sortBy" th:field="*{sortBy}" name="sortBy">
+            <option th:each="sortBy : ${sortByFields}" th:value="${sortBy}" th:text="${#strings.capitalize(sortBy)}"></option>
+        </select>
+
+        <label for="sortDirection">Sort Direction</label>
+        <select id="sortDirection" th:field="*{sortDir}" name="sortDir">
+            <option th:each="sortDir : ${sortDirections}" th:value="${sortDir}" th:text="${sortDir}"></option>
+        </select>
+
+
+        <button type="submit">SEARCH</button>
+
+
+        <div th:if="${totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="pagination">
+            <a th:href="@{/order(size=5,
+                                        page=${pageNumber},
+                                        keyword=${sortOption.getKeyword},
+                                        sortDir=${sortOption.getSortDir},
+                                        sortBy=${sortOption.getSortBy})
+                            }"
+               th:text=${pageNumber}
+               class="test"
+               th:class="${pageNumber==currentPageNumber + 1} ? active">
+            </a>
+        </div>
+    </form>
+
+</div>
+
 <table class="table">
     <thead>
     <tr>
