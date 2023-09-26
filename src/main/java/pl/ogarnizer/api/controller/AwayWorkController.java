@@ -24,7 +24,6 @@ import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Task;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
@@ -88,6 +87,7 @@ public class AwayWorkController {
         var priorities = priorityService.findPriorities();
         var sortByFields = List.of("priority", "createdDate", "stage");
         var sortDirections = List.of("DESCENDING", "ASCENDING");
+        var sizes = List.of(5, 10, 20);
 
         Map<String, Object> data = new HashMap<>(Map.of(
                 "awayWorkDTOs", awayWorks,
@@ -95,7 +95,8 @@ public class AwayWorkController {
                 "clients", clients,
                 "priorities", priorities,
                 "sortByFields", sortByFields,
-                "sortDirections", sortDirections
+                "sortDirections", sortDirections,
+                "sizes", sizes
         ));
         int totalPages = awayWorksPage.getTotalPages();
         data.put("totalPages", totalPages);

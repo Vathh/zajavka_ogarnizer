@@ -1,8 +1,11 @@
 package pl.ogarnizer.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.ClientDAO;
+import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Client;
 import pl.ogarnizer.infrastructure.database.entity.ClientEntity;
 import pl.ogarnizer.infrastructure.database.repository.jpa.ClientJpaRepository;
@@ -29,6 +32,20 @@ public class ClientRepository implements ClientDAO {
         return clientJpaRepository.findAll().stream()
                 .map(clientEntityMapper::mapFromEntity)
                 .toList();
+    }
+
+    @Override
+    public Page<Client> findAll(Pageable pageRequest, String keyword) {
+
+        if(keyword == null || keyword.isEmpty()){
+            return clientJpaRepository
+                    .findAll(pageRequest)
+                    .map(clientEntityMapper::mapFromEntity);
+        }
+
+        return clientJpaRepository.findAllByKeywordAndSort(keyword,
+                        pageRequest)
+                .map(clientEntityMapper::mapFromEntity);
     }
 
     @Override

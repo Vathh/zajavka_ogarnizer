@@ -22,7 +22,8 @@
     <h2 class="header2">Away works</h2>
 
     <div class="sort">
-        <form action="#" th:action="@{away_work(keyword=${sortOption.getKeyword},
+        <form action="#" th:action="@{away_work(size=${sortOption.size},
+                                                keyword=${sortOption.getKeyword},
                                                 sortDir=${sortOption.getSortDir},
                                                 sortBy=${sortOption.getSortBy})
                                     }"
@@ -40,12 +41,16 @@
                 <option th:each="sortDir : ${sortDirections}" th:value="${sortDir}" th:text="${sortDir}"></option>
             </select>
 
+            <label for="size">Elements on Page</label>
+            <select id="size" th:field="*{size}" name="size">
+                <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
+            </select>
 
             <button type="submit">SEARCH</button>
 
 
             <div th:if="${totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="pagination">
-                <a th:href="@{/away_work(size=5,
+                <a th:href="@{/away_work(size=${sortOption.size},
                                         page=${pageNumber},
                                         keyword=${sortOption.getKeyword},
                                         sortDir=${sortOption.getSortDir},

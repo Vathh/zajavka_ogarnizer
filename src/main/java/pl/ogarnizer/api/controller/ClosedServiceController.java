@@ -65,11 +65,13 @@ public class ClosedServiceController {
 
         var sortByFields = List.of("createdDate", "closedDate");
         var sortDirections = List.of("DESCENDING", "ASCENDING");
+        var sizes = List.of(5, 10, 20);
 
         Map<String, Object> data = new HashMap<>(Map.of(
                 "closedServiceDTOs", closedServices,
                 "sortByFields", sortByFields,
-                "sortDirections", sortDirections
+                "sortDirections", sortDirections,
+                "sizes", sizes
         ));
         int totalPages = closedServicesPage.getTotalPages();
         data.put("totalPages", totalPages);

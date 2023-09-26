@@ -87,6 +87,7 @@ public class OrderController {
         var priorities = priorityService.findPriorities();
         var sortByFields = List.of("priority", "createdDate", "stage");
         var sortDirections = List.of("DESCENDING", "ASCENDING");
+        var sizes = List.of(5, 10, 20);
 
         Map<String, Object> data = new HashMap<>(Map.of(
                 "orderDTOs", orders,
@@ -94,7 +95,8 @@ public class OrderController {
                 "clients", clients,
                 "priorities", priorities,
                 "sortByFields", sortByFields,
-                "sortDirections", sortDirections
+                "sortDirections", sortDirections,
+                "sizes", sizes
         ));
         int totalPages = ordersPage.getTotalPages();
         data.put("totalPages", totalPages);

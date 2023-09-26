@@ -2,9 +2,7 @@ package pl.ogarnizer.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import pl.ogarnizer.business.dao.AwayWorkDAO;
 import pl.ogarnizer.domain.AwayWork;
@@ -12,9 +10,7 @@ import pl.ogarnizer.infrastructure.database.entity.AwayWorkEntity;
 import pl.ogarnizer.infrastructure.database.repository.jpa.AwayWorkJpaRepository;
 import pl.ogarnizer.infrastructure.database.repository.mapper.AwayWorkEntityMapper;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Repository

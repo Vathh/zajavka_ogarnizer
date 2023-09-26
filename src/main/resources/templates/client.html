@@ -21,6 +21,35 @@
 
 <h2 class="header2">Clients</h2>
 
+<div class="sort">
+    <form action="#" th:action="@{client(size=${sortOption.size},
+                                        keyword=${sortOption.getKeyword}}"
+          th:method="GET" th:object="${sortOption}">
+        <label for="keyword">Keyword</label>
+        <input id="keyword" th:field="*{keyword}" name="keyword"/>
+
+        <label for="size">Elements on Page</label>
+        <select id="size" th:field="*{size}" name="size">
+            <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
+        </select>
+
+        <button type="submit">SEARCH</button>
+
+
+        <div th:if="${totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="pagination">
+            <a th:href="@{/client(size=${sortOption.size},
+                                    page=${pageNumber},
+                                    keyword=${sortOption.getKeyword}
+                                )}"
+               th:text=${pageNumber}
+               class="test"
+               th:class="${pageNumber==currentPageNumber + 1} ? active">
+            </a>
+        </div>
+    </form>
+
+</div>
+
 <table class="table">
     <thead>
     <tr>

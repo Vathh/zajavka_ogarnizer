@@ -10,4 +10,5 @@ public class SortOption {
     String keyword;
     String sortBy;
     String sortDir;
+    Integer size;
 }

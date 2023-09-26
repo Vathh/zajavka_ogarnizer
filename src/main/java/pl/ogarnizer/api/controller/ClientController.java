@@ -2,6 +2,10 @@ package pl.ogarnizer.api.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -13,10 +17,12 @@ import pl.ogarnizer.api.dto.ClientDTO;
 import pl.ogarnizer.api.dto.mapper.ClientMapper;
 import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.business.ClientService;
+import pl.ogarnizer.business.SortOption;
+import pl.ogarnizer.domain.AwayWork;
 import pl.ogarnizer.domain.Client;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.IntStream;
 
 @Controller
 @AllArgsConstructor
@@ -30,17 +36,36 @@ public class ClientController {
     private final ClientMapper clientMapper;
 
     @GetMapping(value = CLIENT)
-    public ModelAndView clientPage(){
-        Map<String, ?> data = prepareNecessaryData();
+    public ModelAndView clientPage(
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size,
+            @RequestParam("keyword") Optional<String> keyword,
+            @ModelAttribute("sortOption") SortOption sortOption,
+            BindingResult bindingResult
+    ) throws BindException {
+        if(bindingResult.hasErrors()){
+            throw new BindException(bindingResult);
+        }
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        Pageable pageRequest = PageRequest.of(currentPage - 1, pageSize,Sort.Direction.ASC,  "name");
+
+        Map<String, ?> data = prepareNecessaryData(pageRequest, keyword.isEmpty() ? "" : keyword.get());
+
         return new ModelAndView("client", data);
     }
 
-    private Map<String, ?> prepareNecessaryData(){
-        var clients = clientService.findClients().stream()
+    private Map<String, ?> prepareNecessaryData(Pageable pageRequest, String keyword){
+        Page<Client> clientsPage = clientService.findClients(pageRequest, keyword);
+
+        var clients =  clientsPage.stream()
                 .map(clientMapper::map)
                 .toList();
 
         var clientDTO = new ClientDTO();
+        var sizes = List.of(5, 10, 20);
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userRole;
@@ -50,11 +75,25 @@ public class ClientController {
             userRole = "serviceman";
         }
 
-        return Map.of(
+        Map<String, Object> data = new HashMap<>(Map.of(
                 "clientDTOs", clients,
                 "clientDTO", clientDTO,
-                "userRole", userRole
-        );
+                "userRole", userRole,
+                "sizes", sizes
+        ));
+        int totalPages = clientsPage.getTotalPages();
+        data.put("totalPages", totalPages);
+        int currentPageNumber = clientsPage.getNumber();
+        data.put("currentPageNumber", currentPageNumber);
+
+        if(totalPages > 0){
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .toList();
+            data.put("pageNumbers", pageNumbers);
+        }
+
+        return data;
     }
 
     @PostMapping(value = ADD_CLIENT)
