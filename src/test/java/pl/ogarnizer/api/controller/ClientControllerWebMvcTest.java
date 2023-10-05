@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
@@ -48,7 +49,7 @@ public class ClientControllerWebMvcTest {
     @Test
     void thatClientPageLoadsCorrectly() throws Exception {
         //given
-        when(clientService.findClients()).thenReturn(DomainFixtures.someClientsList());
+        when(clientService.findClients(any(), any())).thenReturn(new PageImpl<>(DomainFixtures.someClientsList()));
         when(clientMapper.map(any(Client.class))).thenReturn(DtoFixtures.someClientDTO1());
 
         //when, then

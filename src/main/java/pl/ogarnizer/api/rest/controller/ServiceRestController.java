@@ -2,6 +2,9 @@ package pl.ogarnizer.api.rest.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.ogarnizer.api.dto.ServiceDTO;
@@ -16,6 +19,8 @@ import pl.ogarnizer.domain.Service;
 import pl.ogarnizer.domain.Task;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -37,9 +42,26 @@ public class ServiceRestController {
     private final TaskMapper taskMapper;
 
     @GetMapping
-    public ServicesDTO getServices(){
+    public ServicesDTO getServices(
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size,
+            @RequestParam("keyword") Optional<String> keyword,
+            @RequestParam("sortDir") Optional<String> sortDir,
+            @RequestParam("sortBy") Optional<String> sortBy
+    ){
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        Sort.Direction sortDirection = (sortDir.isEmpty() || sortDir.get().length() == 0 || Objects.equals(sortDir.get(), "DESCENDING"))
+                ? Sort.Direction.DESC : Sort.Direction.ASC;
+
+        Sort sort = Sort.by(sortDirection, (sortBy.isEmpty() || sortBy.get().length() == 0) ? "priority" : sortBy.get());
+
+        Pageable pageRequest = PageRequest.of(currentPage - 1, pageSize, sort);
+
         return ServicesDTO.builder()
-                .services(serviceService.findServices().stream()
+                .services(
+                        serviceService.findServices(pageRequest, keyword.isEmpty() ? "" : keyword.get()).stream()
                         .map(serviceMapper::map).toList())
                 .build();
     }

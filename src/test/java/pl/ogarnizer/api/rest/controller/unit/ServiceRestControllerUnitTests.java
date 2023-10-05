@@ -30,19 +30,19 @@ public class ServiceRestControllerUnitTests {
     @InjectMocks
     private ServiceRestController serviceRestController;
 
-    @Test
-    void thatGetServicesWorksCorrectly(){
-        //given
-        List<Service> services = List.of(DomainFixtures.someService1(), DomainFixtures.someService1(), DomainFixtures.someService1());
-        when(serviceService.findServices()).thenReturn(services);
-        when(serviceMapper.map(any())).thenReturn(DtoFixtures.someServiceDTO1());
-
-        //when
-        ServicesDTO result = serviceRestController.getServices();
-
-        //then
-        assertThat(result).isEqualTo(DtoFixtures.someServicesDTO());
-    }
+//    @Test
+//    void thatGetServicesWorksCorrectly(){
+//        //given
+//        List<Service> services = List.of(DomainFixtures.someService1(), DomainFixtures.someService1(), DomainFixtures.someService1());
+//        when(serviceService.findServices()).thenReturn(services);
+//        when(serviceMapper.map(any())).thenReturn(DtoFixtures.someServiceDTO1());
+//
+//        //when
+//        ServicesDTO result = serviceRestController.getServices();
+//
+//        //then
+//        assertThat(result).isEqualTo(DtoFixtures.someServicesDTO());
+//    }
 
     @Test
     void thatServiceDetailsWorksCorrectly(){

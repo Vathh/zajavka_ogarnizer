@@ -74,4 +74,19 @@ public class AwayWorkRepository implements AwayWorkDAO {
     public void deleteAwayWork(Integer awayWorkId) {
         awayWorkJpaRepository.deleteById(awayWorkId);
     }
+
+    @Override
+    public long countByPriorityName(String priorityName) {
+        return awayWorkJpaRepository.countByPriorityName(priorityName);
+    }
+
+    @Override
+    public long countByStageName(String stageName) {
+        return awayWorkJpaRepository.countByStageName(stageName);
+    }
+
+    @Override
+    public long countAll() {
+        return awayWorkJpaRepository.count();
+    }
 }

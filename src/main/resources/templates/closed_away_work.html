@@ -3,13 +3,15 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link th:href="@{/styles/home.css}" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
     <title>Ogarnizer</title>
+    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link th:href="@{/styles/home.css}" rel="stylesheet" />
 </head>
 
 <body>
-    <h1 class="header">Ogarnizer</h1>
+    <a class="header"><img class="logo" th:src="@{/images/OGARNIZER_PC.svg}" alt=""></a>
 
     <nav class="nav">
         <a th:href="@{/away_work}" class="nav__link">Away works</a>
@@ -30,36 +32,41 @@
 
     <h2 class="header2">Closed Away works</h2>
 
-    <div class="sort">
-        <form action="#" th:action="@{closed_away_work(size=${sortOption.size},
+    <div>
+        <form class="sort" action="#" th:action="@{closed_away_work(size=${sortOption.size},
                                                         keyword=${sortOption.getKeyword},
                                                         sortDir=${sortOption.getSortDir},
                                                         sortBy=${sortOption.getSortBy})
                                     }"
               th:method="GET" th:object="${sortOption}">
-            <label for="keyword">Keyword</label>
-            <input id="keyword" th:field="*{keyword}" name="keyword"/>
+            <div class="sort__container">
+                <label for="keyword">Keyword</label>
+                <input id="keyword" th:field="*{keyword}" name="keyword"/>
 
-            <label for="sortBy">Sort By</label>
-            <select id="sortBy" th:field="*{sortBy}" name="sortBy">
-                <option th:each="sortBy : ${sortByFields}" th:value="${sortBy}" th:text="${#strings.capitalize(sortBy)}"></option>
-            </select>
+                <label for="sortBy">Sort By</label>
+                <select id="sortBy" th:field="*{sortBy}" name="sortBy">
+                    <option th:each="sortBy : ${sortByFields}" th:value="${sortBy}" th:text="${#strings.capitalize(sortBy)}"></option>
+                </select>
+            </div>
 
-            <label for="sortDirection">Sort Direction</label>
-            <select id="sortDirection" th:field="*{sortDir}" name="sortDir">
-                <option th:each="sortDir : ${sortDirections}" th:value="${sortDir}" th:text="${sortDir}"></option>
-            </select>
+            <div class="sort__container">
+                <label for="sortDirection">Sort Direction</label>
+                <select id="sortDirection" th:field="*{sortDir}" name="sortDir">
+                    <option th:each="sortDir : ${sortDirections}" th:value="${sortDir}" th:text="${sortDir}"></option>
+                </select>
 
-            <label for="size">Elements on Page</label>
-            <select id="size" th:field="*{size}" name="size">
-                <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
-            </select>
+                <label for="size">Elements on Page</label>
+                <select id="size" th:field="*{size}" name="size">
+                    <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
+                </select>
+            </div>
 
-            <button type="submit">SEARCH</button>
+            <button class="nav__link btn" type="submit">SEARCH</button>
 
 
-            <div th:if="${totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="pagination">
-                <a th:href="@{/closed_away_work(size=${sortOption.size},
+            <div th:if="${totalPages > 0}" class="pagination">
+                <a th:each="pageNumber : ${pageNumbers}"
+                   th:href="@{/closed_away_work(size=${sortOption.size},
                                                 page=${pageNumber},
                                                 keyword=${sortOption.getKeyword},
                                                 sortDir=${sortOption.getSortDir},
@@ -71,47 +78,38 @@
                 </a>
             </div>
         </form>
-
     </div>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Created By</th>
-            <th>Created Date</th>
-            <th>Client</th>
-            <th>Description</th>
-            <th>Place</th>
-            <th>Device</th>
-            <th>Additional Info</th>
-            <th>Update Info</th>
-            <th>Closed By</th>
-            <th>Closed Date</th>
-            <th>Success</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="closedAwayWork : ${closedAwayWorkDTOs}">
-            <td th:text="${closedAwayWork.creatingUserName}"></td>
-            <td th:text="${closedAwayWork.createdDate}"></td>
-            <td th:text="${closedAwayWork.clientName}"></td>
-            <td th:text="${closedAwayWork.description}"></td>
-            <td th:text="${closedAwayWork.place}"></td>
-            <td th:text="${closedAwayWork.device}"></td>
-            <td th:text="${closedAwayWork.additionalInfo}"></td>
-            <td th:text="${closedAwayWork.updateInfo}"></td>
-            <td th:text="${closedAwayWork.closingUserName}"></td>
-            <td th:text="${closedAwayWork.closedDate}"></td>
-            <td th:text="${closedAwayWork.success}"></td>
-            <td>
+    <div class="table">
+        <div th:each="closedAwayWork : ${closedAwayWorkDTOs}" class="container">
+            <div class="container__data">
+                <div class="container__title">
+                    <span class="container__description" th:text="${closedAwayWork.description}">
+                    </span>
+                </div>
+
+                <p class="container__data">Created By: <span class="container__data-info" th:text="${closedAwayWork.creatingUserName}"></span></p>
+                <p class="container__data">Created Date: <span class="container__data-info" th:text="${closedAwayWork.createdDate}"></span></p>
+                <p class="container__data">Client: <span class="container__data-info" th:text="${closedAwayWork.clientName}"></span></p>
+                <p class="container__data">Place: <span class="container__data-info" th:text="${closedAwayWork.place}"></span></p>
+                <p class="container__data">Device: <span class="container__data-info" th:text="${closedAwayWork.device}"></span></p>
+                <p th:if="${closedAwayWork.additionalInfo != ''}" class="container__data">
+                    Additional Info: <span class="container__data-info" th:text="${closedAwayWork.additionalInfo}"></span>
+                </p>
+                <p th:if="${closedAwayWork.updateInfo != ''}"class="container__data">
+                    Update Info: <span class="container__data-info" th:text="${closedAwayWork.updateInfo}"></span>
+                </p>
+                <p class="container__data">Closed By: <span class="container__data-info" th:text="${closedAwayWork.closingUserName}"></span></p>
+                <p class="container__data">Closed Date: <span class="container__data-info" th:text="${closedAwayWork.closedDate}"></span></p>
+                <p class="container__data">Success: <span class="container__data-info" th:text="${closedAwayWork.success}"></span></p>
+            </div>
+            <div class="buttons">
                 <form action="#" th:action="@{closed_away_work/delete/{closedAwayWorkId}(closedAwayWorkId=${closedAwayWork.closedAwayWorkId})}" th:method="DELETE">
                     <button type="submit"><i class="fas fa-trash-alt"></i></button>
                 </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            </div>
+        </div>
+    </div>
 </body>
-
+<footer><p>&copy; 2023 SunnyVale</p></footer>
 </html>

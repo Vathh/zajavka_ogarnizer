@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ogarnizer.business.dao.AwayWorkDAO;
 import pl.ogarnizer.domain.AwayWork;
+import pl.ogarnizer.domain.Statistics;
 import pl.ogarnizer.domain.Task;
 import pl.ogarnizer.domain.exception.NotFoundException;
 
@@ -67,6 +68,29 @@ public class AwayWorkService {
     @Transactional
     public void deleteAwayWork(Integer awayWorkId){
         awayWorkDAO.deleteAwayWork(awayWorkId);
+    }
+
+    @Transactional
+    public Statistics getAwayWorksStatistics(){
+        long total = awayWorkDAO.countAll();
+        long lowPriorities = awayWorkDAO.countByPriorityName("low");
+        long mediumPriorities = awayWorkDAO.countByPriorityName("medium");
+        long highPriorities = awayWorkDAO.countByPriorityName("high");
+        long justAdded = awayWorkDAO.countByStageName("just_added");
+        long inProgress = awayWorkDAO.countByStageName("in_progress");
+        long waitingForParts = awayWorkDAO.countByStageName("waiting_for_parts");
+        long toInvoice = awayWorkDAO.countByStageName("to_invoice");
+
+        return Statistics.builder()
+                .total(total)
+                .lowPriorities(lowPriorities)
+                .mediumPriorities(mediumPriorities)
+                .highPriorities(highPriorities)
+                .justAdded(justAdded)
+                .inProgress(inProgress)
+                .waitingForParts(waitingForParts)
+                .toInvoice(toInvoice)
+                .build();
     }
 
     public AwayWork prepareAwayWork(Task task){

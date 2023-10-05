@@ -47,18 +47,4 @@ public class ClosedServiceRepositoryUnitTest {
         assertThat(result).isEqualTo(List.of(DomainFixtures.someClosedService1(),
                 DomainFixtures.someClosedService1(), DomainFixtures.someClosedService1()));
     }
-
-    @Test
-    void thatFindByCreatingDateCorrectly(){
-        //given
-        Set<ClosedServiceEntity> closedServiceEntities = Set.of(EntityFixtures.someClosedServiceEntity1());
-        when(closedServiceJpaRepository.findByCreatedDate(any())).thenReturn(closedServiceEntities);
-        when(closedServiceEntityMapper.mapFromEntity(any())).thenReturn(DomainFixtures.someClosedService1());
-
-        //when
-        List<ClosedService> result = closedServiceRepository.findByCreatingDate(LocalDate.now());
-
-        //then
-        assertThat(result).isEqualTo(List.of(DomainFixtures.someClosedService1()));
-    }
 }

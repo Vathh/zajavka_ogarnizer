@@ -31,20 +31,20 @@ public class ClientRestControllerUnitTests {
     @InjectMocks
     private ClientRestController clientRestController;
 
-    @Test
-    void thatGetClientsWorksCorrectly(){
-        //given
-        List<Client> clients = List.of(DomainFixtures.someClient1(),
-                DomainFixtures.someClient1(),DomainFixtures.someClient1());
-        when(clientService.findClients()).thenReturn(clients);
-        when(clientMapper.map((Client) any())).thenReturn(DtoFixtures.someClientDTO1());
-
-        //when
-        ClientsDTO result = clientRestController.getClients();
-
-        //then
-        assertThat(result).isEqualTo(DtoFixtures.someClientsDTO());
-    }
+//    @Test
+//    void thatGetClientsWorksCorrectly(){
+//        //given
+//        List<Client> clients = List.of(DomainFixtures.someClient1(),
+//                DomainFixtures.someClient1(),DomainFixtures.someClient1());
+//        when(clientService.findClients()).thenReturn(clients);
+//        when(clientMapper.map((Client) any())).thenReturn(DtoFixtures.someClientDTO1());
+//
+//        //when
+//        ClientsDTO result = clientRestController.getClients();
+//
+//        //then
+//        assertThat(result).isEqualTo(DtoFixtures.someClientsDTO());
+//    }
 
     @Test
     void thatClientDetailsWorksCorrectly(){

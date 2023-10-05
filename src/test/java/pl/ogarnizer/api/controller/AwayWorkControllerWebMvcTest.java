@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.ogarnizer.api.dto.TaskDTO;
@@ -52,7 +55,7 @@ public class AwayWorkControllerWebMvcTest {
     @Test
     void thatAwayWorkPageLoadsCorrectly() throws Exception{
         //given
-        when(awayWorkService.findAwayWorks()).thenReturn(DomainFixtures.someAwayWorksList());
+        when(awayWorkService.findAwayWorks(any(),any())).thenReturn(new PageImpl<>(DomainFixtures.someAwayWorksList()));
         when(clientService.findClients()).thenReturn(DomainFixtures.someClientsList());
         when(priorityService.findPriorities()).thenReturn(DomainFixtures.allPriorities());
         when(awayWorkMapper.map(any())).thenReturn(DtoFixtures.someAwayWorkDTO1());

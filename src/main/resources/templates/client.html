@@ -3,105 +3,105 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link th:href="@{/styles/home.css}" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
     <title>Ogarnizer</title>
+    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link th:href="@{/styles/home.css}" rel="stylesheet" />
 </head>
 
 <body>
-<h1 class="header">Ogarnizer</h1>
+    <a class="header"><img class="logo" th:src="@{/images/OGARNIZER_PC.svg}" alt=""></a>
 
-<nav class="nav">
-    <a th:href="@{/away_work}" class="nav__link">Away works</a>
-    <a th:href="@{/service}" class="nav__link">Services</a>
-    <a th:href="@{/order}" class="nav__link">Orders</a>
-    <a th:href="@{/client}" class="nav__link">Clients</a>
-    <a th:href="@{/admin_panel}" class="nav__link">Admin Panel</a>
-</nav>
+    <nav class="nav">
+        <a class="nav__link" th:href="@{/away_work}">Away works</a>
+        <a class="nav__link" th:href="@{/service}">Services</a>
+        <a class="nav__link" th:href="@{/order}">Orders</a>
+        <a class="nav__link" th:href="@{/client}">Clients</a>
+        <a class="nav__link" th:href="@{/admin_panel}">Admin Panel</a>
+    </nav>
 
-<h2 class="header2">Clients</h2>
+    <h2 class="header2">Clients</h2>
 
-<div class="sort">
-    <form action="#" th:action="@{client(size=${sortOption.size},
-                                        keyword=${sortOption.getKeyword}}"
-          th:method="GET" th:object="${sortOption}">
-        <label for="keyword">Keyword</label>
-        <input id="keyword" th:field="*{keyword}" name="keyword"/>
+    <div>
+        <form class="sort" action="#" th:action="@{client(size=${sortOption.size},
+                                            keyword=${sortOption.getKeyword})}"
+              th:method="GET" th:object="${sortOption}">
 
-        <label for="size">Elements on Page</label>
-        <select id="size" th:field="*{size}" name="size">
-            <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
-        </select>
+            <div class="sort__container">
+                <label for="keyword">Keyword</label>
+                <input id="keyword" th:field="*{keyword}" name="keyword"/>
 
-        <button type="submit">SEARCH</button>
+                <label for="size">Elements on Page</label>
+                <select id="size" th:field="*{size}" name="size">
+                    <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
+                </select>
+            </div>
+
+            <button class="nav__link btn" type="submit">SEARCH</button>
 
 
-        <div th:if="${totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="pagination">
-            <a th:href="@{/client(size=${sortOption.size},
-                                    page=${pageNumber},
-                                    keyword=${sortOption.getKeyword}
-                                )}"
-               th:text=${pageNumber}
-               class="test"
-               th:class="${pageNumber==currentPageNumber + 1} ? active">
-            </a>
+            <div th:if="${totalPages > 0}" class="pagination">
+                <a th:each="pageNumber : ${pageNumbers}"
+                   th:href="@{/client(size=${sortOption.size},
+                                        page=${pageNumber},
+                                        keyword=${sortOption.getKeyword}
+                                    )}"
+                   th:text=${pageNumber}
+                   class="test"
+                   th:class="${pageNumber==currentPageNumber + 1} ? active">
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <div class="table">
+        <div th:each="client : ${clientDTOs}" class="container">
+            <div class="container__data">
+                <div class="container__title">
+                    <span class="container__description" th:text="${client.name}">
+                    </span>
+                </div>
+
+                <p class="container__data">Address: <span class="container__data-info" th:text="${client.address}"></span></p>
+                <p class="container__data">NIP: <span class="container__data-info" th:text="${client.nip}"></span></p>
+                <p class="container__data">Phone Number: <span class="container__data-info" th:text="${client.phoneNumber}"></span></p>
+            </div>
+            <div class="buttons">
+                <form action="#" th:if="${userRole == 'admin'}" th:action="@{client/delete/{clientId}(clientId=${client.clientId})}" th:method="DELETE">
+                    <button type="submit"><i class="fas fa-trash-alt"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a th:href="@{/client/load}" class="nav__link btn">Load random Clients</a>
+
+    <h2 class="header2">Add Client</h2>
+    <form class="add" action="#" th:action="@{/client/add}" method="POST" th:object="${clientDTO}" >
+        <div class="add__container">
+            <div class="add__container-field">
+                <label for="name">Name</label>
+                <input id="name" th:field="*{name}"></input>
+            </div>
+            <div class="add__container-field">
+                <label for="address">Address</label>
+                <input id="address" th:field="*{address}"></input>
+            </div>
+            <div class="add__container-field">
+                <label for="nip">NIP</label>
+                <textarea id="nip" th:field="*{nip}"></textarea>
+            </div>
+            <div class="add__container-field">
+                <label for="phoneNumber">Phone Number</label>
+                <textarea id="phoneNumber" th:field="*{phoneNumber}"></textarea>
+            </div>
+        </div>
+
+        <div class="add__submit">
+            <input type="submit" value="SUBMIT">
         </div>
     </form>
-
-</div>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Address</th>
-        <th>NIP</th>
-        <th>Phone Number</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="client : ${clientDTOs}">
-        <td th:text="${client.name}"></td>
-        <td th:text="${client.address}"></td>
-        <td th:text="${client.nip}"></td>
-        <td th:text="${client.phoneNumber}"></td>
-        <td  class="icon__container">
-            <form action="#" th:if="${userRole == 'admin'}" th:action="@{client/delete/{clientId}(clientId=${client.clientId})}" th:method="DELETE">
-                <button type="submit"><i class="fas fa-trash-alt"></i></button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<a th:href="@{/client/load}" class="nav__link">Load random Clients</a>
-
-<h2 class="header2">Add Client</h2>
-<form class="add" action="#" th:action="@{/client/add}" method="POST" th:object="${clientDTO}" >
-    <div class="add__container">
-        <div class="add__container-field">
-            <label for="name">Name</label>
-            <input id="name" th:field="*{name}"></input>
-        </div>
-        <div class="add__container-field">
-            <label for="address">Address</label>
-            <input id="address" th:field="*{address}"></input>
-        </div>
-        <div class="add__container-field">
-            <label for="nip">NIP</label>
-            <textarea id="nip" th:field="*{nip}"></textarea>
-        </div>
-        <div class="add__container-field">
-            <label for="phoneNumber">Phone Number</label>
-            <textarea id="phoneNumber" th:field="*{phoneNumber}"></textarea>
-        </div>
-    </div>
-
-    <div class="add__submit">
-        <input type="submit" value="SUBMIT">
-    </div>
-</form>
 </body>
-
+<footer><p>&copy; 2023 SunnyVale</p></footer>
 </html>

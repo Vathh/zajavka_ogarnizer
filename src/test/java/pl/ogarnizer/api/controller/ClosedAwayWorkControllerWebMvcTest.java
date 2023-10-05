@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.ogarnizer.api.dto.mapper.ClosedAwayWorkMapper;
@@ -37,7 +38,7 @@ public class ClosedAwayWorkControllerWebMvcTest {
     @Test
     void thatClosedAwayWorkPageLoadsCorrectly() throws Exception{
         //given
-        when(closedAwayWorkService.findClosedAwayWorks()).thenReturn(DomainFixtures.someClosedAwayWorksList());
+        when(closedAwayWorkService.findClosedAwayWorks(any(),any())).thenReturn(new PageImpl<>(DomainFixtures.someClosedAwayWorksList()));
         when(closedAwayWorkMapper.map(any(ClosedAwayWork.class))).thenReturn(DtoFixtures.someClosedAwayWorkDTO1());
 
         //when, then

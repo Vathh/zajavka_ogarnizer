@@ -21,6 +21,7 @@ import pl.ogarnizer.api.dto.mapper.TaskMapper;
 import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
 import pl.ogarnizer.business.*;
 import pl.ogarnizer.domain.AwayWork;
+import pl.ogarnizer.domain.Statistics;
 import pl.ogarnizer.domain.Task;
 
 import java.util.*;
@@ -61,7 +62,7 @@ public class AwayWorkController {
         }
 
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(4);
 
         Sort.Direction sortDirection = (sortDir.isEmpty() || sortDir.get().length() == 0 || Objects.equals(sortDir.get(), "DESCENDING"))
                 ? Sort.Direction.DESC : Sort.Direction.ASC;
@@ -87,7 +88,7 @@ public class AwayWorkController {
         var priorities = priorityService.findPriorities();
         var sortByFields = List.of("priority", "createdDate", "stage");
         var sortDirections = List.of("DESCENDING", "ASCENDING");
-        var sizes = List.of(5, 10, 20);
+        var sizes = List.of(4, 8, 16);
 
         Map<String, Object> data = new HashMap<>(Map.of(
                 "awayWorkDTOs", awayWorks,
@@ -186,7 +187,10 @@ public class AwayWorkController {
             @PathVariable Integer awayWorkId,
             @ModelAttribute("updateTaskDTO") UpdateTaskDTO updateTaskDTO,
             BindingResult bindingResult
-    ){
+    )throws BindException {
+        if(bindingResult.hasErrors()){
+            throw new BindException(bindingResult);
+        }
         var awayWork = awayWorkService.findAwayWorkById(awayWorkId);
 
         AwayWork awayWorkToSave = awayWork

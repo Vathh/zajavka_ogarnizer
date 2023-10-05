@@ -47,18 +47,4 @@ public class ClosedOrderRepositoryUnitTest {
         assertThat(result).isEqualTo(List.of(DomainFixtures.someClosedOrder1(),
                 DomainFixtures.someClosedOrder1(), DomainFixtures.someClosedOrder1()));
     }
-
-    @Test
-    void thatFindByCreatingDateCorrectly(){
-        //given
-        Set<ClosedOrderEntity> closedOrderEntities = Set.of(EntityFixtures.someClosedOrderEntity1());
-        when(closedOrderJpaRepository.findByCreatedDate(any())).thenReturn(closedOrderEntities);
-        when(closedOrderEntityMapper.mapFromEntity(any())).thenReturn(DomainFixtures.someClosedOrder1());
-
-        //when
-        List<ClosedOrder> result = closedOrderRepository.findByCreatingDate(LocalDate.now());
-
-        //then
-        assertThat(result).isEqualTo(List.of(DomainFixtures.someClosedOrder1()));
-    }
 }

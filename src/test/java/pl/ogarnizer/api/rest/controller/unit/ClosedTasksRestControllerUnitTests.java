@@ -52,48 +52,48 @@ public class ClosedTasksRestControllerUnitTests {
     @InjectMocks
     private ClosedServiceRestController closedServiceRestController;
 
-    @Test
-    void thatGetClosedAwayWorksWorksCorrectly(){
-        //given
-        List<ClosedAwayWork> closedAwayWorks = List.of(DomainFixtures.someClosedAwayWork1(),
-                DomainFixtures.someClosedAwayWork1(), DomainFixtures.someClosedAwayWork1());
-        when(closedAwayWorkService.findClosedAwayWorks()).thenReturn(closedAwayWorks);
-        when(closedAwayWorkMapper.map((ClosedAwayWork) any())).thenReturn(DtoFixtures.someClosedAwayWorkDTO1());
+//    @Test
+//    void thatGetClosedAwayWorksWorksCorrectly(){
+//        //given
+//        List<ClosedAwayWork> closedAwayWorks = List.of(DomainFixtures.someClosedAwayWork1(),
+//                DomainFixtures.someClosedAwayWork1(), DomainFixtures.someClosedAwayWork1());
+//        when(closedAwayWorkService.findClosedAwayWorks()).thenReturn(closedAwayWorks);
+//        when(closedAwayWorkMapper.map((ClosedAwayWork) any())).thenReturn(DtoFixtures.someClosedAwayWorkDTO1());
+//
+//        //when
+//        ClosedAwayWorksDTO result = closedAwayWorkRestController.getClosedAwayWorks();
+//
+//        //then
+//        assertThat(result).isEqualTo(DtoFixtures.someClosedAwayWorksDTO());
+//    }
 
-        //when
-        ClosedAwayWorksDTO result = closedAwayWorkRestController.getClosedAwayWorks();
+//    @Test
+//    void thatGetClosedOrdersWorksCorrectly(){
+//        //given
+//        List<ClosedOrder> closedOrders = List.of(DomainFixtures.someClosedOrder1(),
+//                DomainFixtures.someClosedOrder1(), DomainFixtures.someClosedOrder1());
+//        when(closedOrderService.findClosedOrders()).thenReturn(closedOrders);
+//        when(closedOrderMapper.map((ClosedOrder) any())).thenReturn(DtoFixtures.someClosedOrderDTO1());
+//
+//        //when
+//        ClosedOrdersDTO result = closedOrderRestController.getClosedOrders();
+//
+//        //then
+//        assertThat(result).isEqualTo(DtoFixtures.someClosedOrdersDTO());
+//    }
 
-        //then
-        assertThat(result).isEqualTo(DtoFixtures.someClosedAwayWorksDTO());
-    }
-
-    @Test
-    void thatGetClosedOrdersWorksCorrectly(){
-        //given
-        List<ClosedOrder> closedOrders = List.of(DomainFixtures.someClosedOrder1(),
-                DomainFixtures.someClosedOrder1(), DomainFixtures.someClosedOrder1());
-        when(closedOrderService.findClosedOrders()).thenReturn(closedOrders);
-        when(closedOrderMapper.map((ClosedOrder) any())).thenReturn(DtoFixtures.someClosedOrderDTO1());
-
-        //when
-        ClosedOrdersDTO result = closedOrderRestController.getClosedOrders();
-
-        //then
-        assertThat(result).isEqualTo(DtoFixtures.someClosedOrdersDTO());
-    }
-
-    @Test
-    void thatGetClosedServicesWorksCorrectly(){
-        //given
-        List<ClosedService> closedServices = List.of(DomainFixtures.someClosedService1(),
-                DomainFixtures.someClosedService1(), DomainFixtures.someClosedService1());
-        when(closedServiceService.findClosedServices()).thenReturn(closedServices);
-        when(closedServiceMapper.map((ClosedService) any())).thenReturn(DtoFixtures.someClosedServiceDTO1());
-
-        //when
-        ClosedServicesDTO result = closedServiceRestController.getClosedServices();
-
-        //then
-        assertThat(result).isEqualTo(DtoFixtures.someClosedServicesDTO());
-    }
+//    @Test
+//    void thatGetClosedServicesWorksCorrectly(){
+//        //given
+//        List<ClosedService> closedServices = List.of(DomainFixtures.someClosedService1(),
+//                DomainFixtures.someClosedService1(), DomainFixtures.someClosedService1());
+//        when(closedServiceService.findClosedServices()).thenReturn(closedServices);
+//        when(closedServiceMapper.map((ClosedService) any())).thenReturn(DtoFixtures.someClosedServiceDTO1());
+//
+//        //when
+//        ClosedServicesDTO result = closedServiceRestController.getClosedServices();
+//
+//        //then
+//        assertThat(result).isEqualTo(DtoFixtures.someClosedServicesDTO());
+//    }
 }

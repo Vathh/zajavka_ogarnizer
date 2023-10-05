@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.ogarnizer.api.dto.TaskDTO;
@@ -52,7 +53,7 @@ public class OrderControllerWebMvcTest {
     @Test
     void thatOrderPageLoadsCorrectly() throws Exception{
         //given
-        when(orderService.findOrders()).thenReturn(DomainFixtures.someOrdersList());
+        when(orderService.findOrders(any(),any())).thenReturn(new PageImpl<>(DomainFixtures.someOrdersList()));
         when(clientService.findClients()).thenReturn(DomainFixtures.someClientsList());
         when(priorityService.findPriorities()).thenReturn(DomainFixtures.allPriorities());
         when(orderMapper.map(any())).thenReturn(DtoFixtures.someOrderDTO1());

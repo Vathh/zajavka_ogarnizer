@@ -3,54 +3,62 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link th:href="@{/styles/home.css}" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
     <title>Ogarnizer</title>
+    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link th:href="@{/styles/home.css}" rel="stylesheet" />
 </head>
 
 <body>
-    <h1 class="header">Ogarnizer</h1>
+    <a class="header"><img class="logo" th:src="@{/images/OGARNIZER_PC.svg}" alt=""></a>
 
     <nav class="nav">
-        <a th:href="@{/away_work}" class="nav__link">Away works</a>
-        <a th:href="@{/service}" class="nav__link">Services</a>
-        <a th:href="@{/order}" class="nav__link">Orders</a>
-        <a th:href="@{/client}" class="nav__link">Clients</a>
-        <a th:href="@{/admin_panel}" class="nav__link">Admin Panel</a>
+        <a class="nav__link" th:href="@{/away_work}">Away works</a>
+        <a class="nav__link" th:href="@{/service}">Services</a>
+        <a class="nav__link" th:href="@{/order}">Orders</a>
+        <a class="nav__link" th:href="@{/client}">Clients</a>
+        <a class="nav__link" th:href="@{/admin_panel}">Admin Panel</a>
     </nav>
 
     <h2 class="header2">Away works</h2>
 
-    <div class="sort">
-        <form action="#" th:action="@{away_work(size=${sortOption.size},
+    <div>
+        <form class="sort" action="#" th:action="@{away_work(size=${sortOption.size},
                                                 keyword=${sortOption.getKeyword},
                                                 sortDir=${sortOption.getSortDir},
                                                 sortBy=${sortOption.getSortBy})
                                     }"
               th:method="GET" th:object="${sortOption}">
-            <label for="keyword">Keyword</label>
-            <input id="keyword" th:field="*{keyword}" name="keyword"/>
 
-            <label for="sortBy">Sort By</label>
-            <select id="sortBy" th:field="*{sortBy}" name="sortBy">
-                <option th:each="sortBy : ${sortByFields}" th:value="${sortBy}" th:text="${#strings.capitalize(sortBy)}"></option>
-            </select>
+            <div class="sort__container">
+                <label for="keyword">Keyword</label>
+                <input id="keyword" th:field="*{keyword}" name="keyword"/>
 
-            <label for="sortDirection">Sort Direction</label>
-            <select id="sortDirection" th:field="*{sortDir}" name="sortDir">
-                <option th:each="sortDir : ${sortDirections}" th:value="${sortDir}" th:text="${sortDir}"></option>
-            </select>
+                <label for="sortBy">Sort By</label>
+                <select id="sortBy" th:field="*{sortBy}" name="sortBy">
+                    <option th:each="sortBy : ${sortByFields}" th:value="${sortBy}" th:text="${#strings.capitalize(sortBy)}"></option>
+                </select>
+            </div>
 
-            <label for="size">Elements on Page</label>
-            <select id="size" th:field="*{size}" name="size">
-                <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
-            </select>
+            <div class="sort__container">
+                <label for="sortDirection">Sort Direction</label>
+                <select id="sortDirection" th:field="*{sortDir}" name="sortDir">
+                    <option th:each="sortDir : ${sortDirections}" th:value="${sortDir}" th:text="${sortDir}"></option>
+                </select>
 
-            <button type="submit">SEARCH</button>
+                <label for="size">Elements on Page</label>
+                <select id="size" th:field="*{size}" name="size">
+                    <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
+                </select>
+            </div>
+
+            <button class="nav__link btn" type="submit">SEARCH</button>
 
 
-            <div th:if="${totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="pagination">
-                <a th:href="@{/away_work(size=${sortOption.size},
+            <div th:if="${totalPages > 0}" class="pagination">
+                <a th:each="pageNumber : ${pageNumbers}"
+                   th:href="@{/away_work(size=${sortOption.size},
                                         page=${pageNumber},
                                         keyword=${sortOption.getKeyword},
                                         sortDir=${sortOption.getSortDir},
@@ -62,55 +70,51 @@
                 </a>
             </div>
         </form>
-
     </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Created By</th>
-                <th>Created Date</th>
-                <th>Priority</th>
-                <th>Client</th>
-                <th>Description</th>
-                <th>Place</th>
-                <th>Device</th>
-                <th>Additional Info</th>
-                <th>Update Info</th>
-                <th>Stage</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="awayWork : ${awayWorkDTOs}">
-                <td th:text="${awayWork.creatingUserName}"></td>
-                <td th:text="${awayWork.createdDate}"></td>
-                <td th:text="${awayWork.priorityName}"></td>
-                <td th:text="${awayWork.clientName}"></td>
-                <td th:text="${awayWork.description}"></td>
-                <td th:text="${awayWork.place}"></td>
-                <td th:text="${awayWork.device}"></td>
-                <td th:text="${awayWork.additionalInfo}"></td>
-                <td th:text="${awayWork.updateInfo}"></td>
-                <td th:text="${awayWork.stageName}"></td>
-                <td  class="icon__container">
-                    <form action="#" th:action="@{away_work/close/{awayWorkId}/{success}(awayWorkId=${awayWork.awayWorkId}, success=true)}" th:method="DELETE">
-                        <button type="submit"><i class="fas fa-check"></i></button>
-                    </form>
+    <div class="table">
+        <div th:each="awayWork : ${awayWorkDTOs}" class="container">
+            <div class="container__data">
+                <div class="container__title">
+                    <span class="container__description" th:text="${awayWork.description}">
+                    </span>
+                    <div class="container__description-priority"
+                         th:classappend="${(awayWork.priorityName == 'low' ? 'low' : '') +
+                                        (awayWork.priorityName == 'medium' ? 'medium' : '') +
+                                        (awayWork.priorityName == 'high' ? 'high' : '')}"
+                    ></div>
+                </div>
 
-                    <form action="#" th:action="@{away_work/show/{awayWorkId}(awayWorkId=${awayWork.awayWorkId})}" th:method="GET">
-                        <button type="submit"><i class="fas fa-edit"></i></button>
-                    </form>
+                <p class="container__data">Created By: <span class="container__data-info" th:text="${awayWork.creatingUserName}"></span></p>
+                <p class="container__data">Created Date: <span class="container__data-info" th:text="${awayWork.createdDate}"></span></p>
+                <p class="container__data">Client: <span class="container__data-info" th:text="${awayWork.clientName}"></span></p>
+                <p class="container__data">Place: <span class="container__data-info" th:text="${awayWork.place}"></span></p>
+                <p class="container__data">Device: <span class="container__data-info" th:text="${awayWork.device}"></span></p>
+                <p th:if="${awayWork.additionalInfo != ''}" class="container__data">
+                    Additional Info: <span class="container__data-info" th:text="${awayWork.additionalInfo}"></span>
+                </p>
+                <p th:if="${awayWork.updateInfo != ''}"class="container__data">
+                    Update Info: <span class="container__data-info" th:text="${awayWork.updateInfo}"></span>
+                </p>
+                <p class="container__data">Stage: <span class="container__data-info" th:text="${awayWork.stageName}"></span></p>
+            </div>
+            <div class="buttons">
+                <form action="#" th:action="@{away_work/close/{awayWorkId}/{success}(awayWorkId=${awayWork.awayWorkId}, success=true)}" th:method="DELETE">
+                    <button type="submit"><i class="fas fa-check"></i></button>
+                </form>
 
-                    <form action="#" th:action="@{away_work/close/{awayWorkId}/{success}(awayWorkId=${awayWork.awayWorkId}, success=false)}" th:method="DELETE">
-                        <button type="submit"><i class="fas fa-trash-alt"></i></button>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                <form action="#" th:action="@{away_work/show/{awayWorkId}(awayWorkId=${awayWork.awayWorkId})}" th:method="GET">
+                    <button type="submit"><i class="fas fa-edit"></i></button>
+                </form>
 
-    <a th:href="@{/away_work/load}" class="nav__link">Load random Away Works</a>
+                <form action="#" th:action="@{away_work/close/{awayWorkId}/{success}(awayWorkId=${awayWork.awayWorkId}, success=false)}" th:method="DELETE">
+                    <button type="submit"><i class="fas fa-trash-alt"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a th:href="@{/away_work/load}" class="nav__link btn">Load random Away Works</a>
 
     <h2 class="header2">Add Away Work</h2>
     <form class="add" action="#" th:action="@{/away_work/add}" method="POST" th:object="${taskDTO}" >
@@ -126,7 +130,7 @@
                 <select id="client" th:field="*{clientName}">
                     <option th:each="client : ${clients}" th:value="${client.name}" th:text="${client.name}"></option>
                 </select>
-                <a th:href="@{/client}" class="add__client">Add new Client</a>
+                <a th:href="@{/client}" class="nav__link btn2">Add new Client</a>
             </div>
             <div class="add__container-field">
                 <label for="description">Description</label>
@@ -154,5 +158,5 @@
         </div>
     </form>
 </body>
-
+<footer><p>&copy; 2023 SunnyVale</p></footer>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.ogarnizer.api.dto.mapper.ClosedServiceMapper;
@@ -37,7 +38,7 @@ public class ClosedServiceControllerWebMvcTest {
     @Test
     void thatClosedServicePageLoadsCorrectly() throws Exception{
         //given
-        when(closedServiceService.findClosedServices()).thenReturn(DomainFixtures.someClosedServicesList());
+        when(closedServiceService.findClosedServices(any(),any())).thenReturn(new PageImpl<>(DomainFixtures.someClosedServicesList()));
         when(closedServiceMapper.map(any(ClosedService.class))).thenReturn(DtoFixtures.someClosedServiceDTO1());
 
         //when, then

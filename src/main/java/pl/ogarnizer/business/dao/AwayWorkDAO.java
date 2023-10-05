@@ -17,4 +17,7 @@ public interface AwayWorkDAO {
     void saveAwayWorks(List<AwayWork> awayWorks);
     void addAwayWork(AwayWork awayWork);
     void deleteAwayWork(Integer awayWorkId);
+    long countByPriorityName(String priorityName);
+    long countByStageName(String stageName);
+    long countAll();
 }

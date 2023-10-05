@@ -2,6 +2,9 @@ package pl.ogarnizer.api.rest.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.ogarnizer.api.dto.ClientDTO;
@@ -12,6 +15,7 @@ import pl.ogarnizer.business.ClientService;
 import pl.ogarnizer.domain.Client;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -26,10 +30,21 @@ public class ClientRestController {
     private final ClientMapper clientMapper;
 
     @GetMapping
-    public ClientsDTO getClients(){
+    public ClientsDTO getClients(
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size,
+            @RequestParam("keyword") Optional<String> keyword
+    ){
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        Pageable pageRequest = PageRequest.of(currentPage - 1, pageSize, Sort.Direction.ASC,  "name");
+
         return ClientsDTO.builder()
-                .clients(clientService.findClients().stream()
-                        .map(clientMapper::map).toList())
+                .clients(
+                clientService.findClients(pageRequest, keyword.isEmpty() ? "" : keyword.get())
+                    .stream()
+                    .map(clientMapper::map).toList())
                 .build();
     }
 
