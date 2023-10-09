@@ -9,65 +9,117 @@
 </head>
 
 <body>
-<h1 class="header">Ogarnizer</h1>
+    <a class="header"><img class="logo" th:src="@{/images/OGARNIZER_PC.svg}" alt=""></a>
 
-<nav class="nav">
-    <a th:href="@{/away_work}" class="nav__link">Away works</a>
-    <a th:href="@{/service}" class="nav__link">Services</a>
-    <a th:href="@{/order}" class="nav__link">Orders</a>
-    <a th:href="@{/client}" class="nav__link">Clients</a>
-    <a th:href="@{/admin_panel}" class="nav__link">Admin Panel</a>
-</nav>
+    <nav class="nav">
+        <a th:href="@{/away_work}" class="nav__link">Away works</a>
+        <a th:href="@{/service}" class="nav__link">Services</a>
+        <a th:href="@{/order}" class="nav__link">Orders</a>
+        <a th:href="@{/client}" class="nav__link">Clients</a>
+        <a th:href="@{/admin_panel}" class="nav__link">Admin Panel</a>
+    </nav>
 
-<h2 class="header2">Task Details</h2>
+    <h2 class="header2">Task Details</h2>
 
-<p class="data">id: <span  th:text="${taskDTO.taskId}"></span></p>
-<p class="data">Created By: <span  th:text="${taskDTO.createdByUserName}"></span></p>
-<p class="data">Created Date: <span th:text="${taskDTO.createdDate}" ></span></p>
-<p class="data">Priority: <span th:text="${taskDTO.priorityName}" ></span></p>
-<p class="data">Client: <span th:text="${taskDTO.clientName}" ></span></p>
-<p class="data">Description: <span th:text="${taskDTO.description}" ></span></p>
-<p class="data">Place: <span th:text="${taskDTO.place}" ></span></p>
-<p class="data">Device: <span th:text="${taskDTO.device}" ></span></p>
-<p class="data">Additional Info: <span th:text="${taskDTO.additionalInfo}" ></span></p>
-<p class="data">Update Info: <span th:text="${taskDTO.updateInfo}" ></span></p>
-<p class="data">Stage: <span th:text="${taskDTO.stageName}" ></span></p>
+    <div class="bin">
+        <div class="bin__data">
+            <div class="bin__title">
+                <span class="bin__description" th:text="${taskDTO.description}"></span>
+                <div class="bin__description-priority"
+                     th:classappend="${(taskDTO.priorityName == 'low' ? 'low' : '') +
+                                        (taskDTO.priorityName == 'medium' ? 'medium' : '') +
+                                        (taskDTO.priorityName == 'high' ? 'high' : '')}"
+                ></div>
+            </div>
 
-<form class="add"
-      action="#"
-      th:action="${taskType} == 'AWAY_WORK' ?
-            @{/away_work/update/{awayWorkId}(awayWorkId=${taskDTO.taskId})} : (${taskType} == 'SERVICE' ?
-                @{/service/update/{serviceId}(serviceId=${taskDTO.taskId})} :
-                @{/order/update/{orderId}(orderId=${taskDTO.taskId})}
-            )"
-      th:method="PUT"
-      th:object="${updateTaskDTO}"
->
-    <div class="add__container">
-        <div class="add__container-field">
-            <label for="updateInfo">Update Info</label>
-            <textarea id="updateInfo" class="add__container-field-textarea" th:field="*{updateInfo}"></textarea>
-        </div>
-
-        <div class="add__container-field">
-            <label for="priority">Priority</label>
-            <select id="priority" th:field="*{priorityName}">
-                <option th:each="priority : ${priorities}" th:value="${priority.name}" th:text="${priority.name}"></option>
-            </select>
-        </div>
-
-        <div class="add__container-field">
-            <label for="stage">Stage</label>
-            <select id="stage" th:field="*{stageName}">
-                <option th:each="stage : ${stages}" th:value="${stage.name}" th:text="${stage.name}"></option>
-            </select>
+            <div class="bin__row">
+                <p class="bin__data">Created By: </p>
+                <span class="bin__data-info" th:text="${taskDTO.createdByUserName}"></span>
+            </div>
+            <div class="bin__row">
+                <p class="bin__data">Created Date: </p>
+                <span class="bin__data-info" th:text="${taskDTO.createdDate}"></span>
+            </div>
+            <div class="bin__row">
+                <p class="bin__data">Client: </p>
+                <span class="bin__data-info" th:text="${taskDTO.clientName}"></span>
+            </div>
+            <div th:if="${taskDTO.place != ''}" class="bin__row">
+                <p class="bin__data">Place: </p>
+                <span class="bin__data-info" th:text="${taskDTO.place}"></span>
+            </div>
+            <div class="bin__row">
+                <p class="bin__data">Device: </p>
+                <span class="bin__data-info" th:text="${taskDTO.device}"></span>
+            </div>
+            <div th:if="${taskDTO.additionalInfo != ''}" class="bin__row">
+                <p class="bin__data">Additional Info: </p>
+                <span class="bin__data-info" th:text="${taskDTO.additionalInfo}"></span>
+            </div>
+            <div th:if="${taskDTO.updateInfo != ''}" class="bin__row">
+                <p class="bin__data">Update Info: </p>
+                <span class="bin__data-info" th:text="${taskDTO.updateInfo}"></span>
+            </div>
+            <div class="bin__row">
+                <p class="bin__data">Stage: </p>
+                <span class="bin__data-info" th:text="${taskDTO.stageName}"></span>
+            </div>
         </div>
     </div>
-    <div class="add__submit">
-        <input type="submit" value="SUBMIT">
-    </div>
-</form>
 
-</body>
+<!--    <p class="data">id: <span  th:text="${taskDTO.taskId}"></span></p>-->
+<!--    <p class="data">Created By: <span  th:text="${taskDTO.createdByUserName}"></span></p>-->
+<!--    <p class="data">Created Date: <span th:text="${taskDTO.createdDate}" ></span></p>-->
+<!--    <p class="data">Priority: <span th:text="${taskDTO.priorityName}" ></span></p>-->
+<!--    <p class="data">Client: <span th:text="${taskDTO.clientName}" ></span></p>-->
+<!--    <p class="data">Description: <span th:text="${taskDTO.description}" ></span></p>-->
+<!--    <p class="data">Place: <span th:text="${taskDTO.place}" ></span></p>-->
+<!--    <p class="data">Device: <span th:text="${taskDTO.device}" ></span></p>-->
+<!--    <p class="data">Additional Info: <span th:text="${taskDTO.additionalInfo}" ></span></p>-->
+<!--    <p class="data">Update Info: <span th:text="${taskDTO.updateInfo}" ></span></p>-->
+<!--    <p class="data">Stage: <span th:text="${taskDTO.stageName}" ></span></p>-->
 
+    <form class="update"
+          action="#"
+          th:action="${taskType} == 'AWAY_WORK' ?
+                @{/away_work/update/{awayWorkId}(awayWorkId=${taskDTO.taskId})} : (${taskType} == 'SERVICE' ?
+                    @{/service/update/{serviceId}(serviceId=${taskDTO.taskId})} :
+                    @{/order/update/{orderId}(orderId=${taskDTO.taskId})}
+                )"
+          th:method="PUT"
+          th:object="${updateTaskDTO}"
+    >
+            <div class="update__bin">
+                <label for="updateInfo">Update Info</label>
+                <textarea id="updateInfo" th:field="*{updateInfo}"></textarea>
+            </div>
+
+            <div class="update__field">
+                <label for="priority">Priority</label>
+                <select id="priority" th:field="*{priorityName}"/>
+                    <option th:each="priority : ${priorities}"
+                            th:value="${priority.name}"
+                            th:text="${priority.name}"
+                            th:selected="${taskDTO.priorityName == priority.name}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="update__field">
+                <label for="stage">Stage</label>
+                <select id="stage" th:field="*{stageName}"/>
+                    <option th:each="stage : ${stages}"
+                            th:value="${stage.name}"
+                            th:text="${stage.name}"
+                            th:selected="${taskDTO.stageName == stage.name}">
+                    </option>
+                </select>
+            </div>
+        <div class="add__submit">
+            <input type="submit" value="SUBMIT">
+        </div>
+    </form>
+
+    </body>
+<footer><p>&copy; 2023 SunnyVale</p></footer>
 </html>

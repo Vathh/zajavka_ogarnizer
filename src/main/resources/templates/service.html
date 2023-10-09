@@ -3,150 +3,198 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link th:href="@{/styles/home.css}" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
     <title>Ogarnizer</title>
+    <script src="https://kit.fontawesome.com/c005c4fba5.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link th:href="@{/styles/home.css}" rel="stylesheet" />
 </head>
 
 <body>
-<h1 class="header">Ogarnizer</h1>
+    <a class="header"><img class="logo" th:src="@{/images/OGARNIZER_PC.svg}" alt=""></a>
 
-<nav class="nav">
-    <a th:href="@{/away_work}" class="nav__link">Away works</a>
-    <a th:href="@{/service}" class="nav__link">Services</a>
-    <a th:href="@{/order}" class="nav__link">Orders</a>
-    <a th:href="@{/client}" class="nav__link">Clients</a>
-    <a th:href="@{/admin_panel}" class="nav__link">Admin Panel</a>
-</nav>
+    <nav class="nav">
+        <a th:href="@{/away_work}" class="nav__link">Away works</a>
+        <a th:href="@{/service}" class="nav__link">Services</a>
+        <a th:href="@{/order}" class="nav__link">Orders</a>
+        <a th:href="@{/client}" class="nav__link">Clients</a>
+        <a th:href="@{/admin_panel}" class="nav__link">Admin Panel</a>
+    </nav>
 
-<h2 class="header2">Services</h2>
+    <h2 class="header2">Services</h2>
 
-<div class="sort">
-    <form action="#" th:action="@{service(size=${sortOption.size},
-                                            keyword=${sortOption.getKeyword},
-                                            sortDir=${sortOption.getSortDir},
-                                            sortBy=${sortOption.getSortBy})
-                                    }"
-          th:method="GET" th:object="${sortOption}">
-        <label for="keyword">Keyword</label>
-        <input id="keyword" th:field="*{keyword}" name="keyword"/>
+    <div>
+        <form class="sort" action="#" th:action="@{service(size=${sortOption.size},
+                                                keyword=${sortOption.getKeyword},
+                                                sortDir=${sortOption.getSortDir},
+                                                sortBy=${sortOption.getSortBy})
+                                        }"
+              th:method="GET" th:object="${sortOption}">
+            <div class="sort__container">
+                <label for="keyword">Keyword</label>
+                <input id="keyword" th:field="*{keyword}" name="keyword"/>
 
-        <label for="sortBy">Sort By</label>
-        <select id="sortBy" th:field="*{sortBy}" name="sortBy">
-            <option th:each="sortBy : ${sortByFields}" th:value="${sortBy}" th:text="${#strings.capitalize(sortBy)}"></option>
-        </select>
+                <label for="sortBy">Sort By</label>
+                <select id="sortBy" th:field="*{sortBy}" name="sortBy">
+                    <option th:each="sortBy : ${sortByFields}" th:value="${sortBy}" th:text="${#strings.capitalize(sortBy)}"></option>
+                </select>
+            </div>
 
-        <label for="sortDirection">Sort Direction</label>
-        <select id="sortDirection" th:field="*{sortDir}" name="sortDir">
-            <option th:each="sortDir : ${sortDirections}" th:value="${sortDir}" th:text="${sortDir}"></option>
-        </select>
+            <div class="sort__container">
+                <label for="sortDirection">Sort Direction</label>
+                <select id="sortDirection" th:field="*{sortDir}" name="sortDir">
+                    <option th:each="sortDir : ${sortDirections}" th:value="${sortDir}" th:text="${sortDir}"></option>
+                </select>
 
-        <label for="size">Elements on Page</label>
-        <select id="size" th:field="*{size}" name="size">
-            <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
-        </select>
+                <label for="size">Elements on Page</label>
+                <select id="size" th:field="*{size}" name="size">
+                    <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
+                </select>
+            </div>
 
-        <button type="submit">SEARCH</button>
+            <button class="nav__link btn" type="submit">SEARCH</button>
 
 
-        <div th:if="${totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="pagination">
-            <a th:href="@{/service(size=${sortOption.size},
-                                    page=${pageNumber},
-                                    keyword=${sortOption.getKeyword},
-                                    sortDir=${sortOption.getSortDir},
-                                    sortBy=${sortOption.getSortBy})
-                            }"
-               th:text=${pageNumber}
-               class="test"
-               th:class="${pageNumber==currentPageNumber + 1} ? active">
-            </a>
+            <div th:if="${totalPages > 0}" class="pagination">
+                <a th:each="pageNumber : ${pageNumbers}"
+                   th:href="@{/service(size=${sortOption.size},
+                                        page=${pageNumber},
+                                        keyword=${sortOption.getKeyword},
+                                        sortDir=${sortOption.getSortDir},
+                                        sortBy=${sortOption.getSortBy})
+                                }"
+                   th:text=${pageNumber}
+                   class="test"
+                   th:class="${pageNumber==currentPageNumber + 1} ? active">
+                </a>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="table">
+        <div th:each="service : ${serviceDTOs}" class="container">
+            <div class="container__data">
+                <div class="container__title">
+                    <span class="container__description" th:text="${service.description}">
+                    </span>
+                    <div class="container__description-priority"
+                         th:classappend="${(service.priorityName == 'low' ? 'low' : '') +
+                                        (service.priorityName == 'medium' ? 'medium' : '') +
+                                        (service.priorityName == 'high' ? 'high' : '')}"
+                    ></div>
+                </div>
+
+                <p class="container__data">Created By: <span class="container__data-info" th:text="${service.creatingUserName}"></span></p>
+                <p class="container__data">Created Date: <span class="container__data-info" th:text="${service.createdDate}"></span></p>
+                <p class="container__data">Client: <span class="container__data-info" th:text="${service.clientName}"></span></p>
+                <p class="container__data">Device: <span class="container__data-info" th:text="${service.device}"></span></p>
+                <p th:if="${service.additionalInfo != ''}" class="container__data">
+                    Additional Info: <span class="container__data-info" th:text="${service.additionalInfo}"></span>
+                </p>
+                <p th:if="${service.updateInfo != ''}"class="container__data">
+                    Update Info: <span class="container__data-info" th:text="${service.updateInfo}"></span>
+                </p>
+                <p class="container__data">Stage: <span class="container__data-info" th:text="${service.stageName}"></span></p>
+            </div>
+            <div class="buttons">
+                <form action="#" th:action="@{service/close/{serviceId}/{success}(serviceId=${service.serviceId}, success=true)}" th:method="DELETE">
+                    <button type="submit"><i class="fas fa-check"></i></button>
+                </form>
+
+                <form action="#" th:action="@{service/show/{serviceId}(serviceId=${service.serviceId})}" th:method="GET">
+                    <button type="submit"><i class="fas fa-edit"></i></button>
+                </form>
+
+                <form action="#" th:action="@{service/close/{serviceId}/{success}(serviceId=${service.serviceId}, success=false)}" th:method="DELETE">
+                    <button type="submit"><i class="fas fa-trash-alt"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!--    <table class="table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Created By</th>-->
+<!--            <th>Created Date</th>-->
+<!--            <th>Priority</th>-->
+<!--            <th>Client</th>-->
+<!--            <th>Description</th>-->
+<!--            <th>Device</th>-->
+<!--            <th>Additional Info</th>-->
+<!--            <th>Update Info</th>-->
+<!--            <th>Stage</th>-->
+<!--            <th>Action</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="service : ${serviceDTOs}">-->
+<!--            <td th:text="${service.creatingUserName}"></td>-->
+<!--            <td th:text="${service.createdDate}"></td>-->
+<!--            <td th:text="${service.priorityName}"></td>-->
+<!--            <td th:text="${service.clientName}"></td>-->
+<!--            <td th:text="${service.description}"></td>-->
+<!--            <td th:text="${service.device}"></td>-->
+<!--            <td th:text="${service.additionalInfo}"></td>-->
+<!--            <td th:text="${service.updateInfo}"></td>-->
+<!--            <td th:text="${service.stageName}"></td>-->
+<!--            <td  class="icon__container">-->
+<!--                <form action="#" th:action="@{service/close/{serviceId}/{success}(serviceId=${service.serviceId}, success=true)}" th:method="DELETE">-->
+<!--                    <button type="submit"><i class="fas fa-check"></i></button>-->
+<!--                </form>-->
+<!--    -->
+<!--                <form action="#" th:action="@{service/show/{serviceId}(serviceId=${service.serviceId})}" th:method="GET">-->
+<!--                    <button type="submit"><i class="fas fa-edit"></i></button>-->
+<!--                </form>-->
+<!--    -->
+<!--                <form action="#" th:action="@{service/close/{serviceId}/{success}(serviceId=${service.serviceId}, success=false)}" th:method="DELETE">-->
+<!--                    <button type="submit"><i class="fas fa-trash-alt"></i></button>-->
+<!--                </form>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+    <a th:href="@{/service/load}" class="nav__link btn">Load random Services</a>
+
+    <h2 class="header2">Add Service</h2>
+    <form class="add" action="#" th:action="@{/service/add}" method="POST" th:object="${taskDTO}" >
+        <div class="add__container">
+            <div class="add__container-field">
+                <label for="priority">Priority</label>
+                <select id="priority" th:field="*{priorityName}">
+                    <option th:each="priority : ${priorities}" th:value="${priority.name}" th:text="${priority.name}"></option>
+                </select>
+            </div>
+            <div class="add__container-field">
+                <label for="client">Client</label>
+                <select id="client" th:field="*{clientName}">
+                    <option th:each="client : ${clients}" th:value="${client.name}" th:text="${client.name}"></option>
+                </select>
+                <a th:href="@{/client}" class="nav__link btn2">Add new Client</a>
+            </div>
+            <div class="add__container-field">
+                <label for="description">Description</label>
+                <textarea id="description" class="add__container-field-textarea" th:field="*{description}"></textarea>
+            </div>
+        </div>
+
+        <div class="add__container">
+            <div class="add__container-field">
+                <label for="device">Device</label>
+                <input id="device" th:field="*{device}"></input>
+            </div>
+            <div class="add__container-field">
+                <label for="additionalInfo">AdditionalInfo</label>
+                <textarea id="additionalInfo" class="add__container-field-textarea" th:field="*{additionalInfo}"></textarea>
+            </div>
+        </div>
+
+        <div class="add__submit">
+            <input type="submit" value="SUBMIT">
         </div>
     </form>
-
-</div>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th>Created By</th>
-        <th>Created Date</th>
-        <th>Priority</th>
-        <th>Client</th>
-        <th>Description</th>
-        <th>Device</th>
-        <th>Additional Info</th>
-        <th>Update Info</th>
-        <th>Stage</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="service : ${serviceDTOs}">
-        <td th:text="${service.creatingUserName}"></td>
-        <td th:text="${service.createdDate}"></td>
-        <td th:text="${service.priorityName}"></td>
-        <td th:text="${service.clientName}"></td>
-        <td th:text="${service.description}"></td>
-        <td th:text="${service.device}"></td>
-        <td th:text="${service.additionalInfo}"></td>
-        <td th:text="${service.updateInfo}"></td>
-        <td th:text="${service.stageName}"></td>
-        <td  class="icon__container">
-            <form action="#" th:action="@{service/close/{serviceId}/{success}(serviceId=${service.serviceId}, success=true)}" th:method="DELETE">
-                <button type="submit"><i class="fas fa-check"></i></button>
-            </form>
-
-            <form action="#" th:action="@{service/show/{serviceId}(serviceId=${service.serviceId})}" th:method="GET">
-                <button type="submit"><i class="fas fa-edit"></i></button>
-            </form>
-
-            <form action="#" th:action="@{service/close/{serviceId}/{success}(serviceId=${service.serviceId}, success=false)}" th:method="DELETE">
-                <button type="submit"><i class="fas fa-trash-alt"></i></button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<a th:href="@{/service/load}" class="nav__link">Load random Services</a>
-
-<h2 class="header2">Add Service</h2>
-<form class="add" action="#" th:action="@{/service/add}" method="POST" th:object="${taskDTO}" >
-    <div class="add__container">
-        <div class="add__container-field">
-            <label for="priority">Priority</label>
-            <select id="priority" th:field="*{priorityName}">
-                <option th:each="priority : ${priorities}" th:value="${priority.name}" th:text="${priority.name}"></option>
-            </select>
-        </div>
-        <div class="add__container-field">
-            <label for="client">Client</label>
-            <select id="client" th:field="*{clientName}">
-                <option th:each="client : ${clients}" th:value="${client.name}" th:text="${client.name}"></option>
-            </select>
-            <a th:href="@{/client}" class="add__client">Add new Client</a>
-        </div>
-        <div class="add__container-field">
-            <label for="description">Description</label>
-            <textarea id="description" class="add__container-field-textarea" th:field="*{description}"></textarea>
-        </div>
-    </div>
-
-    <div class="add__container">
-        <div class="add__container-field">
-            <label for="device">Device</label>
-            <input id="device" th:field="*{device}"></input>
-        </div>
-        <div class="add__container-field">
-            <label for="additionalInfo">AdditionalInfo</label>
-            <textarea id="additionalInfo" class="add__container-field-textarea" th:field="*{additionalInfo}"></textarea>
-        </div>
-    </div>
-
-    <div class="add__submit">
-        <input type="submit" value="SUBMIT">
-    </div>
-</form>
 </body>
-
+<footer><p>&copy; 2023 SunnyVale</p></footer>
 </html>
