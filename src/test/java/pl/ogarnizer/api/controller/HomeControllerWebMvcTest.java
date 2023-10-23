@@ -23,6 +23,8 @@ public class HomeControllerWebMvcTest {
         mockMvc.perform(get(HomeController.HOME))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
-                .andExpect(content().string(containsString("Ogarnizer")));
+                .andExpect(content().string(containsString("Away Works")))
+                .andExpect(content().string(containsString("Orders")))
+                .andExpect(content().string(containsString("Services")));
     }
 }

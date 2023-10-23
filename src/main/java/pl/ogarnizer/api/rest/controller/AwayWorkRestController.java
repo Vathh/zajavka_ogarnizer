@@ -60,7 +60,7 @@ public class AwayWorkRestController {
             @RequestParam("sortBy") Optional<String> sortBy
     ){
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(4);
 
         Sort.Direction sortDirection = (sortDir.isEmpty() || sortDir.get().length() == 0 || Objects.equals(sortDir.get(), "DESCENDING"))
                 ? Sort.Direction.DESC : Sort.Direction.ASC;

@@ -13,6 +13,7 @@ import pl.ogarnizer.api.dto.UpdateTaskDTO;
 import pl.ogarnizer.api.dto.mapper.OrderMapper;
 import pl.ogarnizer.api.dto.mapper.TaskMapper;
 import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
+import pl.ogarnizer.api.rest.dto.AwayWorksDTO;
 import pl.ogarnizer.api.rest.dto.OrdersDTO;
 import pl.ogarnizer.business.*;
 import pl.ogarnizer.domain.Order;
@@ -42,7 +43,16 @@ public class OrderRestController {
     private final TaskMapper taskMapper;
 
     @GetMapping
-    public OrdersDTO getOrders(
+    public OrdersDTO getOrders() {
+        return OrdersDTO.builder()
+                .orders(
+                        orderService.findOrders().stream()
+                                .map(orderMapper::map).toList())
+                .build();
+    }
+
+    @GetMapping
+    public OrdersDTO getOrdersPaginated(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,
             @RequestParam("keyword") Optional<String> keyword,
@@ -50,7 +60,7 @@ public class OrderRestController {
             @RequestParam("sortBy") Optional<String> sortBy
     ){
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(4);
 
         Sort.Direction sortDirection = (sortDir.isEmpty() || sortDir.get().length() == 0 || Objects.equals(sortDir.get(), "DESCENDING"))
                 ? Sort.Direction.DESC : Sort.Direction.ASC;

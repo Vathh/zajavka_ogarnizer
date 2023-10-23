@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.ogarnizer.api.dto.mapper.ClosedAwayWorkMapper;
+import pl.ogarnizer.api.rest.dto.AwayWorksDTO;
 import pl.ogarnizer.api.rest.dto.ClosedAwayWorksDTO;
 import pl.ogarnizer.business.ClosedAwayWorkService;
 
@@ -25,7 +26,16 @@ public class ClosedAwayWorkRestController {
     private final ClosedAwayWorkMapper closedAwayWorkMapper;
 
     @GetMapping
-    public ClosedAwayWorksDTO getClosedAwayWorks(
+    public ClosedAwayWorksDTO getClosedAwayWorks() {
+        return ClosedAwayWorksDTO.builder()
+                .closedAwayWorks(
+                        closedAwayWorkService.findClosedAwayWorks().stream()
+                                .map(closedAwayWorkMapper::map).toList())
+                .build();
+    }
+
+    @GetMapping
+    public ClosedAwayWorksDTO getClosedAwayWorksPaginated(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,
             @RequestParam("keyword") Optional<String> keyword,
@@ -33,7 +43,7 @@ public class ClosedAwayWorkRestController {
             @RequestParam("sortBy") Optional<String> sortBy
     ){
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(4);
 
         Sort.Direction sortDirection = (sortDir.isEmpty() || sortDir.get().length() == 0 || Objects.equals(sortDir.get(), "DESCENDING"))
                 ? Sort.Direction.DESC : Sort.Direction.ASC;

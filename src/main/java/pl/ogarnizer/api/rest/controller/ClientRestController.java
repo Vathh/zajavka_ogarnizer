@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.ogarnizer.api.dto.ClientDTO;
 import pl.ogarnizer.api.dto.mapper.ClientMapper;
 import pl.ogarnizer.api.ogarnizerAPI.dao.OgarnizerAPIDAO;
+import pl.ogarnizer.api.rest.dto.AwayWorksDTO;
 import pl.ogarnizer.api.rest.dto.ClientsDTO;
 import pl.ogarnizer.business.ClientService;
 import pl.ogarnizer.domain.Client;
@@ -30,13 +31,22 @@ public class ClientRestController {
     private final ClientMapper clientMapper;
 
     @GetMapping
-    public ClientsDTO getClients(
+    public ClientsDTO getClients() {
+        return ClientsDTO.builder()
+                .clients(
+                        clientService.findClients().stream()
+                                .map(clientMapper::map).toList())
+                .build();
+    }
+
+    @GetMapping
+    public ClientsDTO getClientsPaginated(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,
             @RequestParam("keyword") Optional<String> keyword
     ){
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(4);
 
         Pageable pageRequest = PageRequest.of(currentPage - 1, pageSize, Sort.Direction.ASC,  "name");
 

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.ogarnizer.api.dto.mapper.ClosedServiceMapper;
+import pl.ogarnizer.api.rest.dto.AwayWorksDTO;
 import pl.ogarnizer.api.rest.dto.ClosedServicesDTO;
 import pl.ogarnizer.business.ClosedServiceService;
 
@@ -25,7 +26,16 @@ public class ClosedServiceRestController {
     private final ClosedServiceMapper closedServiceMapper;
 
     @GetMapping
-    public ClosedServicesDTO getClosedServices(
+    public ClosedServicesDTO getClosedServices() {
+        return ClosedServicesDTO.builder()
+                .closedServices(
+                        closedServiceService.findClosedServices().stream()
+                                .map(closedServiceMapper::map).toList())
+                .build();
+    }
+
+    @GetMapping
+    public ClosedServicesDTO getClosedServicesPaginated(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,
             @RequestParam("keyword") Optional<String> keyword,
@@ -33,7 +43,7 @@ public class ClosedServiceRestController {
             @RequestParam("sortBy") Optional<String> sortBy
     ){
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(4);
 
         Sort.Direction sortDirection = (sortDir.isEmpty() || sortDir.get().length() == 0 || Objects.equals(sortDir.get(), "DESCENDING"))
                 ? Sort.Direction.DESC : Sort.Direction.ASC;
