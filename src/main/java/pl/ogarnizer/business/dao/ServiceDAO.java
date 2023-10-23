@@ -18,4 +18,7 @@ public interface ServiceDAO {
     void saveServices(List<Service> services);
     void addService(Service service);
     void deleteService(Integer serviceId);
+    long countByPriorityName(String priorityName);
+    long countByStageName(String stageName);
+    long countAll();
 }

@@ -48,7 +48,7 @@ public class ClientController {
         }
 
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(4);
 
         Pageable pageRequest = PageRequest.of(currentPage - 1, pageSize,Sort.Direction.ASC,  "name");
 
@@ -65,7 +65,7 @@ public class ClientController {
                 .toList();
 
         var clientDTO = new ClientDTO();
-        var sizes = List.of(5, 10, 20);
+        var sizes = List.of(4, 8, 20);
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userRole;

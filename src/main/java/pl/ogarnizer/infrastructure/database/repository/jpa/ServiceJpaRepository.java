@@ -26,4 +26,16 @@ public interface ServiceJpaRepository extends JpaRepository<ServiceEntity, Integ
             """)
     Page<ServiceEntity> findAllByKeywordAndSort(final @Param("keyword") String keyword,
                                                  Pageable pageable);
+
+    @Query("""
+            SELECT COUNT(sv) FROM ServiceEntity sv
+            WHERE sv.priority.name=:priorityName
+            """)
+    long countByPriorityName(final @Param("priorityName") String priorityName);
+
+    @Query("""
+            SELECT COUNT(sv) FROM ServiceEntity sv
+            WHERE sv.stage.name=:stageName
+            """)
+    long countByStageName(final @Param("stageName") String stageName);
 }

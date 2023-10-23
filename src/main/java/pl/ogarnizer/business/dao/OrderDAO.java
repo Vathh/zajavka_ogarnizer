@@ -17,4 +17,7 @@ public interface OrderDAO {
     void saveOrders(List<Order> orders);
     void addOrder(Order order);
     void deleteOrder(Integer orderId);
+    long countByPriorityName(String priorityName);
+    long countByStageName(String stageName);
+    long countAll();
 }

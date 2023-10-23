@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <a class="header"><img class="logo" th:src="@{/images/OGARNIZER_PC.svg}" alt=""></a>
+    <a class="header" th:href="@{/}"><img class="logo" th:src="@{/images/OGARNIZER_PC.svg}" alt=""></a>
 
     <nav class="nav">
         <a th:href="@{/away_work}" class="nav__link">Away works</a>
@@ -66,18 +66,6 @@
             </div>
         </div>
     </div>
-
-<!--    <p class="data">id: <span  th:text="${taskDTO.taskId}"></span></p>-->
-<!--    <p class="data">Created By: <span  th:text="${taskDTO.createdByUserName}"></span></p>-->
-<!--    <p class="data">Created Date: <span th:text="${taskDTO.createdDate}" ></span></p>-->
-<!--    <p class="data">Priority: <span th:text="${taskDTO.priorityName}" ></span></p>-->
-<!--    <p class="data">Client: <span th:text="${taskDTO.clientName}" ></span></p>-->
-<!--    <p class="data">Description: <span th:text="${taskDTO.description}" ></span></p>-->
-<!--    <p class="data">Place: <span th:text="${taskDTO.place}" ></span></p>-->
-<!--    <p class="data">Device: <span th:text="${taskDTO.device}" ></span></p>-->
-<!--    <p class="data">Additional Info: <span th:text="${taskDTO.additionalInfo}" ></span></p>-->
-<!--    <p class="data">Update Info: <span th:text="${taskDTO.updateInfo}" ></span></p>-->
-<!--    <p class="data">Stage: <span th:text="${taskDTO.stageName}" ></span></p>-->
 
     <form class="update"
           action="#"

@@ -70,4 +70,19 @@ public class ServiceRepository implements ServiceDAO {
     public void deleteService(Integer serviceId) {
         serviceJpaRepository.deleteById(serviceId);
     }
+
+    @Override
+    public long countByPriorityName(String priorityName) {
+        return serviceJpaRepository.countByPriorityName(priorityName);
+    }
+
+    @Override
+    public long countByStageName(String stageName) {
+        return serviceJpaRepository.countByStageName(stageName);
+    }
+
+    @Override
+    public long countAll() {
+        return serviceJpaRepository.count();
+    }
 }

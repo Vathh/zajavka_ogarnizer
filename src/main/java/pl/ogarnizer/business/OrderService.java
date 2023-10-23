@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.ogarnizer.business.dao.OrderDAO;
 import pl.ogarnizer.domain.Order;
 import pl.ogarnizer.domain.Order;
+import pl.ogarnizer.domain.Statistics;
 import pl.ogarnizer.domain.Task;
 import pl.ogarnizer.domain.exception.NotFoundException;
 
@@ -65,6 +66,30 @@ public class OrderService {
     @Transactional
     public void deleteOrder(Integer orderId){
         orderDAO.deleteOrder(orderId);
+    }
+
+    @Transactional
+    public Statistics getOrdersStatistics(){
+        long total = orderDAO.countAll();
+        long lowPriorities = orderDAO.countByPriorityName("low");
+        long mediumPriorities = orderDAO.countByPriorityName("medium");
+        long highPriorities = orderDAO.countByPriorityName("high");
+        long justAdded = orderDAO.countByStageName("just_added");
+        long inProgress = orderDAO.countByStageName("in_progress");
+        long waitingForParts = orderDAO.countByStageName("waiting_for_parts");
+        long toInvoice = orderDAO.countByStageName("to_invoice");
+
+        return Statistics.builder()
+                .name("Orders")
+                .total(total)
+                .lowPrioritiesPercentage((short) (lowPriorities * 100 / total))
+                .mediumPrioritiesPercentage((short) (mediumPriorities * 100 / total))
+                .highPrioritiesPercentage((short) (highPriorities * 100 / total))
+                .justAdded(justAdded)
+                .inProgress(inProgress)
+                .waitingForParts(waitingForParts)
+                .toInvoice(toInvoice)
+                .build();
     }
 
     private Order prepareOrder(Task task){

@@ -25,4 +25,16 @@ public interface OrderJpaRepository extends JpaRepository<OrderEntity, Integer> 
             """)
     Page<OrderEntity> findAllByKeywordAndSort(final @Param("keyword") String keyword,
                                                  Pageable pageable);
+
+    @Query("""
+            SELECT COUNT(od) FROM OrderEntity od
+            WHERE od.priority.name=:priorityName
+            """)
+    long countByPriorityName(final @Param("priorityName") String priorityName);
+
+    @Query("""
+            SELECT COUNT(od) FROM OrderEntity od
+            WHERE od.stage.name=:stageName
+            """)
+    long countByStageName(final @Param("stageName") String stageName);
 }

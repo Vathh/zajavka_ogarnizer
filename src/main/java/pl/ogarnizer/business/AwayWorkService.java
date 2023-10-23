@@ -82,10 +82,11 @@ public class AwayWorkService {
         long toInvoice = awayWorkDAO.countByStageName("to_invoice");
 
         return Statistics.builder()
+                .name("Away Works")
                 .total(total)
-                .lowPriorities(lowPriorities)
-                .mediumPriorities(mediumPriorities)
-                .highPriorities(highPriorities)
+                .lowPrioritiesPercentage((short) (lowPriorities * 100 / total))
+                .mediumPrioritiesPercentage((short) (mediumPriorities * 100 / total))
+                .highPrioritiesPercentage((short) (highPriorities * 100 / total))
                 .justAdded(justAdded)
                 .inProgress(inProgress)
                 .waitingForParts(waitingForParts)

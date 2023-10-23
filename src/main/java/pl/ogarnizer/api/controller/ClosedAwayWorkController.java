@@ -45,7 +45,7 @@ public class ClosedAwayWorkController {
         }
 
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(4);
 
         Sort.Direction sortDirection = (sortDir.isEmpty() || sortDir.get().length() == 0 || Objects.equals(sortDir.get(), "DESCENDING"))
                 ? Sort.Direction.DESC : Sort.Direction.ASC;
@@ -68,7 +68,7 @@ public class ClosedAwayWorkController {
 
         var sortByFields = List.of("createdDate", "closedDate");
         var sortDirections = List.of("DESCENDING", "ASCENDING");
-        var sizes = List.of(5, 10, 20);
+        var sizes = List.of(4, 8, 20);
 
         Map<String, Object> data = new HashMap<>(Map.of(
                 "closedAwayWorkDTOs", closedAwayWorks,

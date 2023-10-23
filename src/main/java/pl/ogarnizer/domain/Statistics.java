@@ -7,10 +7,11 @@ import lombok.Value;
 @Builder
 public class Statistics {
 
+    String name;
     long total;
-    long lowPriorities;
-    long mediumPriorities;
-    long highPriorities;
+    short lowPrioritiesPercentage;
+    short mediumPrioritiesPercentage;
+    short highPrioritiesPercentage;
     long justAdded;
     long inProgress;
     long waitingForParts;

@@ -69,4 +69,19 @@ public class OrderRepository implements OrderDAO {
     public void deleteOrder(Integer orderId) {
         orderJpaRepository.deleteById(orderId);
     }
+
+    @Override
+    public long countByPriorityName(String priorityName) {
+        return orderJpaRepository.countByPriorityName(priorityName);
+    }
+
+    @Override
+    public long countByStageName(String stageName) {
+        return orderJpaRepository.countByStageName(stageName);
+    }
+
+    @Override
+    public long countAll() {
+        return orderJpaRepository.count();
+    }
 }
