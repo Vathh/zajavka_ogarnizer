@@ -20,6 +20,7 @@ import java.util.Optional;
 public class ClosedOrderRestController {
 
     public static final String API_CLOSED_ORDER = "/api/closed_order";
+    public static final String API_CLOSED_ORDER_PAGES = "/pages";
     public static final String API_CLOSED_ORDER_ID = "/{closedOrderId}";
 
     private final ClosedOrderService closedOrderService;
@@ -34,7 +35,7 @@ public class ClosedOrderRestController {
                 .build();
     }
 
-    @GetMapping
+    @GetMapping(API_CLOSED_ORDER_PAGES)
     public ClosedOrdersDTO getClosedOrdersPaginated(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,

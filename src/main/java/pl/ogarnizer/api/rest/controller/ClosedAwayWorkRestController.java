@@ -20,6 +20,7 @@ import java.util.Optional;
 public class ClosedAwayWorkRestController {
 
     public static final String API_CLOSED_AWAY_WORK = "/api/closed_away_work";
+    public static final String API_CLOSED_AWAY_WORK_PAGES = "/pages";
     public static final String API_CLOSED_AWAY_WORK_ID = "/{closedAwayWorkId}";
 
     private final ClosedAwayWorkService closedAwayWorkService;
@@ -34,7 +35,7 @@ public class ClosedAwayWorkRestController {
                 .build();
     }
 
-    @GetMapping
+    @GetMapping(API_CLOSED_AWAY_WORK_PAGES)
     public ClosedAwayWorksDTO getClosedAwayWorksPaginated(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,

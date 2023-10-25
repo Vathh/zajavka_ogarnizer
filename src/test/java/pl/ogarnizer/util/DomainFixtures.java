@@ -345,4 +345,46 @@ public class DomainFixtures {
         return List.of(someClosedService1(), someClosedService1(), someClosedService1());
     }
 
+    public static Statistics someAwayWorkStatistics(){
+        return Statistics.builder()
+                .name("Away Work")
+                .total(10)
+                .lowPrioritiesPercentage((short) 30)
+                .mediumPrioritiesPercentage((short) 50)
+                .highPrioritiesPercentage((short) 20)
+                .justAdded(2)
+                .inProgress(3)
+                .waitingForParts(4)
+                .toInvoice(1)
+                .build();
+    }
+
+    public static Statistics someOrderStatistics(){
+        return Statistics.builder()
+                .name("Order")
+                .total(10)
+                .lowPrioritiesPercentage((short) 30)
+                .mediumPrioritiesPercentage((short) 50)
+                .highPrioritiesPercentage((short) 20)
+                .justAdded(2)
+                .inProgress(3)
+                .waitingForParts(4)
+                .toInvoice(1)
+                .build();
+    }
+
+    public static Statistics someServiceStatistics(){
+        return Statistics.builder()
+                .name("Service")
+                .total(10)
+                .lowPrioritiesPercentage((short) 30)
+                .mediumPrioritiesPercentage((short) 50)
+                .highPrioritiesPercentage((short) 20)
+                .justAdded(2)
+                .inProgress(3)
+                .waitingForParts(4)
+                .toInvoice(1)
+                .build();
+    }
+
 }

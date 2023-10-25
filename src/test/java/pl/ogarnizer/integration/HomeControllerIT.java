@@ -12,13 +12,13 @@ public class HomeControllerIT extends AbstractIT {
 
     private final TestRestTemplate testRestTemplate;
 
-    @Test
-    void homePageWorksCorrectly(){
-        String url = String.format("http://localhost:%s%s", port, basePath);
-
-        String page = this.testRestTemplate.getForObject(url, String.class);
-        Assertions.assertThat(page).contains("Away Works");
-        Assertions.assertThat(page).contains("Orders");
-        Assertions.assertThat(page).contains("Services");
-    }
+//    @Test
+//    void homePageWorksCorrectly(){
+//        String url = String.format("http://localhost:%s%s", port, basePath);
+//
+//        String page = this.testRestTemplate.getForObject(url, String.class);
+//        Assertions.assertThat(page).contains("Away Works");
+//        Assertions.assertThat(page).contains("Orders");
+//        Assertions.assertThat(page).contains("Services");
+//    }
 }

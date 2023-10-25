@@ -29,6 +29,7 @@ import java.util.Optional;
 public class OrderRestController {
 
     public static final String API_ORDER = "/api/order";
+    public static final String API_ORDER_PAGES = "/pages";
     public static final String API_ORDER_ID = "/{orderId}";
     public static final String API_DELETE_ORDER = "/{orderId}/{success}/{closingUserName}";
     public static final String LOAD_RANDOM_ORDERS = "/load";
@@ -51,7 +52,7 @@ public class OrderRestController {
                 .build();
     }
 
-    @GetMapping
+    @GetMapping(API_ORDER_PAGES)
     public OrdersDTO getOrdersPaginated(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,

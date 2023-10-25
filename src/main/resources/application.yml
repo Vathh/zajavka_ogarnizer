@@ -9,8 +9,8 @@ api:
 
 spring:
   security:
-    enabled: true
-#    enabled: false
+#    enabled: true
+    enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.postgresql.Driver

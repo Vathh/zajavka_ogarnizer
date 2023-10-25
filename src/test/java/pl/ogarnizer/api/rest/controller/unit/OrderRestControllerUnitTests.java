@@ -31,19 +31,19 @@ public class OrderRestControllerUnitTests {
     @InjectMocks
     private OrderRestController orderRestController;
 
-//    @Test
-//    void thatGetOrdersWorksCorrectly(){
-//        //given
-//        List<Order> orders = List.of(DomainFixtures.someOrder1(), DomainFixtures.someOrder1(), DomainFixtures.someOrder1());
-//        when(orderService.findOrders()).thenReturn(orders);
-//        when(orderMapper.map(any())).thenReturn(DtoFixtures.someOrderDTO1());
-//
-//        //when
-//        OrdersDTO result = orderRestController.getOrders();
-//
-//        //then
-//        assertThat(result).isEqualTo(DtoFixtures.someOrdersDTO());
-//    }
+    @Test
+    void thatGetOrdersWorksCorrectly(){
+        //given
+        List<Order> orders = List.of(DomainFixtures.someOrder1(), DomainFixtures.someOrder1(), DomainFixtures.someOrder1());
+        when(orderService.findOrders()).thenReturn(orders);
+        when(orderMapper.map(any())).thenReturn(DtoFixtures.someOrderDTO1());
+
+        //when
+        OrdersDTO result = orderRestController.getOrders();
+
+        //then
+        assertThat(result).isEqualTo(DtoFixtures.someOrdersDTO());
+    }
 
     @Test
     void thatOrderDetailsWorksCorrectly(){

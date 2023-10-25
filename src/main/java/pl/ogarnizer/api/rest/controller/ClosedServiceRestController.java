@@ -20,6 +20,7 @@ import java.util.Optional;
 public class ClosedServiceRestController {
 
     public static final String API_CLOSED_SERVICE = "/api/closed_service";
+    public static final String API_CLOSED_SERVICE_PAGES = "/pages";
     public static final String API_CLOSED_SERVICE_ID = "/{closedServiceId}";
 
     private final ClosedServiceService closedServiceService;
@@ -34,7 +35,7 @@ public class ClosedServiceRestController {
                 .build();
     }
 
-    @GetMapping
+    @GetMapping(API_CLOSED_SERVICE_PAGES)
     public ClosedServicesDTO getClosedServicesPaginated(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,

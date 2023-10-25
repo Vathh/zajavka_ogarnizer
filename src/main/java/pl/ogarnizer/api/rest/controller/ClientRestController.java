@@ -23,6 +23,7 @@ import java.util.Optional;
 @RequestMapping(ClientRestController.API_CLIENT)
 public class ClientRestController {
     public static final String API_CLIENT = "/api/client";
+    public static final String API_CLIENT_PAGES = "/pages";
     public static final String API_CLIENT_ID = "/{clientId}";
     public static final String LOAD_RANDOM_CLIENTS = "/load";
 
@@ -39,7 +40,7 @@ public class ClientRestController {
                 .build();
     }
 
-    @GetMapping
+    @GetMapping(API_CLIENT_PAGES)
     public ClientsDTO getClientsPaginated(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,

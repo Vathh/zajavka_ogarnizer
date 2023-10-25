@@ -29,6 +29,7 @@ import java.util.Optional;
 public class ServiceRestController {
 
     public static final String API_SERVICE = "/api/service";
+    public static final String API_SERVICE_PAGES = "/pages";
     public static final String API_SERVICE_ID = "/{serviceId}";
     public static final String API_DELETE_SERVICE = "/{serviceId}/{success}/{closingUserName}";
     public static final String LOAD_RANDOM_SERVICES = "/load";
@@ -51,7 +52,7 @@ public class ServiceRestController {
                 .build();
     }
 
-    @GetMapping
+    @GetMapping(API_SERVICE_PAGES)
     public ServicesDTO getServicesPaginated(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,
