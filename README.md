@@ -1,57 +1,52 @@
 # zajavka_ogarnizer
 
-Aplikacja służy usprawnieniu zarządzania firmą oferującą serwis sprzętu biurowego (komputery, drukarki, ksero, skanery itp.) podmiotom gospodarczym.
-Projekt umożliwia kooperację między pracownikami serwisu. Powstał wskutek własnego doświadczenia pracy w serwisie gdzie takowej aplikacji brakowało.
+Application for Streamlining the Management of a Company Offering Office Equipment Service
+
+The application is designed to streamline the management of a company that provides office equipment service (computers, printers, copiers, scanners, etc.) to businesses. The project facilitates cooperation among service employees. It was developed based on personal experience working in a service where such an application was lacking.
 </br>
 </br>
-Cały kontekst aplikacji opiera się o dodawanie i zarządzanie zadaniami zleconymi przez klientów, które dalej nazywać będę po prostu zadaniami.
+The entire context of the application revolves around adding and managing tasks commissioned by clients, which will henceforth be referred to simply as tasks.
 </br>
 
-Zadania podzielone są na trzy kategorie:
- - Serwisy wykonywane u klienta (away work)
- - Serwisy prowadzone w siedzibie firmy (service)
- - Zamówienia - (order)
+Tasks are divided into three categories:
+ - Services performed at the client's location (away work)
+ - Services conducted at the company's headquarters (service)
+ - Orders (order)
  </br>
 
-Dodając zadanie możliwym jest określić priorytet (priority) jego wykonania (low, medium, high).
+When adding a task, it is possible to specify its execution priority (low, medium, high).
 </br>
 </br>
-Aplikacja przechowuje również podstawowe dane o klientach firmy. W celu ułatwienia dodawania zadań, wcześniej dodanego klienta
-wybiera się z listy w panelu dodawania zadań. 
+The application also stores basic information about the company's clients. To facilitate the addition of tasks, a previously added client can be selected from a list in the task addition panel.
 </br>
 </br>
-Zadanie można aktualizować wprowadzając dodatkowe informacje tekstowe oraz zmieniając etap (stage) wykonania na 
-którym się obecnie znajduje. Wyróznione zostały następujące etapy:
- - nowe (just_added) - przypisywane domyślnie dla dodawanych zadań
- - w trakcie realizacji (in_progress)
- - w oczekiwaniu na części (waiting_for_parts)
- - gotowe do zafakturowania (to_invoice)
+A task can be updated by entering additional text information and changing its current stage. The following stages are distinguished:
+ - Just added  assigned by default to newly added tasks
+ - In progress 
+ - Waiting for parts 
+ - Ready to invoice 
 </br>
-Zadanie można zatwierdzić w przypadku pomyślnej realizacji oraz usunąć w przypadku porzucenia realizacji.
-W obu przypadkach zadanie trafi na listę zamkniętych zadań (odpowiednio: closed away work, closed service, closed order)
-z adekwatną informacją o powodzeniu jego wykonania (w tabeli success). Całkowite usunięcie zadania z aplikacji następuje
-po usunięciu go z listy zamkniętych zadań.
+A task can be approved upon successful completion or deleted if abandoned. In both cases, the task will be moved to the list of closed tasks (closed away work, closed service, closed order) with appropriate information about the outcome (in the success column). Completely removing a task from the application occurs after it is deleted from the list of closed tasks.
 </br>
 
-Użytkownicy podzieleni są na dwie kategorie (role):
- - serwisant (serviceman)
- - admin (admin)
+Users are divided into two roles:
+ - serviceman
+ - admin
 </br>
 
-Serwisant posiada uprawnienia do:
- - wyświetlania listy, dodawania, aktualizacji, zamykania (zatwierdzenie lub usunięcie) zadań
- - wyświetlania listy, dodawania klientów
+A serviceman has the following permissions:
+ - View, add, update, and close tasks (either by approval or deletion).
+ - View and add clients.
 </br>
 
-Admin, prócz uprawnień serwisanta posiada również możliwość:
- - usuwania klientów
- - wyświetlania listy, dodawania, usuwania użytkowników
- - wyświetlania listy, usuwania zamkniętych zadań (closed away work, closed service, closed order)
+Besides the serviceman's permissions, the admin also has the ability to:
+ - delete clients
+ - view lists, add, and remove users
+ - view lists, delete closed tasks (closed work, closed service, closed order)
 
 </br>
 
-Aplikacja posiada również funkcję pobrania z dedykowanego API (zajavka-ogarnizerAPI) losowych danych z osobna dla 
-każdego rodzaju zadań i klientów. 
+The application also features a function to fetch random data separately for each type of tasks and clients from a dedicated API (zajavka-ogarnizerAPI). 
 
 
 
