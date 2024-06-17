@@ -48,6 +48,13 @@ Besides the serviceman's permissions, the admin also has the ability to:
 
 The application also features a function to fetch random data separately for each type of tasks and clients from a dedicated API (zajavka-ogarnizerAPI). 
 
+For the proper functioning of the entire application, it is necessary to log in, as it uses the data of the logged-in user.
+
+Login details: 
+ - login: Karol  password: karol123  [serviceman]
+ - login: Wojtek password: wojtek123 [admin]
+
+
 
 
 
